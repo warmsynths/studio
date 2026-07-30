@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <!-- PLAY ICON -->
+    <g id="icon-play">
+      <path d="M 6 4 L 20 12 L 6 20 Z" fill="currentColor"/>
+    </g>
+
+    <!-- STOP / EJECT ICON -->
+    <g id="icon-eject">
+      <path d="M 12 3 L 20 11 L 4 11 Z" fill="currentColor"/>
+      <rect x="4" y="14" width="16" height="4" fill="currentColor"/>
+    </g>
+
+    <!-- PAUSE ICON -->
+    <g id="icon-pause">
+      <rect x="5" y="4" width="5" height="16" fill="currentColor" rx="1"/>
+      <rect x="14" y="4" width="5" height="16" fill="currentColor" rx="1"/>
+    </g>
+
+    <!-- REWIND ICON -->
+    <g id="icon-rewind">
+      <path d="M 12 4 L 2 12 L 12 20 Z" fill="currentColor"/>
+      <path d="M 22 4 L 12 12 L 22 20 Z" fill="currentColor"/>
+    </g>
+
+    <!-- FAST FORWARD ICON -->
+    <g id="icon-fast-forward">
+      <path d="M 2 4 L 12 12 L 2 20 Z" fill="currentColor"/>
+      <path d="M 12 4 L 22 12 L 12 20 Z" fill="currentColor"/>
+    </g>
+
+    <!-- RECORD ICON -->
+    <g id="icon-record">
+      <circle cx="12" cy="12" r="8" fill="#e53935"/>
+    </g>
+
+    <!-- SP / LP MODE ICON -->
+    <g id="icon-sp-lp">
+      <rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+      <text x="12" y="15" font-family="'IBM Plex Mono', monospace" font-size="8" font-weight="bold" fill="currentColor" text-anchor="middle">SP</text>
+    </g>
+
+    <!-- TRACKING GEAR ICON -->
+    <g id="icon-tracking">
+      <circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+      <line x1="12" y1="2" x2="12" y2="6" stroke="currentColor" stroke-width="2"/>
+      <line x1="12" y1="18" x2="12" y2="22" stroke="currentColor" stroke-width="2"/>
+      <line x1="2" y1="12" x2="6" y2="12" stroke="currentColor" stroke-width="2"/>
+      <line x1="18" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2"/>
+    </g>
+
+    <!-- VHS CASSETTE GLYPH -->
+    <g id="icon-vhs-tape">
+      <rect x="2" y="5" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="7" cy="12" r="3" fill="currentColor"/>
+      <circle cx="17" cy="12" r="3" fill="currentColor"/>
+      <rect x="11" y="9" width="2" height="6" fill="currentColor"/>
+    </g>
+
+    <!-- OSD GLITCH ICON -->
+    <g id="icon-osd-glitch">
+      <line x1="2" y1="6" x2="22" y2="6" stroke="currentColor" stroke-width="2"/>
+      <line x1="6" y1="12" x2="18" y2="12" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+      <line x1="2" y1="18" x2="22" y2="18" stroke="currentColor" stroke-width="2"/>
+    </g>
+  </defs>
+
+  <!-- VHS ICON PACK SHEET PREVIEW -->
+  <style>
+    .label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; fill: #444; }
+    .box { fill: #f5f2ea; stroke: #d0cbbe; stroke-width: 1; rx: 6px; }
+  </style>
+
+  <rect x="10" y="10" width="380" height="280" class="box"/>
+  <text x="200" y="34" font-family="'IBM Plex Mono', monospace" font-size="14" font-weight="bold" fill="#2a2621" text-anchor="middle">VHS ICON PACK SPRITE LIBRARY</text>
+
+  <!-- Grid Layout of Icons -->
+  <g transform="translate(30, 50)" fill="#2a2621">
+    <!-- Row 1 -->
+    <g transform="translate(0, 20)">
+      <use href="#icon-play" x="0" y="0" width="24" height="24"/>
+      <text x="36" y="16" class="label">Play</text>
+    </g>
+    <g transform="translate(180, 20)">
+      <use href="#icon-eject" x="0" y="0" width="24" height="24"/>
+      <text x="36" y="16" class="label">Eject / Stop</text>
+    </g>
+
+    <!-- Row 2 -->
+    <g transform="translate(0, 70)">
+      <use href="#icon-pause" x="0" y="0" width="24" height="24"/>
+      <text x="36" y="16" class="label">Pause</text>
+    </g>
+    <g transform="translate(180, 70)">
+      <use href="#icon-record" x="0" y="0" width="24" height="24"/>
+      <text x="36" y="16" class="label">Record</text>
+    </g>
+
+    <!-- Row 3 -->
+    <g transform="translate(0, 120)">
+      <use href="#icon-rewind" x="0" y="0" width="24" height="24"/>
+      <text x="36" y="16" class="label">Rewind</text>
+    </g>
+    <g transform="translate(180, 120)">
+      <use href="#icon-fast-forward" x="0" y="0" width="24" height="24"/>
+      <text x="36" y="16" class="label">Fast Forward</text>
+    </g>
+
+    <!-- Row 4 -->
+    <g transform="translate(0, 170)">
+      <use href="#icon-sp-lp" x="0" y="0" width="24" height="24"/>
+      <text x="36" y="16" class="label">SP / LP Mode</text>
+    </g>
+    <g transform="translate(180, 170)">
+      <use href="#icon-vhs-tape" x="0" y="0" width="24" height="24"/>
+      <text x="36" y="16" class="label">Tape Cassette</text>
+    </g>
+  </g>
+</svg>
