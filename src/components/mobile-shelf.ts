@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { TAPES, TapeKey } from '../types/portfolio.js';
+import './vcr-player.js';
+import './crt-display.js';
 
 const ORDER: TapeKey[] = ['chord', 'scene', 'echo', 'pixel', 'drift'];
 
@@ -8,24 +10,60 @@ const ORDER: TapeKey[] = ['chord', 'scene', 'echo', 'pixel', 'drift'];
 export class MobileShelfComponent extends LitElement {
   static styles = css`
     :host {
-      display: block;
+      display: flex;
+      flex-direction: column;
       position: relative;
       width: 100%;
       min-height: 100%;
-      background: #f5f2ea;
+      background: #ece6da;
       overflow: hidden;
     }
 
-    .top {
+    .bg-floor {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 42%;
+      background: #d8cdba;
+    }
+
+    .bg-floor::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 2px;
+      background: rgba(42, 38, 33, .16);
+    }
+
+    .set {
+      position: absolute;
+      top: -14px;
+      right: -170px;
+      width: 620px;
+      height: 650px;
+      transform: scale(.6);
+      transform-origin: top right;
+      opacity: .75;
+      filter: blur(4px);
+      z-index: 0;
+    }
+
+    .set-inner {
       position: relative;
-      padding: 22px 22px 28px;
-      background: #ece6da;
+      width: 100%;
+      height: 100%;
     }
 
     .header {
+      position: relative;
+      z-index: 2;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 22px 22px 0;
       font-family: 'IBM Plex Mono', monospace;
       font-size: 10px;
       letter-spacing: .09em;
@@ -46,33 +84,43 @@ export class MobileShelfComponent extends LitElement {
       background: #2a2621;
     }
 
+    .hero {
+      position: relative;
+      z-index: 2;
+      padding: 0 22px;
+    }
+
     h1 {
-      margin: 28px 0 0;
+      margin: 26px 0 0;
       font: 400 clamp(24px, 8vw, 32px) / 1.18 Georgia, serif;
       color: #2a2621;
+      max-width: 240px;
     }
 
     p {
       margin: 14px 0 0;
       font: 13px / 1.6 'Inter', sans-serif;
       color: rgba(42, 38, 33, .55);
-      max-width: 300px;
+      max-width: 260px;
+    }
+
+    .spacer {
+      flex: 1;
+      min-height: 24px;
     }
 
     .shelf {
       position: relative;
-      background: #d8cdba;
-      padding: 34px 20px 40px;
+      z-index: 2;
+      padding: 30px 20px calc(24px + env(safe-area-inset-bottom, 0px));
     }
 
     .shelf-label {
-      position: absolute;
-      top: 14px;
-      left: 20px;
       font-family: 'IBM Plex Mono', monospace;
       font-size: 9.5px;
       letter-spacing: .14em;
       color: rgba(42, 38, 33, .42);
+      margin-bottom: 10px;
     }
 
     .list {
@@ -86,7 +134,7 @@ export class MobileShelfComponent extends LitElement {
       position: relative;
       border-radius: 4px 4px 2px 2px;
       background: #262626;
-      box-shadow: 0 3px 9px rgba(42, 38, 33, .22);
+      box-shadow: 0 4px 12px rgba(42, 38, 33, .28);
       overflow: hidden;
       border: none;
       display: block;
@@ -165,14 +213,26 @@ export class MobileShelfComponent extends LitElement {
 
   render() {
     return html`
-      <div class="top">
-        <div class="header">
-          <span>PORTFOLIO — DESIGN × CODE</span>
-          <span class="burger"><span></span><span></span></span>
+      <div class="bg-floor"></div>
+
+      <div class="set">
+        <div class="set-inner">
+          <vcr-player .setOp=${1} .setFx=${'blur(0px)'}></vcr-player>
+          <crt-display .setOp=${1} .setFx=${'blur(0px)'}></crt-display>
         </div>
+      </div>
+
+      <div class="header">
+        <span>PORTFOLIO — DESIGN × CODE</span>
+        <span class="burger"><span></span><span></span></span>
+      </div>
+      <div class="hero">
         <h1>Five working apps, shelved on tape.</h1>
         <p>I direct AI-assisted builds of interactive tools. Tap a tape to load one — eject to come back.</p>
       </div>
+
+      <div class="spacer"></div>
+
       <div class="shelf">
         <div class="shelf-label">ON THE SHELF · 0${ORDER.length}</div>
         <div class="list">

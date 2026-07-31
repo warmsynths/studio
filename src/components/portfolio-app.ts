@@ -28,32 +28,22 @@ export class PortfolioAppComponent extends LitElement {
     }
 
     .desktop-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      min-height: 100vh;
-      padding: clamp(14px, 4vw, 44px);
-      box-sizing: border-box;
-    }
-
-    .stage-outer {
       position: relative;
-      width: min(1100px, 100%);
-      aspect-ratio: 1100 / 700;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #f5f2ea;
     }
 
     .main-card {
       position: absolute;
-      top: 0;
+      top: 50%;
       left: 50%;
       width: 1100px;
       height: 700px;
       background: #f5f2ea;
       overflow: hidden;
-      border: 1px solid rgba(0,0,0,.06);
-      border-radius: 4px;
-      transform-origin: top center;
+      transform-origin: center center;
     }
 
     .camera-stage {
@@ -134,13 +124,13 @@ export class PortfolioAppComponent extends LitElement {
   }
 
   updated() {
-    const outer = this.shadowRoot?.querySelector('.stage-outer');
+    const outer = this.shadowRoot?.querySelector('.desktop-wrap');
     if (!outer || outer === this.observedStageEl) return;
     this.resizeObserver?.disconnect();
     this.observedStageEl = outer;
     this.resizeObserver = new ResizeObserver(entries => {
-      const w = entries[0]?.contentRect.width;
-      if (w) this.stageScale = w / 1100;
+      const r = entries[0]?.contentRect;
+      if (r) this.stageScale = Math.max(r.width / 1100, r.height / 700);
     });
     this.resizeObserver.observe(outer);
   }
@@ -490,8 +480,7 @@ export class PortfolioAppComponent extends LitElement {
 
     return html`
       <div class="desktop-wrap">
-      <div class="stage-outer">
-      <div class="main-card" style="transform: translate(-50%, 0) scale(${this.stageScale})">
+      <div class="main-card" style="transform: translate(-50%, -50%) scale(${this.stageScale})">
         <div
           class="camera-stage"
           style="transform: ${this.camOn ? `scale(${this.camScale})` : 'none'}; transform-origin: ${this.camOrigin}; transition: transform ${this.camDur}ms cubic-bezier(.32,.72,0,1)"
@@ -578,7 +567,6 @@ export class PortfolioAppComponent extends LitElement {
           .scrubVal=${this.scrubVal}
           @skip-cutscene=${this.skip}
         ></cutscene-overlay>
-      </div>
       </div>
       </div>
 
