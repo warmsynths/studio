@@ -9,6 +9,9 @@ import './crt-display.js';
 import './cutscene-overlay.js';
 import './motion-inspector.js';
 import './tape-app-slot.js';
+import './mobile-shelf.js';
+import './mobile-insert.js';
+import './mobile-playing.js';
 
 const OUT = 'cubic-bezier(.23,1,.32,1)';
 
@@ -16,15 +19,22 @@ const OUT = 'cubic-bezier(.23,1,.32,1)';
 export class PortfolioAppComponent extends LitElement {
   static styles = css`
     :host {
+      display: block;
+      width: 100%;
+      min-height: 100vh;
+      background: #f5f2ea;
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    .desktop-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       min-height: 100vh;
-      background: #f5f2ea;
       padding: clamp(14px, 4vw, 44px);
       box-sizing: border-box;
-      user-select: none;
     }
 
     .stage-outer {
@@ -52,10 +62,30 @@ export class PortfolioAppComponent extends LitElement {
       will-change: transform;
       transition: transform 560ms cubic-bezier(.32,.72,0,1);
     }
+
+    .mobile-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      overflow: hidden;
+      background: #f5f2ea;
+    }
+
+    .mobile-panel {
+      position: absolute;
+      inset: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
   `;
 
   @state() private stageScale: number = 1;
   private resizeObserver?: ResizeObserver;
+  private observedStageEl?: Element;
+
+  @state() private isMobile: boolean = false;
+  private mq?: MediaQueryList;
+  private handleMqChange = (e: MediaQueryListEvent) => { this.isMobile = e.matches; };
 
   @state() private activeKey: TapeKey | null = null;
   @state() private stageState: CutsceneState = 'idle';
@@ -88,6 +118,9 @@ export class PortfolioAppComponent extends LitElement {
     super.connectedCallback();
     window.addEventListener('keydown', this.handleKeyDown);
     window.addEventListener('popstate', this.handlePopState);
+    this.mq = window.matchMedia('(max-width: 639px)');
+    this.isMobile = this.mq.matches;
+    this.mq.addEventListener('change', this.handleMqChange);
     requestAnimationFrame(() => this.route(true));
   }
 
@@ -95,18 +128,28 @@ export class PortfolioAppComponent extends LitElement {
     super.disconnectedCallback();
     window.removeEventListener('keydown', this.handleKeyDown);
     window.removeEventListener('popstate', this.handlePopState);
+    this.mq?.removeEventListener('change', this.handleMqChange);
     this.resizeObserver?.disconnect();
     this.clear();
   }
 
-  firstUpdated() {
+  updated() {
     const outer = this.shadowRoot?.querySelector('.stage-outer');
-    if (!outer) return;
+    if (!outer || outer === this.observedStageEl) return;
+    this.resizeObserver?.disconnect();
+    this.observedStageEl = outer;
     this.resizeObserver = new ResizeObserver(entries => {
       const w = entries[0]?.contentRect.width;
       if (w) this.stageScale = w / 1100;
     });
     this.resizeObserver.observe(outer);
+  }
+
+  private get mobilePhase(): 'shelf' | 'insert' | 'playing' {
+    const st = this.stageState;
+    if (st === 'play' || st === 'playWipe') return 'playing';
+    if (st === 'idle' || st === 'home') return 'shelf';
+    return 'insert';
   }
 
   private clear() {
@@ -421,7 +464,32 @@ export class PortfolioAppComponent extends LitElement {
       : st === 'idle' ? 'SHELF'
       : (playing ? 'PLAYING' : this.currentShot !== 'none' ? 'RUNNING · ' + (this.currentShot === 'A' ? 'SHOT A' : this.currentShot === 'Be' ? 'EJECT' : 'SHOT B') : reading ? 'RUNNING · SETTLE / READ' : 'RUNNING') + (a ? ' — ' + TAPES[a].title : '');
 
+    if (this.isMobile) {
+      return html`
+        ${this.renderMobile()}
+        ${this.showInspector
+          ? html`
+              <motion-inspector
+                .inspectState=${inspectState}
+                .activeHold=${this.activeHold}
+                .scrubVal=${this.scrubVal}
+                .shotADur=${this.shotADur}
+                .shotBDur=${this.shotBDur}
+                .flashDur=${this.flashDur}
+                .dollyDur=${this.dollyDur}
+                .readDur=${this.readDur}
+                .camPct=${this.camPct}
+                @hold-shot=${(e: CustomEvent) => this.handleHold(e.detail.hold)}
+                @param-change=${(e: CustomEvent) => this.handleParamChange(e.detail.name, e.detail.val)}
+                @run-sequence=${this.runSequence}
+              ></motion-inspector>
+            `
+          : ''}
+      `;
+    }
+
     return html`
+      <div class="desktop-wrap">
       <div class="stage-outer">
       <div class="main-card" style="transform: translate(-50%, 0) scale(${this.stageScale})">
         <div
@@ -512,6 +580,7 @@ export class PortfolioAppComponent extends LitElement {
         ></cutscene-overlay>
       </div>
       </div>
+      </div>
 
       <!-- Motion Inspector Debug Panel (Hidden by default) -->
       ${this.showInspector
@@ -532,6 +601,39 @@ export class PortfolioAppComponent extends LitElement {
             ></motion-inspector>
           `
         : ''}
+    `;
+  }
+
+  private renderMobile() {
+    const phase = this.mobilePhase;
+    const a = this.activeKey;
+
+    return html`
+      <div class="mobile-wrap">
+        <mobile-shelf
+          class="mobile-panel"
+          style="opacity:${phase === 'shelf' ? 1 : 0}; pointer-events:${phase === 'shelf' ? 'auto' : 'none'}; transition:opacity 260ms ${OUT}"
+          @pick-tape=${(e: CustomEvent) => this.pick(e.detail.key)}
+        ></mobile-shelf>
+
+        <mobile-insert
+          class="mobile-panel"
+          style="opacity:${phase === 'insert' ? 1 : 0}; pointer-events:${phase === 'insert' ? 'auto' : 'none'}; transition:opacity 200ms linear"
+          .activeKey=${a}
+          ?ejecting=${this.stageState === 'ejectCollapse'}
+          ?skippable=${this.stageState === 'read'}
+          @skip=${this.skip}
+        ></mobile-insert>
+
+        <mobile-playing
+          class="mobile-panel"
+          style="opacity:${phase === 'playing' ? 1 : 0}; pointer-events:${phase === 'playing' ? 'auto' : 'none'}; transition:opacity 260ms ${OUT}"
+          .activeKey=${a}
+          @eject-tape=${this.eject}
+        >
+          <tape-app-slot .activeKey=${a}></tape-app-slot>
+        </mobile-playing>
+      </div>
     `;
   }
 }
