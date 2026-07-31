@@ -35,53 +35,47 @@ export class MobileInsertComponent extends LitElement {
 
     .cassette {
       position: absolute;
-      left: 294px;
-      top: -110px;
-      width: 112px;
-      height: 64px;
+      left: 430px;
+      top: 69px;
+      width: 130px;
+      height: 46px;
       z-index: 4;
-      transform: translateY(0);
-      transition: transform 680ms cubic-bezier(.32,.72,0,1);
-      filter: drop-shadow(0 10px 14px rgba(0,0,0,.45));
+      transform-origin: left center;
+      transform: translateX(0) scale(1);
+      opacity: 1;
+      transition: transform 680ms cubic-bezier(.32,.72,0,1), opacity 560ms cubic-bezier(.32,.72,0,1);
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.4));
     }
 
     .cassette.inserted {
-      transform: translateY(174px);
+      transform: translateX(-142px) scale(.22);
+      opacity: 0;
     }
 
     .cassette-body {
       position: relative;
       width: 100%;
       height: 100%;
-      border-radius: 4px;
+      border-radius: 3px;
       background: #262626;
       overflow: hidden;
       box-shadow: 0 2px 6px rgba(0,0,0,.3);
     }
 
-    .cassette-body .top-strip {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 14px;
-      background: #1a1a1a;
-    }
-
     .cassette-body .strip {
       position: absolute;
       left: 0;
-      right: 0;
-      top: 14px;
-      height: 6px;
+      top: 0;
+      bottom: 0;
+      width: 12px;
     }
 
     .cassette-body .label {
       position: absolute;
-      left: 8px;
+      left: 18px;
       right: 8px;
-      top: 26px;
-      bottom: 8px;
+      top: 6px;
+      bottom: 6px;
       background: #f4f1e6;
       border-radius: 1px;
       display: flex;
@@ -94,7 +88,7 @@ export class MobileInsertComponent extends LitElement {
     .cassette-body .label span {
       font-family: 'IBM Plex Mono', monospace;
       font-weight: 600;
-      font-size: 8px;
+      font-size: 9px;
       letter-spacing: .04em;
       color: #2a2621;
       line-height: 1.3;
@@ -192,7 +186,6 @@ export class MobileInsertComponent extends LitElement {
           ></crt-display>
           <div class="cassette ${this.inserted ? 'inserted' : ''}">
             <div class="cassette-body">
-              <div class="top-strip"></div>
               <div class="strip" style="background:${t ? (t.strip2 || t.strip) : '#888'}"></div>
               <div class="label"><span>${t ? t.title : ''}</span></div>
             </div>
