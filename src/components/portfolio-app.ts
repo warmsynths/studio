@@ -10,7 +10,6 @@ import './cutscene-overlay.js';
 import './motion-inspector.js';
 import './tape-app-slot.js';
 import './mobile-shelf.js';
-import './mobile-insert.js';
 import './mobile-playing.js';
 
 const OUT = 'cubic-bezier(.23,1,.32,1)';
@@ -135,11 +134,15 @@ export class PortfolioAppComponent extends LitElement {
     this.resizeObserver.observe(outer);
   }
 
-  private get mobilePhase(): 'shelf' | 'insert' | 'playing' {
+  private get mobileShelfPhase(): 'idle' | 'loading' | 'ejecting' {
     const st = this.stageState;
-    if (st === 'play' || st === 'playWipe') return 'playing';
-    if (st === 'idle' || st === 'home') return 'shelf';
-    return 'insert';
+    if (st === 'ejectCollapse') return 'ejecting';
+    if (st === 'idle' || st === 'home') return 'idle';
+    return 'loading';
+  }
+
+  private get mobilePlayingVisible(): boolean {
+    return this.stageState === 'play' || this.stageState === 'playWipe';
   }
 
   private clear() {
@@ -593,29 +596,24 @@ export class PortfolioAppComponent extends LitElement {
   }
 
   private renderMobile() {
-    const phase = this.mobilePhase;
     const a = this.activeKey;
+    const playingVisible = this.mobilePlayingVisible;
 
     return html`
       <div class="mobile-wrap">
         <mobile-shelf
           class="mobile-panel"
-          style="opacity:${phase === 'shelf' ? 1 : 0}; pointer-events:${phase === 'shelf' ? 'auto' : 'none'}; transition:opacity 260ms ${OUT}"
-          @pick-tape=${(e: CustomEvent) => this.pick(e.detail.key)}
-        ></mobile-shelf>
-
-        <mobile-insert
-          class="mobile-panel"
-          style="opacity:${phase === 'insert' ? 1 : 0}; pointer-events:${phase === 'insert' ? 'auto' : 'none'}; transition:opacity 200ms linear"
+          style="opacity:${playingVisible ? 0 : 1}; pointer-events:${playingVisible ? 'none' : 'auto'}; transition:opacity 320ms ${OUT}"
           .activeKey=${a}
-          ?ejecting=${this.stageState === 'ejectCollapse'}
+          .phase=${this.mobileShelfPhase}
           ?skippable=${this.stageState === 'read'}
+          @pick-tape=${(e: CustomEvent) => this.pick(e.detail.key)}
           @skip=${this.skip}
-        ></mobile-insert>
+        ></mobile-shelf>
 
         <mobile-playing
           class="mobile-panel"
-          style="opacity:${phase === 'playing' ? 1 : 0}; pointer-events:${phase === 'playing' ? 'auto' : 'none'}; transition:opacity 260ms ${OUT}"
+          style="opacity:${playingVisible ? 1 : 0}; pointer-events:${playingVisible ? 'auto' : 'none'}; transition:opacity 260ms ${OUT}"
           .activeKey=${a}
           @eject-tape=${this.eject}
         >
