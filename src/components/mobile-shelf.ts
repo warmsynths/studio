@@ -176,13 +176,29 @@ export class MobileShelfComponent extends LitElement {
     .list {
       display: flex;
       flex-direction: column;
-      gap: 1.5%;
       max-width: 480px;
       margin: 0 auto;
     }
 
-    .tape {
+    .tape-slot {
       aspect-ratio: 7.2 / 1;
+      overflow: hidden;
+      margin-bottom: 1.5%;
+      transition: aspect-ratio 460ms cubic-bezier(.6,0,.4,1), margin-bottom 460ms cubic-bezier(.6,0,.4,1);
+    }
+
+    .tape-slot:last-child {
+      margin-bottom: 0;
+    }
+
+    .tape-slot.collapsed {
+      aspect-ratio: 7.2 / 0.02;
+      margin-bottom: 0;
+    }
+
+    .tape {
+      width: 100%;
+      height: 100%;
       position: relative;
       border-radius: 4px 4px 2px 2px;
       background: #262626;
@@ -288,6 +304,7 @@ export class MobileShelfComponent extends LitElement {
 
   private lastPhase: 'idle' | 'loading' | 'ejecting' = 'idle';
   private lastFlownKey: TapeKey | null = null;
+  private homeRect: DOMRect | null = null;
 
   updated(changed: Map<string, unknown>) {
     if (!changed.has('phase') && !changed.has('activeKey')) return;
@@ -306,13 +323,12 @@ export class MobileShelfComponent extends LitElement {
   }
 
   private beginFlight(direction: 'in' | 'out', key: TapeKey) {
-    const tapeEl = this.shadowRoot?.querySelector(`[data-tape="${key}"]`) as HTMLElement | null;
     const vcr = this.shadowRoot?.querySelector('vcr-player');
     const slot = vcr?.shadowRoot?.querySelector('[data-slot]') as HTMLElement | null;
-    if (!tapeEl || !slot) return;
+    const tapeRect = this.homeRect;
+    if (!tapeRect || !slot) return;
 
     const host = this.getBoundingClientRect();
-    const tapeRect = tapeEl.getBoundingClientRect();
     const slotRect = slot.getBoundingClientRect();
 
     this.flightKey = key;
@@ -347,6 +363,8 @@ export class MobileShelfComponent extends LitElement {
   }
 
   private pick(k: TapeKey) {
+    const tapeEl = this.shadowRoot?.querySelector(`[data-tape="${k}"]`) as HTMLElement | null;
+    if (tapeEl) this.homeRect = tapeEl.getBoundingClientRect();
     this.dispatchEvent(new CustomEvent('pick-tape', { detail: { key: k } }));
   }
 
@@ -399,21 +417,23 @@ export class MobileShelfComponent extends LitElement {
             const tp = TAPES[k];
             const hidden = dim && k === a;
             return html`
-              <button
-                class="tape"
-                data-tape=${k}
-                @click=${() => this.pick(k)}
-                aria-label="Load ${tp.title}"
-                style="opacity:${hidden ? 0 : 1}; filter:${dim && !hidden ? 'brightness(.55) blur(1px)' : 'none'}"
-              >
-                <div class="strip" style="background:${tp.strip2 || tp.strip}"></div>
-                <div class="label">
-                  <span class="title">${tp.title}</span>
-                  <span class="kicker">${tp.kicker}</span>
-                </div>
-                <div class="sheen"></div>
-                <div class="vhs">VHS</div>
-              </button>
+              <div class="tape-slot ${hidden ? 'collapsed' : ''}">
+                <button
+                  class="tape"
+                  data-tape=${k}
+                  @click=${() => this.pick(k)}
+                  aria-label="Load ${tp.title}"
+                  style="filter:${dim && !hidden ? 'brightness(.55) blur(1px)' : 'none'}"
+                >
+                  <div class="strip" style="background:${tp.strip2 || tp.strip}"></div>
+                  <div class="label">
+                    <span class="title">${tp.title}</span>
+                    <span class="kicker">${tp.kicker}</span>
+                  </div>
+                  <div class="sheen"></div>
+                  <div class="vhs">VHS</div>
+                </button>
+              </div>
             `;
           })}
         </div>
