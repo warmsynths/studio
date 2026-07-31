@@ -16,24 +16,34 @@ const OUT = 'cubic-bezier(.23,1,.32,1)';
 export class PortfolioAppComponent extends LitElement {
   static styles = css`
     :host {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
       min-height: 100vh;
       background: #f5f2ea;
-      padding: 40px 44px 60px;
+      padding: clamp(14px, 4vw, 44px);
       box-sizing: border-box;
       user-select: none;
     }
 
-    .main-card {
+    .stage-outer {
       position: relative;
+      width: min(1100px, 100%);
+      aspect-ratio: 1100 / 700;
+    }
+
+    .main-card {
+      position: absolute;
+      top: 0;
+      left: 50%;
       width: 1100px;
       height: 700px;
       background: #f5f2ea;
       overflow: hidden;
       border: 1px solid rgba(0,0,0,.06);
       border-radius: 4px;
-      margin: 0 auto;
+      transform-origin: top center;
     }
 
     .camera-stage {
@@ -43,6 +53,9 @@ export class PortfolioAppComponent extends LitElement {
       transition: transform 560ms cubic-bezier(.32,.72,0,1);
     }
   `;
+
+  @state() private stageScale: number = 1;
+  private resizeObserver?: ResizeObserver;
 
   @state() private activeKey: TapeKey | null = null;
   @state() private stageState: CutsceneState = 'idle';
@@ -82,7 +95,18 @@ export class PortfolioAppComponent extends LitElement {
     super.disconnectedCallback();
     window.removeEventListener('keydown', this.handleKeyDown);
     window.removeEventListener('popstate', this.handlePopState);
+    this.resizeObserver?.disconnect();
     this.clear();
+  }
+
+  firstUpdated() {
+    const outer = this.shadowRoot?.querySelector('.stage-outer');
+    if (!outer) return;
+    this.resizeObserver = new ResizeObserver(entries => {
+      const w = entries[0]?.contentRect.width;
+      if (w) this.stageScale = w / 1100;
+    });
+    this.resizeObserver.observe(outer);
   }
 
   private clear() {
@@ -398,9 +422,10 @@ export class PortfolioAppComponent extends LitElement {
       : (playing ? 'PLAYING' : this.currentShot !== 'none' ? 'RUNNING · ' + (this.currentShot === 'A' ? 'SHOT A' : this.currentShot === 'Be' ? 'EJECT' : 'SHOT B') : reading ? 'RUNNING · SETTLE / READ' : 'RUNNING') + (a ? ' — ' + TAPES[a].title : '');
 
     return html`
-      <div class="main-card">
-        <div 
-          class="camera-stage" 
+      <div class="stage-outer">
+      <div class="main-card" style="transform: translate(-50%, 0) scale(${this.stageScale})">
+        <div
+          class="camera-stage"
           style="transform: ${this.camOn ? `scale(${this.camScale})` : 'none'}; transform-origin: ${this.camOrigin}; transition: transform ${this.camDur}ms cubic-bezier(.32,.72,0,1)"
         >
           <!-- Background Scene -->
@@ -485,6 +510,7 @@ export class PortfolioAppComponent extends LitElement {
           .scrubVal=${this.scrubVal}
           @skip-cutscene=${this.skip}
         ></cutscene-overlay>
+      </div>
       </div>
 
       <!-- Motion Inspector Debug Panel (Hidden by default) -->
