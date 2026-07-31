@@ -404,7 +404,7 @@ export class MobileShelfComponent extends LitElement {
                 data-tape=${k}
                 @click=${() => this.pick(k)}
                 aria-label="Load ${tp.title}"
-                style="opacity:${hidden ? 0 : (dim ? 0.35 : 1)}; filter:${dim && !hidden ? 'blur(1px)' : 'none'}"
+                style="opacity:${hidden ? 0 : 1}; filter:${dim && !hidden ? 'brightness(.55) blur(1px)' : 'none'}"
               >
                 <div class="strip" style="background:${tp.strip2 || tp.strip}"></div>
                 <div class="label">
