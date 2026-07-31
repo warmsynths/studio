@@ -126,11 +126,13 @@ export class MobileShelfComponent extends LitElement {
     .list {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 1.5%;
+      max-width: 480px;
+      margin: 0 auto;
     }
 
     .tape {
-      height: 54px;
+      aspect-ratio: 7.2 / 1;
       position: relative;
       border-radius: 4px 4px 2px 2px;
       background: #262626;
