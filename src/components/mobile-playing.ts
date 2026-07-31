@@ -2,8 +2,6 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { TAPES, TapeKey } from '../types/portfolio.js';
 
-const ORDER: TapeKey[] = ['chord', 'scene', 'echo', 'pixel', 'drift'];
-
 @customElement('mobile-playing')
 export class MobilePlayingComponent extends LitElement {
   static styles = css`
@@ -160,37 +158,12 @@ export class MobilePlayingComponent extends LitElement {
 
     .return {
       margin: 22px 22px 0;
-      padding-top: 14px;
+      padding: 14px 0 calc(24px + env(safe-area-inset-bottom, 0px));
       border-top: 1px solid rgba(42, 38, 33, .16);
       font-family: 'IBM Plex Mono', monospace;
       font-size: 9.5px;
       letter-spacing: .12em;
       color: rgba(42, 38, 33, .45);
-    }
-
-    .mini-tapes {
-      margin: 18px 22px 20px;
-      display: flex;
-      gap: 5px;
-      align-items: flex-end;
-    }
-
-    .mini-tape {
-      flex: 1;
-      height: 32px;
-      border-radius: 3px 3px 2px 2px;
-      background: #262626;
-      opacity: .5;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .mini-tape .strip {
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 8px;
     }
   `;
 
@@ -237,14 +210,6 @@ export class MobilePlayingComponent extends LitElement {
       </div>
 
       <div class="return">SWIPE DOWN OR HIT ■ ▲ TO RETURN TO THE SHELF</div>
-
-      <div class="mini-tapes">
-        ${ORDER.map(k => html`
-          <div class="mini-tape">
-            <div class="strip" style="background:${TAPES[k].strip2 || TAPES[k].strip}"></div>
-          </div>
-        `)}
-      </div>
     `;
   }
 }
