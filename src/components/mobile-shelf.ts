@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { TAPES, TapeKey } from '../types/portfolio.js';
 import './vcr-player.js';
 import './crt-display.js';
@@ -10,22 +10,22 @@ const ORDER: TapeKey[] = ['chord', 'scene', 'echo', 'pixel', 'drift'];
 export class MobileShelfComponent extends LitElement {
   static styles = css`
     :host {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      grid-template-columns: 1fr;
       position: relative;
       width: 100%;
-      min-height: 100%;
+      height: 100%;
       background: #ece6da;
       overflow: hidden;
     }
 
     .bg-floor {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 42%;
+      grid-area: 4 / 1;
+      position: relative;
+      top: 52px;
       background: #d8cdba;
+      box-shadow: 0 500px 0 0 #d8cdba;
     }
 
     .bg-floor::before {
@@ -40,13 +40,13 @@ export class MobileShelfComponent extends LitElement {
 
     .set {
       position: absolute;
-      top: -14px;
-      right: -170px;
-      width: 620px;
-      height: 650px;
-      transform: scale(.6);
-      transform-origin: top right;
-      z-index: 0;
+      bottom: -72px;
+      left: 30vw;
+      width: 560px;
+      height: 570px;
+      transform: scale(.55);
+      transform-origin: bottom left;
+      z-index: 1;
       transition: opacity 420ms cubic-bezier(.23,1,.32,1), filter 420ms cubic-bezier(.23,1,.32,1);
     }
 
@@ -56,7 +56,20 @@ export class MobileShelfComponent extends LitElement {
       height: 100%;
     }
 
+    .set-inner vcr-player {
+      right: auto;
+      left: 132px;
+      top: 0;
+    }
+
+    .set-inner crt-display {
+      right: auto;
+      left: 10px;
+      top: 104px;
+    }
+
     .header {
+      grid-area: 1 / 1;
       position: relative;
       z-index: 2;
       display: flex;
@@ -84,6 +97,7 @@ export class MobileShelfComponent extends LitElement {
     }
 
     .copy-stack {
+      grid-area: 2 / 1;
       position: relative;
       z-index: 2;
       padding: 0 22px;
@@ -154,11 +168,13 @@ export class MobileShelfComponent extends LitElement {
     }
 
     .spacer {
-      flex: 1;
+      grid-area: 3 / 1;
       min-height: 24px;
+      position: relative;
     }
 
     .shelf {
+      grid-area: 4 / 1;
       position: relative;
       z-index: 2;
       padding: 30px 20px calc(24px + env(safe-area-inset-bottom, 0px));
@@ -274,119 +290,23 @@ export class MobileShelfComponent extends LitElement {
       font-family: Arial, sans-serif;
     }
 
-    .flying-tape {
-      position: absolute;
-      z-index: 6;
-      pointer-events: none;
-      transition: transform 720ms cubic-bezier(.32,.72,0,1);
-      will-change: transform;
-    }
 
-    .flying-tape .tape-visual {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 4px 4px 2px 2px;
-      background: #262626;
-      box-shadow: 0 10px 20px rgba(42, 38, 33, .35);
-      overflow: hidden;
-    }
   `;
 
   @property({ type: String }) activeKey: TapeKey | null = null;
   @property({ type: String }) phase: 'idle' | 'loading' | 'ejecting' = 'idle';
-  @property({ type: Boolean }) skippable = false;
-
-  @state() private flying: 'pre' | 'in' | 'out' | null = null;
-  @state() private flightTransform = 'translate(0,0) scale(1)';
-  @state() private flightStart = { left: 0, top: 0, width: 0, height: 0 };
-  @state() private flightKey: TapeKey | null = null;
-
-  private lastPhase: 'idle' | 'loading' | 'ejecting' = 'idle';
-  private lastFlownKey: TapeKey | null = null;
-  private homeRect: DOMRect | null = null;
-
-  updated(changed: Map<string, unknown>) {
-    if (!changed.has('phase') && !changed.has('activeKey')) return;
-
-    if (this.phase === 'loading' && this.activeKey && this.activeKey !== this.lastFlownKey) {
-      this.lastFlownKey = this.activeKey;
-      this.beginFlight('in', this.activeKey);
-    } else if (this.phase === 'ejecting' && this.lastPhase !== 'ejecting' && this.activeKey) {
-      this.beginFlight('out', this.activeKey);
-    } else if (this.phase === 'idle' && this.lastPhase !== 'idle') {
-      this.flying = null;
-      this.flightKey = null;
-      this.lastFlownKey = null;
-    }
-    this.lastPhase = this.phase;
-  }
-
-  private beginFlight(direction: 'in' | 'out', key: TapeKey) {
-    const vcr = this.shadowRoot?.querySelector('vcr-player');
-    const slot = vcr?.shadowRoot?.querySelector('[data-slot]') as HTMLElement | null;
-    const tapeRect = this.homeRect;
-    if (!tapeRect || !slot) return;
-
-    const host = this.getBoundingClientRect();
-    const slotRect = slot.getBoundingClientRect();
-
-    this.flightKey = key;
-    this.flightStart = {
-      left: tapeRect.left - host.left,
-      top: tapeRect.top - host.top,
-      width: tapeRect.width,
-      height: tapeRect.height,
-    };
-
-    const dx = (slotRect.left + slotRect.width / 2) - (tapeRect.left + tapeRect.width / 2);
-    const dy = (slotRect.top + slotRect.height / 2) - (tapeRect.top + tapeRect.height / 2);
-    const scale = Math.max(0.14, Math.min(slotRect.width / tapeRect.width, slotRect.height / tapeRect.height) * 1.7);
-    const flownTf = `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) scale(${scale.toFixed(3)})`;
-    const restTf = 'translate(0,0) scale(1)';
-
-    if (direction === 'in') {
-      this.flightTransform = restTf;
-      this.flying = 'pre';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        this.flightTransform = flownTf;
-        this.flying = 'in';
-      }));
-    } else {
-      this.flightTransform = flownTf;
-      this.flying = 'pre';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        this.flightTransform = restTf;
-        this.flying = 'out';
-      }));
-    }
-  }
 
   private pick(k: TapeKey) {
-    const tapeEl = this.shadowRoot?.querySelector(`[data-tape="${k}"]`) as HTMLElement | null;
-    if (tapeEl) this.homeRect = tapeEl.getBoundingClientRect();
     this.dispatchEvent(new CustomEvent('pick-tape', { detail: { key: k } }));
-  }
-
-  private skip() {
-    if (this.skippable) this.dispatchEvent(new CustomEvent('skip'));
   }
 
   render() {
     const dim = this.phase !== 'idle';
     const a = this.activeKey;
     const t = a ? TAPES[a] : null;
-    const flyingKey = this.flightKey;
 
     return html`
       <div class="bg-floor"></div>
-
-      <div class="set" style="opacity:${dim ? 1 : .75}; filter:${dim ? 'blur(0px)' : 'blur(4px)'}">
-        <div class="set-inner">
-          <vcr-player .setOp=${1} .setFx=${'blur(0px)'}></vcr-player>
-          <crt-display .activeKey=${a} .setOp=${1} .setFx=${'blur(0px)'} ?isReading=${this.phase === 'loading'}></crt-display>
-        </div>
-      </div>
 
       <div class="header">
         <span>PORTFOLIO — DESIGN × CODE</span>
@@ -403,12 +323,18 @@ export class MobileShelfComponent extends LitElement {
             <div class="kicker">${this.phase === 'ejecting' ? 'EJECTING' : 'LOADING'}</div>
             <div class="title">${t ? t.title : ''}</div>
             <div class="sub">${t ? t.kicker : ''}</div>
-            ${this.skippable ? html`<button class="skip" @click=${this.skip}>TAP TO SKIP</button>` : ''}
           </div>
         </div>
       </div>
 
-      <div class="spacer"></div>
+      <div class="spacer">
+        <div class="set" style="opacity:${dim ? 1 : .6}; filter:${dim ? 'blur(0px)' : 'blur(4px)'}">
+          <div class="set-inner">
+            <vcr-player .setOp=${1} .setFx=${'blur(0px)'}></vcr-player>
+            <crt-display .activeKey=${a} .setOp=${1} .setFx=${'blur(0px)'} ?isReading=${this.phase === 'loading'}></crt-display>
+          </div>
+        </div>
+      </div>
 
       <div class="shelf">
         <div class="shelf-label" style="opacity:${dim ? .3 : 1}">ON THE SHELF · 0${ORDER.length}</div>
@@ -438,23 +364,6 @@ export class MobileShelfComponent extends LitElement {
           })}
         </div>
       </div>
-
-      ${this.flying && flyingKey ? html`
-        <div
-          class="flying-tape"
-          style="left:${this.flightStart.left}px; top:${this.flightStart.top}px; width:${this.flightStart.width}px; height:${this.flightStart.height}px; transform:${this.flightTransform}"
-        >
-          <div class="tape-visual">
-            <div class="strip" style="background:${TAPES[flyingKey].strip2 || TAPES[flyingKey].strip}"></div>
-            <div class="label">
-              <span class="title">${TAPES[flyingKey].title}</span>
-              <span class="kicker">${TAPES[flyingKey].kicker}</span>
-            </div>
-            <div class="sheen"></div>
-            <div class="vhs">VHS</div>
-          </div>
-        </div>
-      ` : ''}
     `;
   }
 }
