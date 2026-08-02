@@ -113,10 +113,12 @@ export class CutsceneOverlayComponent extends LitElement {
 
       <!-- SHOT A: Macro Sleeve Slide-Out Cut -->
       <div 
-        style="position:absolute; inset:0; z-index:90; display:${this.currentShot === 'A' ? 'block' : 'none'}; background:#efeadf; overflow:hidden; font-family:Arial,Helvetica,sans-serif"
+        style="position:absolute; inset:0; z-index:90; display:${this.currentShot === 'A' ? 'block' : 'none'}; font-family:Arial,Helvetica,sans-serif"
         @click=${this.onSkip}
       >
-        <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 42% 44%,rgba(255,255,255,.62),rgba(42,38,33,.18))"></div>
+        <div style="position:absolute; left:-4000px; right:-4000px; top:-4000px; bottom:-4000px; background:#efeadf;">
+          <div style="position:absolute; inset:0; background:radial-gradient(550px 350px at calc(4000px + 462px) calc(4000px + 308px), rgba(255,255,255,.62), rgba(42,38,33,.18))"></div>
+        </div>
 
         <div style="position:absolute; left:150px; top:96px; width:700px; height:500px; transform-origin:26% 50%; animation-name:${shotAPushAnim}; animation-duration:${this.shotADur}ms; animation-timing-function:cubic-bezier(.32,.72,0,1); animation-fill-mode:both; animation-delay:${shotDelay}; animation-play-state:${shotPlay}">
           <div style="position:absolute; left:20px; top:30px; width:420px; height:470px; background:rgba(42,38,33,.2); filter:blur(26px); border-radius:14px"></div>
@@ -179,16 +181,24 @@ export class CutsceneOverlayComponent extends LitElement {
 
       <!-- SHOT B: Extreme Close-Up Deck Insertion & Eject -->
       <div 
-        style="position:absolute; inset:0; z-index:91; display:${this.currentShot === 'B' || this.currentShot === 'Be' ? 'block' : 'none'}; background:#6f5a3f; overflow:hidden; font-family:Arial,Helvetica,sans-serif"
+        style="position:absolute; inset:0; z-index:91; display:${this.currentShot === 'B' || this.currentShot === 'Be' ? 'block' : 'none'}; background:#6f5a3f; font-family:Arial,Helvetica,sans-serif"
         @click=${this.onSkip}
       >
-        <div style="position:absolute; left:0; right:0; top:0; height:474px; z-index:1; background:linear-gradient(180deg,#08080a,#131316)"></div>
-
+        <!-- Background Extensions for Wide Screens -->
+        <div style="position:absolute; left:-4000px; right:-4000px; top:0; height:474px; z-index:0; background:linear-gradient(180deg,#08080a,#131316)"></div>
         <div style="position:absolute; left:0; right:0; top:472px; bottom:0; z-index:1; perspective:820px; perspective-origin:50% -60%">
-          <div style="position:absolute; left:-40%; right:-40%; top:0; height:1200px; transform:rotateX(76deg); transform-origin:top center; background:linear-gradient(180deg,#c9ab84,#8a6d46)">
+          <div style="position:absolute; left:-3940px; right:-3940px; top:0; height:1200px; transform:rotateX(76deg); transform-origin:top center; background:linear-gradient(180deg,#c9ab84,#8a6d46)">
             <div style="position:absolute; inset:0; background:repeating-linear-gradient(90deg,rgba(90,62,34,.1) 0 3px,transparent 3px 70px)"></div>
           </div>
         </div>
+        <div style="position:absolute; left:-4000px; right:-4000px; top:206px; height:230px; z-index:0; background:linear-gradient(180deg,#141417,#0d0d0f)"></div>
+        <div style="position:absolute; left:-4000px; right:-4000px; top:350px; height:86px; z-index:0; background:linear-gradient(180deg,#1c1c1f,#101012)"><div style="position:absolute; left:0; right:0; top:0; height:1px; background:rgba(255,255,255,.055)"></div></div>
+        <div style="position:absolute; left:-4000px; right:-4000px; top:436px; height:30px; z-index:0; background:linear-gradient(180deg,#efe9dc 0 72%,#c7c0b0 72%); box-shadow:0 16px 26px rgba(20,14,6,.55)"></div>
+        <div style="position:absolute; left:-4000px; right:-4000px; top:0; height:24px; z-index:0; background:#08080a"></div>
+        <div style="position:absolute; left:-4000px; right:-4000px; top:22px; height:186px; z-index:0; background:linear-gradient(180deg,#212125 0 34%,#16161a 34%,#131316); border-bottom:2px solid #34343a; box-shadow:0 8px 18px rgba(0,0,0,.6)"><div style="position:absolute; left:0; right:0; top:0; height:1px; background:rgba(255,255,255,.09)"></div></div>
+
+        <!-- Original centered content -->
+        <div style="position:absolute; left:0; right:0; top:0; height:474px; z-index:1; background:linear-gradient(180deg,#08080a,#131316)"></div>
 
         <div style="position:absolute; left:-30px; right:-30px; top:206px; height:230px; z-index:2; background:linear-gradient(180deg,#141417,#0d0d0f)"></div>
         <div style="position:absolute; left:-30px; right:-30px; top:350px; height:86px; z-index:2; background:linear-gradient(180deg,#1c1c1f,#101012)">
@@ -261,7 +271,7 @@ export class CutsceneOverlayComponent extends LitElement {
           <div style="width:15px; height:15px; border-radius:50%; background:#c9a06a; animation-name:ledBlink; animation-duration:${bDur}ms; animation-timing-function:linear; animation-fill-mode:both; animation-play-state:${shotPlay}; animation-delay:140ms"></div>
           <div style="width:15px; height:15px; border-radius:50%; background:#7fb37a; animation-name:ledBlink; animation-duration:${bDur}ms; animation-timing-function:linear; animation-fill-mode:both; animation-play-state:${shotPlay}; animation-delay:${shotDelay}"></div>
         </div>
-        <div style="position:absolute; left:0; right:0; bottom:0; height:20%; z-index:10; pointer-events:none; background:linear-gradient(180deg,rgba(30,20,10,0),rgba(30,20,10,.5))"></div>
+        <div style="position:absolute; left:-4000px; right:-4000px; bottom:0; height:20%; z-index:10; pointer-events:none; background:linear-gradient(180deg,rgba(30,20,10,0),rgba(30,20,10,.5))"></div>
       </div>
     `;
   }

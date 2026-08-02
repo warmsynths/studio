@@ -31,7 +31,6 @@ export class DesktopLayout extends LitElement {
       width: 1100px;
       height: 700px;
       background: #f5f2ea;
-      overflow: hidden;
       transform-origin: center center;
     }
     .camera-stage {
@@ -135,9 +134,13 @@ export class DesktopLayout extends LitElement {
             @click=${() => { if (d.currentShot !== 'none') d.skip(); else if (playing) this.eject(); else if (st !== 'idle') d.cancel(); }}
             style="position:absolute; inset:0; z-index:1; opacity: ${dim ? (playing ? 0.18 : 0.35) : 1}; filter: ${dim ? (playing ? 'blur(6px)' : 'blur(3px)') : 'blur(0px)'}; transition: opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)"
           >
-            <div style="position:absolute; left:0; right:0; top:0; height:452px; background:#ece6da; filter:blur(6px); opacity:.72"></div>
-            <div style="position:absolute; left:0; right:0; top:452px; bottom:0; background:#d8cdba; filter:blur(6px); opacity:.72"></div>
-            <div style="position:absolute; left:0; right:0; top:450px; height:2px; background:rgba(42,38,33,.18); filter:blur(6px); opacity:.72"></div>
+            <div style="position:absolute; left:-4000px; right:-4000px; top:0; height:452px; background:#ece6da; filter:blur(6px); opacity:.72"></div>
+            <div style="position:absolute; left:0; right:0; top:452px; bottom:0; filter:blur(6px); opacity:.72; perspective:820px; perspective-origin:50% -60%">
+              <div style="position:absolute; left:-3940px; right:-3940px; top:0; height:1200px; transform:rotateX(76deg); transform-origin:top center; background:linear-gradient(180deg,#c9ab84,#8a6d46)">
+                <div style="position:absolute; inset:0; background:repeating-linear-gradient(90deg,rgba(90,62,34,.1) 0 3px,transparent 3px 70px)"></div>
+              </div>
+            </div>
+            <div style="position:absolute; left:-4000px; right:-4000px; top:450px; height:2px; background:rgba(42,38,33,.18); filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; left:56px; top:470px; width:660px; height:170px; background:#cdbfa6; border-radius:6px; transform:perspective(500px) rotateX(58deg); filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; right:34px; top:236px; width:56px; height:216px; background:#c9b79a; border-radius:4px 4px 0 0; filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; right:22px; top:196px; width:80px; height:52px; background:#e2d6c0; border-radius:6px 6px 3px 3px; filter:blur(6px); opacity:.72"></div>
