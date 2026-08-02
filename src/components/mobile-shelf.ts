@@ -316,7 +316,7 @@ export class MobileShelfComponent extends LitElement {
       <div class="copy-stack">
         <div class="grid">
           <div class="copy-layer" style="opacity:${dim ? 0 : 1}; pointer-events:${dim ? 'none' : 'auto'}">
-            <h1>Five working apps, shelved on tape.</h1>
+            <h1>Memories grow in the spaces between living.</h1>
             <p>I direct AI-assisted builds of interactive tools. Tap a tape to load one — eject to come back.</p>
           </div>
           <div class="copy-layer loading-copy" style="opacity:${dim ? 1 : 0}; pointer-events:${dim ? 'auto' : 'none'}">

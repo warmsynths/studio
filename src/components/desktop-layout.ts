@@ -146,7 +146,7 @@ export class DesktopLayout extends LitElement {
             <div style="position:absolute; left:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:#2a2621">PORTFOLIO — DESIGN × CODE</div>
             <div style="position:absolute; right:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:rgba(42,38,33,.45)">ABOUT · CONTACT</div>
             <div style="position:absolute; left:48px; top:212px; max-width:520px">
-              <div style="font:400 34px/1.25 Georgia,serif; color:#2a2621">Built between everything else —</div>
+              <div style="font:400 34px/1.25 Georgia,serif; color:#2a2621">Memories grow in the spaces between living.</div>
               <div style="margin-top:16px; font:14px/1.6 Inter,sans-serif; color:rgba(42,38,33,.55)">Apps I grew, not coded. Pick a tape to load one — eject to come back.</div>
             </div>
           </div>
