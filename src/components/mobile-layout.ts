@@ -13,6 +13,11 @@ const OUT = 'cubic-bezier(.23,1,.32,1)';
 @customElement('mobile-layout')
 export class MobileLayout extends LitElement {
   static styles = css`
+    :host {
+      display: block;
+      width: 100%;
+      min-height: 100vh;
+    }
     .mobile-wrap {
       position: relative;
       width: 100%;
@@ -29,6 +34,9 @@ export class MobileLayout extends LitElement {
   `;
 
   @property({ type: Object }) director!: CutsceneDirector;
+  @property({ type: String }) activeKey: TapeKey | null = null;
+  @property({ type: String }) stageState: string = 'idle';
+  @property({ type: String }) currentShot: string = 'none';
 
   private get mobileShelfPhase(): 'idle' | 'loading' | 'ejecting' {
     const st = this.director.stageState;

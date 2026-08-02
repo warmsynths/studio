@@ -12,6 +12,11 @@ import './tape-app-slot.js';
 @customElement('desktop-layout')
 export class DesktopLayout extends LitElement {
   static styles = css`
+    :host {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
     .desktop-wrap {
       position: relative;
       width: 100%;
@@ -38,6 +43,10 @@ export class DesktopLayout extends LitElement {
   `;
 
   @property({ type: Object }) director!: CutsceneDirector;
+  @property({ type: String }) activeKey: TapeKey | null = null;
+  @property({ type: String }) stageState: string = 'idle';
+  @property({ type: String }) currentShot: string = 'none';
+  @property({ type: String }) flightTransform: string = 'none';
   @property({ type: Number }) stageScale: number = 1;
 
   private _f: { dx: number; dy: number; deg: number; s: number } | null = null;
@@ -137,8 +146,8 @@ export class DesktopLayout extends LitElement {
             <div style="position:absolute; left:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:#2a2621">PORTFOLIO — DESIGN × CODE</div>
             <div style="position:absolute; right:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:rgba(42,38,33,.45)">ABOUT · CONTACT</div>
             <div style="position:absolute; left:48px; top:212px; max-width:520px">
-              <div style="font:400 34px/1.25 Georgia,serif; color:#2a2621">Five working apps, shelved on tape.</div>
-              <div style="margin-top:16px; font:14px/1.6 Inter,sans-serif; color:rgba(42,38,33,.55)">I direct AI-assisted builds of interactive tools.<br>Pick a tape to load one — eject to come back.</div>
+              <div style="font:400 34px/1.25 Georgia,serif; color:#2a2621">Built between everything else —</div>
+              <div style="margin-top:16px; font:14px/1.6 Inter,sans-serif; color:rgba(42,38,33,.55)">Apps I grew, not coded. Pick a tape to load one — eject to come back.</div>
             </div>
           </div>
 
@@ -177,7 +186,7 @@ export class DesktopLayout extends LitElement {
 
         <!-- Info Case Panel -->
         <div 
-          style="position:absolute; left:44px; top:146px; width:352px; z-index:6; pointer-events:none; opacity:${playing ? 1 : 0}; transform:${playing ? 'translateY(0)' : 'translateY(14px)'}; transition:opacity 380ms cubic-bezier(.23,1,.32,1), transform 380ms cubic-bezier(.23,1,.32,1)"
+          style="position:absolute; left:44px; top:146px; width:352px; z-index:6; pointer-events:${playing ? 'auto' : 'none'}; opacity:${playing ? 1 : 0}; transform:${playing ? 'translateY(0)' : 'translateY(14px)'}; transition:opacity 380ms cubic-bezier(.23,1,.32,1), transform 380ms cubic-bezier(.23,1,.32,1)"
         >
           <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:rgba(42,38,33,.45)">NOW PLAYING · ${activeTape ? activeTape.year : ''}</div>
           <div style="margin-top:14px; font:400 34px/1.12 Georgia,serif; color:#2a2621; text-wrap:pretty">${activeTape ? activeTape.title : ''}</div>
@@ -187,7 +196,17 @@ export class DesktopLayout extends LitElement {
             <span style="color:rgba(42,38,33,.42)">BUILT WITH</span><span>${activeTape ? activeTape.stack : ''}</span>
             <span style="color:rgba(42,38,33,.42)">CASE</span><span>/${activeTape ? activeTape.slug : ''}</span>
           </div>
-          <div style="margin-top:30px; padding-top:14px; border-top:1px solid rgba(42,38,33,.16); font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; color:rgba(42,38,33,.45)">■ ▲ EJECT TO RETURN TO THE SHELF</div>
+          <div style="margin-top:30px; padding-top:14px; border-top:1px solid rgba(42,38,33,.16); display:flex; align-items:center; justify-content:space-between">
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; color:rgba(42,38,33,.45)">■ ▲ EJECT TO RETURN TO THE SHELF</div>
+            <a
+              href="https://warmsynths.github.io/${activeTape ? activeTape.slug : ''}"
+              target="_blank"
+              rel="noopener"
+              style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; color:#2a2621; text-decoration:none; white-space:nowrap; opacity:.55; transition:opacity 140ms linear"
+              @mouseenter=${(e: MouseEvent) => (e.target as HTMLElement).style.opacity = '1'}
+              @mouseleave=${(e: MouseEvent) => (e.target as HTMLElement).style.opacity = '.55'}
+            >↗ OPEN APP</a>
+          </div>
         </div>
 
         <!-- 3-Shot Cutscene Overlay -->

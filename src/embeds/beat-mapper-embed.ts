@@ -1,34 +1,36 @@
 import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 
-/**
- * Placeholder for the real beat-mapper Lit component.
- * Replace this file's contents with the real embed — keep the
- * `beat-mapper-embed` tag name so tape-app-slot.ts picks it up unchanged.
- */
+const SCRIPT_URL = import.meta.env.VITE_APP_BEAT_MAPPER_SCRIPT || '/beat-mapper/app.js';
+
 @customElement('beat-mapper-embed')
 export class BeatMapperEmbed extends LitElement {
   static styles = css`
     :host {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
       width: 100%;
       height: 100%;
-      box-sizing: border-box;
-      padding: 10px;
-      border: 1px dashed rgba(230, 226, 217, 0.25);
-      border-radius: 3px;
-      background: rgba(255, 255, 255, 0.02);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 8.5px;
-      letter-spacing: 0.1em;
-      color: rgba(230, 226, 217, 0.45);
-      text-align: center;
+      overflow: auto;
     }
   `;
 
+  @state() private loaded = customElements.get('app-root') !== undefined;
+
+  async connectedCallback() {
+    super.connectedCallback();
+    if (!this.loaded) {
+      try {
+        await import(/* @vite-ignore */ SCRIPT_URL);
+        this.loaded = true;
+      } catch (err) {
+        console.error('Failed to load Beat Mapper component script:', err);
+      }
+    }
+  }
+
   render() {
-    return html`EMBED PENDING — BEAT MAPPER`;
+    return this.loaded
+      ? html`<app-root style="display:block; width:100%; height:100%;"></app-root>`
+      : html`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING BEAT MAPPER...</div>`;
   }
 }

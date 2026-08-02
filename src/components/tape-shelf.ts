@@ -64,7 +64,7 @@ export class TapeShelfComponent extends LitElement {
               <div @click=${() => this.pick('drift')} style="width:200px; height:35px; position:relative; border-radius:4px 4px 2px 2px; background:#262626; box-shadow:0 2px 7px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
                 <div style="position:absolute; left:0; top:0; bottom:0; width:10px; background:${TAPES.drift.strip}"></div>
                 <div style="position:absolute; left:18px; top:6px; bottom:6px; right:34px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; gap:8px; padding:0 8px">
-                  <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">DRIFT</span>
+                  <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">BEAT MAPPER</span>
                   <span style="font-family:'IBM Plex Mono',monospace; font-size:6px; color:rgba(42,38,33,.5); letter-spacing:.05em; white-space:nowrap">${TAPES.drift.kicker}</span>
                 </div>
                 <div style="position:absolute; left:0; right:0; top:0; height:1px; background:rgba(255,255,255,.16)"></div>
@@ -81,7 +81,7 @@ export class TapeShelfComponent extends LitElement {
               <div @click=${() => this.pick('pixel')} style="width:200px; height:35px; position:relative; border-radius:4px 4px 2px 2px; background:#262626; box-shadow:0 2px 7px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
                 <div style="position:absolute; left:0; top:0; bottom:0; width:10px; background:${TAPES.pixel.strip}"></div>
                 <div style="position:absolute; left:18px; top:6px; bottom:6px; right:34px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; gap:8px; padding:0 8px">
-                  <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">PIXEL LOOM</span>
+                  <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">CHROMA CHORDS</span>
                   <span style="font-family:'IBM Plex Mono',monospace; font-size:6px; color:rgba(42,38,33,.5); letter-spacing:.05em; white-space:nowrap">${TAPES.pixel.kicker}</span>
                 </div>
                 <div style="position:absolute; left:0; right:0; top:0; height:1px; background:rgba(255,255,255,.16)"></div>
@@ -98,7 +98,7 @@ export class TapeShelfComponent extends LitElement {
               <div @click=${() => this.pick('chord')} style="width:200px; height:35px; position:relative; border-radius:4px 4px 2px 2px; background:#262626; box-shadow:0 2px 7px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
                 <div style="position:absolute; left:0; top:0; bottom:0; width:10px; background:${TAPES.chord.strip2}"></div>
                 <div style="position:absolute; left:18px; top:6px; bottom:6px; right:34px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; gap:8px; padding:0 8px">
-                  <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">CHORDCRAFT</span>
+                  <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">CIRCUIT CHORDS</span>
                   <span style="font-family:'IBM Plex Mono',monospace; font-size:6px; color:rgba(42,38,33,.5); letter-spacing:.05em; white-space:nowrap">${TAPES.chord.kicker}</span>
                 </div>
                 <div style="position:absolute; left:0; right:0; top:0; height:1px; background:rgba(255,255,255,.16)"></div>
@@ -115,7 +115,7 @@ export class TapeShelfComponent extends LitElement {
               <div @click=${() => this.pick('echo')} style="width:35px; height:200px; position:relative; border-radius:2px 2px 4px 4px; background:#262626; box-shadow:0 3px 10px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
                 <div style="position:absolute; left:0; right:0; bottom:0; height:10px; background:${TAPES.echo.strip}"></div>
                 <div style="position:absolute; left:6px; right:6px; top:34px; bottom:18px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; justify-content:center; overflow:hidden">
-                  <span style="writing-mode:vertical-rl; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">ECHO ROOM</span>
+                  <span style="writing-mode:vertical-rl; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">HYPERSYN</span>
                 </div>
                 <div style="position:absolute; left:0; right:0; top:0; height:1px; background:rgba(255,255,255,.16)"></div>
                 <div style="position:absolute; left:0; right:0; top:12px; text-align:center; font-size:7px; font-style:italic; color:#aaa; font-family:Arial,sans-serif">VHS</div>
@@ -131,7 +131,7 @@ export class TapeShelfComponent extends LitElement {
               <div @click=${() => this.pick('scene')} style="width:35px; height:200px; position:relative; border-radius:2px 2px 4px 4px; background:#262626; box-shadow:0 3px 10px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
                 <div style="position:absolute; left:0; right:0; bottom:0; height:10px; background:${TAPES.scene.strip2}"></div>
                 <div style="position:absolute; left:6px; right:6px; top:34px; bottom:18px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; justify-content:center; overflow:hidden">
-                  <span style="writing-mode:vertical-rl; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">SCENE/BUILDER</span>
+                  <span style="writing-mode:vertical-rl; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">J-6 COMPANION</span>
                 </div>
                 <div style="position:absolute; left:0; right:0; top:0; height:1px; background:rgba(255,255,255,.16)"></div>
                 <div style="position:absolute; left:0; right:0; top:12px; text-align:center; font-size:7px; font-style:italic; color:#aaa; font-family:Arial,sans-serif">VHS</div>

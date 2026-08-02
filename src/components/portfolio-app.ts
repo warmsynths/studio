@@ -56,7 +56,7 @@ export class PortfolioAppComponent extends LitElement {
     this.observedStageEl = outer;
     this.resizeObserver = new ResizeObserver(entries => {
       const r = entries[0]?.contentRect;
-      if (r) this.stageScale = Math.max(r.width / 1100, r.height / 700);
+      if (r) this.stageScale = Math.min(r.width / 1100, r.height / 700);
     });
     this.resizeObserver.observe(outer);
   }
@@ -106,8 +106,20 @@ export class PortfolioAppComponent extends LitElement {
 
     return html`
       ${this.isMobile 
-        ? html`<mobile-layout .director=${d}></mobile-layout>` 
-        : html`<desktop-layout .director=${d} .stageScale=${this.stageScale}></desktop-layout>`
+        ? html`<mobile-layout
+            .director=${d}
+            .activeKey=${d.activeKey}
+            .stageState=${d.stageState}
+            .currentShot=${d.currentShot}
+          ></mobile-layout>` 
+        : html`<desktop-layout
+            .director=${d}
+            .activeKey=${d.activeKey}
+            .stageState=${d.stageState}
+            .currentShot=${d.currentShot}
+            .flightTransform=${d.flightTransform}
+            .stageScale=${this.stageScale}
+          ></desktop-layout>`
       }
 
       ${this.showInspector
