@@ -30,7 +30,10 @@ export class HypersynEmbed extends LitElement {
 
   render() {
     return this.loaded
-      ? html`<hypersyn-app style="display:block; width:100%; height:100%;"></hypersyn-app>`
+      ? html`
+          <link rel="stylesheet" href="/hypersyn-chord-helper/assets/styles.css">
+          <hypersyn-app style="display:block; width:100%; height:100%;"></hypersyn-app>
+        `
       : html`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING HYPERSYN HELPER...</div>`;
   }
 }

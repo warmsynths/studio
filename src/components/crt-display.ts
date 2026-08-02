@@ -68,8 +68,8 @@ export class CrtDisplayComponent extends LitElement {
             >
               <!-- Active screen layer -->
               <div style="position:absolute; inset:0; background:#0a0a0c; border-radius:38px 38px 34px 34px; opacity:${screenOn ? 1 : 0}; transition:opacity 200ms linear;">
-                <!-- App rendered at 800×600 emulated, scaled to fit the ~296×238px glass area -->
-                <div style="position:absolute; left:0; top:0; width:800px; height:600px; transform:scale(.37); transform-origin:top left; clip-path:${this.isPlayWipe ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)'}; transition:clip-path 420ms cubic-bezier(.23,1,.32,1)">
+                <!-- App rendered at 800×643 emulated, scaled to fit the ~296×238px glass area -->
+                <div style="position:absolute; left:0; top:0; width:800px; height:643px; transform:scale(.37); transform-origin:top left; clip-path:${this.isPlayWipe ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)'}; transition:clip-path 420ms cubic-bezier(.23,1,.32,1)">
                   <slot></slot>
                 </div>
               </div>
