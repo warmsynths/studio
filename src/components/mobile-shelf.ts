@@ -118,9 +118,10 @@ export class MobileShelfComponent extends LitElement {
 
     h1 {
       margin: 26px 0 0;
-      font: 400 clamp(24px, 8vw, 32px) / 1.18 Georgia, serif;
+      font: 400 clamp(32px, 8vw, 56px) / 1.08 Georgia, serif;
+      letter-spacing: -0.01em;
       color: #2a2621;
-      max-width: 240px;
+      max-width: 320px;
     }
 
     p {
@@ -310,14 +311,18 @@ export class MobileShelfComponent extends LitElement {
 
       <div class="header">
         <span>PORTFOLIO — DESIGN × CODE</span>
-        <span class="burger"><span></span><span></span></span>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; color:rgba(42,38,33,.6); display:flex; gap:8px">
+          <span style="cursor:pointer" @click=${() => this.dispatchEvent(new CustomEvent('open-info', { detail: { mode: 'about' }, bubbles: true, composed: true }))}>ABOUT</span>
+          <span>·</span>
+          <span style="cursor:pointer" @click=${() => this.dispatchEvent(new CustomEvent('open-info', { detail: { mode: 'contact' }, bubbles: true, composed: true }))}>CONTACT</span>
+        </div>
       </div>
 
       <div class="copy-stack">
         <div class="grid">
           <div class="copy-layer" style="opacity:${dim ? 0 : 1}; pointer-events:${dim ? 'none' : 'auto'}">
             <h1>Memories grow in the spaces between living.</h1>
-            <p>I direct AI-assisted builds of interactive tools. Tap a tape to load one — eject to come back.</p>
+            <p>A web developer, using AI to catch up to my own imagination. Tap a tape to load one — eject to come back.</p>
           </div>
           <div class="copy-layer loading-copy" style="opacity:${dim ? 1 : 0}; pointer-events:${dim ? 'auto' : 'none'}">
             <div class="kicker">${this.phase === 'ejecting' ? 'EJECTING' : 'LOADING'}</div>

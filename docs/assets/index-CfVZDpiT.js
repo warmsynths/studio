@@ -1,35 +1,35 @@
-(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const i of document.querySelectorAll('link[rel="modulepreload"]'))o(i);new MutationObserver(i=>{for(const a of i)if(a.type==="childList")for(const r of a.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&o(r)}).observe(document,{childList:!0,subtree:!0});function e(i){const a={};return i.integrity&&(a.integrity=i.integrity),i.referrerPolicy&&(a.referrerPolicy=i.referrerPolicy),i.crossOrigin==="use-credentials"?a.credentials="include":i.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function o(i){if(i.ep)return;i.ep=!0;const a=e(i);fetch(i.href,a)}})();/**
+(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))s(o);new MutationObserver(o=>{for(const a of o)if(a.type==="childList")for(const r of a.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&s(r)}).observe(document,{childList:!0,subtree:!0});function e(o){const a={};return o.integrity&&(a.integrity=o.integrity),o.referrerPolicy&&(a.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?a.credentials="include":o.crossOrigin==="anonymous"?a.credentials="omit":a.credentials="same-origin",a}function s(o){if(o.ep)return;o.ep=!0;const a=e(o);fetch(o.href,a)}})();/**
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const tt=globalThis,vt=tt.ShadowRoot&&(tt.ShadyCSS===void 0||tt.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,yt=Symbol(),At=new WeakMap;let It=class{constructor(t,e,o){if(this._$cssResult$=!0,o!==yt)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const e=this.t;if(vt&&t===void 0){const o=e!==void 0&&e.length===1;o&&(t=At.get(e)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),o&&At.set(e,t))}return t}toString(){return this.cssText}};const Xt=s=>new It(typeof s=="string"?s:s+"",void 0,yt),v=(s,...t)=>{const e=s.length===1?s[0]:t.reduce((o,i,a)=>o+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(i)+s[a+1],s[0]);return new It(e,s,yt)},Yt=(s,t)=>{if(vt)s.adoptedStyleSheets=t.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(const e of t){const o=document.createElement("style"),i=tt.litNonce;i!==void 0&&o.setAttribute("nonce",i),o.textContent=e.cssText,s.appendChild(o)}},_t=vt?s=>s:s=>s instanceof CSSStyleSheet?(t=>{let e="";for(const o of t.cssRules)e+=o.cssText;return Xt(e)})(s):s;/**
+ */const it=globalThis,yt=it.ShadowRoot&&(it.ShadyCSS===void 0||it.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,wt=Symbol(),Et=new WeakMap;let Ft=class{constructor(t,e,s){if(this._$cssResult$=!0,s!==wt)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e}get styleSheet(){let t=this.o;const e=this.t;if(yt&&t===void 0){const s=e!==void 0&&e.length===1;s&&(t=Et.get(e)),t===void 0&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),s&&Et.set(e,t))}return t}toString(){return this.cssText}};const Jt=i=>new Ft(typeof i=="string"?i:i+"",void 0,wt),v=(i,...t)=>{const e=i.length===1?i[0]:t.reduce((s,o,a)=>s+(r=>{if(r._$cssResult$===!0)return r.cssText;if(typeof r=="number")return r;throw Error("Value passed to 'css' function must be a 'css' function result: "+r+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+i[a+1],i[0]);return new Ft(e,i,wt)},Qt=(i,t)=>{if(yt)i.adoptedStyleSheets=t.map(e=>e instanceof CSSStyleSheet?e:e.styleSheet);else for(const e of t){const s=document.createElement("style"),o=it.litNonce;o!==void 0&&s.setAttribute("nonce",o),s.textContent=e.cssText,i.appendChild(s)}},Pt=yt?i=>i:i=>i instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return Jt(e)})(i):i;/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const{is:Jt,defineProperty:Qt,getOwnPropertyDescriptor:Zt,getOwnPropertyNames:te,getOwnPropertySymbols:ee,getPrototypeOf:ie}=Object,lt=globalThis,Ot=lt.trustedTypes,se=Ot?Ot.emptyScript:"",oe=lt.reactiveElementPolyfillSupport,G=(s,t)=>s,et={toAttribute(s,t){switch(t){case Boolean:s=s?se:null;break;case Object:case Array:s=s==null?s:JSON.stringify(s)}return s},fromAttribute(s,t){let e=s;switch(t){case Boolean:e=s!==null;break;case Number:e=s===null?null:Number(s);break;case Object:case Array:try{e=JSON.parse(s)}catch{e=null}}return e}},mt=(s,t)=>!Jt(s,t),Pt={attribute:!0,type:String,converter:et,reflect:!1,useDefault:!1,hasChanged:mt};Symbol.metadata??=Symbol("metadata"),lt.litPropertyMetadata??=new WeakMap;let N=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,e=Pt){if(e.state&&(e.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((e=Object.create(e)).wrapped=!0),this.elementProperties.set(t,e),!e.noAccessor){const o=Symbol(),i=this.getPropertyDescriptor(t,o,e);i!==void 0&&Qt(this.prototype,t,i)}}static getPropertyDescriptor(t,e,o){const{get:i,set:a}=Zt(this.prototype,t)??{get(){return this[e]},set(r){this[e]=r}};return{get:i,set(r){const n=i?.call(this);a?.call(this,r),this.requestUpdate(t,n,o)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??Pt}static _$Ei(){if(this.hasOwnProperty(G("elementProperties")))return;const t=ie(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(G("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(G("properties"))){const e=this.properties,o=[...te(e),...ee(e)];for(const i of o)this.createProperty(i,e[i])}const t=this[Symbol.metadata];if(t!==null){const e=litPropertyMetadata.get(t);if(e!==void 0)for(const[o,i]of e)this.elementProperties.set(o,i)}this._$Eh=new Map;for(const[e,o]of this.elementProperties){const i=this._$Eu(e,o);i!==void 0&&this._$Eh.set(i,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const o=new Set(t.flat(1/0).reverse());for(const i of o)e.unshift(_t(i))}else t!==void 0&&e.push(_t(t));return e}static _$Eu(t,e){const o=e.attribute;return o===!1?void 0:typeof o=="string"?o:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,e=this.constructor.elementProperties;for(const o of e.keys())this.hasOwnProperty(o)&&(t.set(o,this[o]),delete this[o]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return Yt(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,e,o){this._$AK(t,o)}_$ET(t,e){const o=this.constructor.elementProperties.get(t),i=this.constructor._$Eu(t,o);if(i!==void 0&&o.reflect===!0){const a=(o.converter?.toAttribute!==void 0?o.converter:et).toAttribute(e,o.type);this._$Em=t,a==null?this.removeAttribute(i):this.setAttribute(i,a),this._$Em=null}}_$AK(t,e){const o=this.constructor,i=o._$Eh.get(t);if(i!==void 0&&this._$Em!==i){const a=o.getPropertyOptions(i),r=typeof a.converter=="function"?{fromAttribute:a.converter}:a.converter?.fromAttribute!==void 0?a.converter:et;this._$Em=i;const n=r.fromAttribute(e,a.type);this[i]=n??this._$Ej?.get(i)??n,this._$Em=null}}requestUpdate(t,e,o,i=!1,a){if(t!==void 0){const r=this.constructor;if(i===!1&&(a=this[t]),o??=r.getPropertyOptions(t),!((o.hasChanged??mt)(a,e)||o.useDefault&&o.reflect&&a===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,o))))return;this.C(t,e,o)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,e,{useDefault:o,reflect:i,wrapped:a},r){o&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??e??this[t]),a!==!0||r!==void 0)||(this._$AL.has(t)||(this.hasUpdated||o||(e=void 0),this._$AL.set(t,e)),i===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[i,a]of this._$Ep)this[i]=a;this._$Ep=void 0}const o=this.constructor.elementProperties;if(o.size>0)for(const[i,a]of o){const{wrapped:r}=a,n=this[i];r!==!0||this._$AL.has(i)||n===void 0||this.C(i,void 0,a,n)}}let t=!1;const e=this._$AL;try{t=this.shouldUpdate(e),t?(this.willUpdate(e),this._$EO?.forEach(o=>o.hostUpdate?.()),this.update(e)):this._$EM()}catch(o){throw t=!1,this._$EM(),o}t&&this._$AE(e)}willUpdate(t){}_$AE(t){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(t){}firstUpdated(t){}};N.elementStyles=[],N.shadowRootOptions={mode:"open"},N[G("elementProperties")]=new Map,N[G("finalized")]=new Map,oe?.({ReactiveElement:N}),(lt.reactiveElementVersions??=[]).push("2.1.2");/**
+ */const{is:Zt,defineProperty:te,getOwnPropertyDescriptor:ee,getOwnPropertyNames:ie,getOwnPropertySymbols:oe,getPrototypeOf:se}=Object,dt=globalThis,Ct=dt.trustedTypes,ae=Ct?Ct.emptyScript:"",re=dt.reactiveElementPolyfillSupport,W=(i,t)=>i,ot={toAttribute(i,t){switch(t){case Boolean:i=i?ae:null;break;case Object:case Array:i=i==null?i:JSON.stringify(i)}return i},fromAttribute(i,t){let e=i;switch(t){case Boolean:e=i!==null;break;case Number:e=i===null?null:Number(i);break;case Object:case Array:try{e=JSON.parse(i)}catch{e=null}}return e}},$t=(i,t)=>!Zt(i,t),Tt={attribute:!0,type:String,converter:ot,reflect:!1,useDefault:!1,hasChanged:$t};Symbol.metadata??=Symbol("metadata"),dt.litPropertyMetadata??=new WeakMap;let N=class extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,e=Tt){if(e.state&&(e.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(t)&&((e=Object.create(e)).wrapped=!0),this.elementProperties.set(t,e),!e.noAccessor){const s=Symbol(),o=this.getPropertyDescriptor(t,s,e);o!==void 0&&te(this.prototype,t,o)}}static getPropertyDescriptor(t,e,s){const{get:o,set:a}=ee(this.prototype,t)??{get(){return this[e]},set(r){this[e]=r}};return{get:o,set(r){const n=o?.call(this);a?.call(this,r),this.requestUpdate(t,n,s)},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)??Tt}static _$Ei(){if(this.hasOwnProperty(W("elementProperties")))return;const t=se(this);t.finalize(),t.l!==void 0&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties)}static finalize(){if(this.hasOwnProperty(W("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(W("properties"))){const e=this.properties,s=[...ie(e),...oe(e)];for(const o of s)this.createProperty(o,e[o])}const t=this[Symbol.metadata];if(t!==null){const e=litPropertyMetadata.get(t);if(e!==void 0)for(const[s,o]of e)this.elementProperties.set(s,o)}this._$Eh=new Map;for(const[e,s]of this.elementProperties){const o=this._$Eu(e,s);o!==void 0&&this._$Eh.set(o,e)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(t){const e=[];if(Array.isArray(t)){const s=new Set(t.flat(1/0).reverse());for(const o of s)e.unshift(Pt(o))}else t!==void 0&&e.push(Pt(t));return e}static _$Eu(t,e){const s=e.attribute;return s===!1?void 0:typeof s=="string"?s:typeof t=="string"?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this))}addController(t){(this._$EO??=new Set).add(t),this.renderRoot!==void 0&&this.isConnected&&t.hostConnected?.()}removeController(t){this._$EO?.delete(t)}_$E_(){const t=new Map,e=this.constructor.elementProperties;for(const s of e.keys())this.hasOwnProperty(s)&&(t.set(s,this[s]),delete this[s]);t.size>0&&(this._$Ep=t)}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return Qt(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(t=>t.hostConnected?.())}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.())}attributeChangedCallback(t,e,s){this._$AK(t,s)}_$ET(t,e){const s=this.constructor.elementProperties.get(t),o=this.constructor._$Eu(t,s);if(o!==void 0&&s.reflect===!0){const a=(s.converter?.toAttribute!==void 0?s.converter:ot).toAttribute(e,s.type);this._$Em=t,a==null?this.removeAttribute(o):this.setAttribute(o,a),this._$Em=null}}_$AK(t,e){const s=this.constructor,o=s._$Eh.get(t);if(o!==void 0&&this._$Em!==o){const a=s.getPropertyOptions(o),r=typeof a.converter=="function"?{fromAttribute:a.converter}:a.converter?.fromAttribute!==void 0?a.converter:ot;this._$Em=o;const n=r.fromAttribute(e,a.type);this[o]=n??this._$Ej?.get(o)??n,this._$Em=null}}requestUpdate(t,e,s,o=!1,a){if(t!==void 0){const r=this.constructor;if(o===!1&&(a=this[t]),s??=r.getPropertyOptions(t),!((s.hasChanged??$t)(a,e)||s.useDefault&&s.reflect&&a===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,s))))return;this.C(t,e,s)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(t,e,{useDefault:s,reflect:o,wrapped:a},r){s&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??e??this[t]),a!==!0||r!==void 0)||(this._$AL.has(t)||(this.hasUpdated||s||(e=void 0),this._$AL.set(t,e)),o===!0&&this._$Em!==t&&(this._$Eq??=new Set).add(t))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(e){Promise.reject(e)}const t=this.scheduleUpdate();return t!=null&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[o,a]of this._$Ep)this[o]=a;this._$Ep=void 0}const s=this.constructor.elementProperties;if(s.size>0)for(const[o,a]of s){const{wrapped:r}=a,n=this[o];r!==!0||this._$AL.has(o)||n===void 0||this.C(o,void 0,a,n)}}let t=!1;const e=this._$AL;try{t=this.shouldUpdate(e),t?(this.willUpdate(e),this._$EO?.forEach(s=>s.hostUpdate?.()),this.update(e)):this._$EM()}catch(s){throw t=!1,this._$EM(),s}t&&this._$AE(e)}willUpdate(t){}_$AE(t){this._$EO?.forEach(e=>e.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return!0}update(t){this._$Eq&&=this._$Eq.forEach(e=>this._$ET(e,this[e])),this._$EM()}updated(t){}firstUpdated(t){}};N.elementStyles=[],N.shadowRootOptions={mode:"open"},N[W("elementProperties")]=new Map,N[W("finalized")]=new Map,re?.({ReactiveElement:N}),(dt.reactiveElementVersions??=[]).push("2.1.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const $t=globalThis,Et=s=>s,it=$t.trustedTypes,Ct=it?it.createPolicy("lit-html",{createHTML:s=>s}):void 0,jt="$lit$",C=`lit$${Math.random().toFixed(9).slice(2)}$`,Nt="?"+C,ae=`<${Nt}>`,R=document,W=()=>R.createComment(""),X=s=>s===null||typeof s!="object"&&typeof s!="function",wt=Array.isArray,re=s=>wt(s)||typeof s?.[Symbol.iterator]=="function",xt=`[ 	
-\f\r]`,K=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,Tt=/-->/g,Dt=/>/g,z=RegExp(`>|${xt}(?:([^\\s"'>=/]+)(${xt}*=${xt}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`,"g"),zt=/'/g,Mt=/"/g,Ft=/^(?:script|style|textarea|title)$/i,ne=s=>(t,...e)=>({_$litType$:s,strings:t,values:e}),c=ne(1),F=Symbol.for("lit-noChange"),f=Symbol.for("lit-nothing"),Rt=new WeakMap,M=R.createTreeWalker(R,129);function Lt(s,t){if(!wt(s)||!s.hasOwnProperty("raw"))throw Error("invalid template strings array");return Ct!==void 0?Ct.createHTML(t):t}const pe=(s,t)=>{const e=s.length-1,o=[];let i,a=t===2?"<svg>":t===3?"<math>":"",r=K;for(let n=0;n<e;n++){const p=s[n];let h,g,d=-1,b=0;for(;b<p.length&&(r.lastIndex=b,g=r.exec(p),g!==null);)b=r.lastIndex,r===K?g[1]==="!--"?r=Tt:g[1]!==void 0?r=Dt:g[2]!==void 0?(Ft.test(g[2])&&(i=RegExp("</"+g[2],"g")),r=z):g[3]!==void 0&&(r=z):r===z?g[0]===">"?(r=i??K,d=-1):g[1]===void 0?d=-2:(d=r.lastIndex-g[2].length,h=g[1],r=g[3]===void 0?z:g[3]==='"'?Mt:zt):r===Mt||r===zt?r=z:r===Tt||r===Dt?r=K:(r=z,i=void 0);const m=r===z&&s[n+1].startsWith("/>")?" ":"";a+=r===K?p+ae:d>=0?(o.push(h),p.slice(0,d)+jt+p.slice(d)+C+m):p+C+(d===-2?n:m)}return[Lt(s,a+(s[e]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),o]};class Y{constructor({strings:t,_$litType$:e},o){let i;this.parts=[];let a=0,r=0;const n=t.length-1,p=this.parts,[h,g]=pe(t,e);if(this.el=Y.createElement(h,o),M.currentNode=this.el.content,e===2||e===3){const d=this.el.content.firstChild;d.replaceWith(...d.childNodes)}for(;(i=M.nextNode())!==null&&p.length<n;){if(i.nodeType===1){if(i.hasAttributes())for(const d of i.getAttributeNames())if(d.endsWith(jt)){const b=g[r++],m=i.getAttribute(d).split(C),P=/([.?@])?(.*)/.exec(b);p.push({type:1,index:a,name:P[2],strings:m,ctor:P[1]==="."?de:P[1]==="?"?ce:P[1]==="@"?he:dt}),i.removeAttribute(d)}else d.startsWith(C)&&(p.push({type:6,index:a}),i.removeAttribute(d));if(Ft.test(i.tagName)){const d=i.textContent.split(C),b=d.length-1;if(b>0){i.textContent=it?it.emptyScript:"";for(let m=0;m<b;m++)i.append(d[m],W()),M.nextNode(),p.push({type:2,index:++a});i.append(d[b],W())}}}else if(i.nodeType===8)if(i.data===Nt)p.push({type:2,index:a});else{let d=-1;for(;(d=i.data.indexOf(C,d+1))!==-1;)p.push({type:7,index:a}),d+=C.length-1}a++}}static createElement(t,e){const o=R.createElement("template");return o.innerHTML=t,o}}function L(s,t,e=s,o){if(t===F)return t;let i=o!==void 0?e._$Co?.[o]:e._$Cl;const a=X(t)?void 0:t._$litDirective$;return i?.constructor!==a&&(i?._$AO?.(!1),a===void 0?i=void 0:(i=new a(s),i._$AT(s,e,o)),o!==void 0?(e._$Co??=[])[o]=i:e._$Cl=i),i!==void 0&&(t=L(s,i._$AS(s,t.values),i,o)),t}class le{constructor(t,e){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:e},parts:o}=this._$AD,i=(t?.creationScope??R).importNode(e,!0);M.currentNode=i;let a=M.nextNode(),r=0,n=0,p=o[0];for(;p!==void 0;){if(r===p.index){let h;p.type===2?h=new Q(a,a.nextSibling,this,t):p.type===1?h=new p.ctor(a,p.name,p.strings,this,t):p.type===6&&(h=new ge(a,this,t)),this._$AV.push(h),p=o[++n]}r!==p?.index&&(a=M.nextNode(),r++)}return M.currentNode=R,i}p(t){let e=0;for(const o of this._$AV)o!==void 0&&(o.strings!==void 0?(o._$AI(t,o,e),e+=o.strings.length-2):o._$AI(t[e])),e++}}class Q{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,e,o,i){this.type=2,this._$AH=f,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=o,this.options=i,this._$Cv=i?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return e!==void 0&&t?.nodeType===11&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=L(this,t,e),X(t)?t===f||t==null||t===""?(this._$AH!==f&&this._$AR(),this._$AH=f):t!==this._$AH&&t!==F&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):re(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==f&&X(this._$AH)?this._$AA.nextSibling.data=t:this.T(R.createTextNode(t)),this._$AH=t}$(t){const{values:e,_$litType$:o}=t,i=typeof o=="number"?this._$AC(t):(o.el===void 0&&(o.el=Y.createElement(Lt(o.h,o.h[0]),this.options)),o);if(this._$AH?._$AD===i)this._$AH.p(e);else{const a=new le(i,this),r=a.u(this.options);a.p(e),this.T(r),this._$AH=a}}_$AC(t){let e=Rt.get(t.strings);return e===void 0&&Rt.set(t.strings,e=new Y(t)),e}k(t){wt(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let o,i=0;for(const a of t)i===e.length?e.push(o=new Q(this.O(W()),this.O(W()),this,this.options)):o=e[i],o._$AI(a),i++;i<e.length&&(this._$AR(o&&o._$AB.nextSibling,i),e.length=i)}_$AR(t=this._$AA.nextSibling,e){for(this._$AP?.(!1,!0,e);t!==this._$AB;){const o=Et(t).nextSibling;Et(t).remove(),t=o}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class dt{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,e,o,i,a){this.type=1,this._$AH=f,this._$AN=void 0,this.element=t,this.name=e,this._$AM=i,this.options=a,o.length>2||o[0]!==""||o[1]!==""?(this._$AH=Array(o.length-1).fill(new String),this.strings=o):this._$AH=f}_$AI(t,e=this,o,i){const a=this.strings;let r=!1;if(a===void 0)t=L(this,t,e,0),r=!X(t)||t!==this._$AH&&t!==F,r&&(this._$AH=t);else{const n=t;let p,h;for(t=a[0],p=0;p<a.length-1;p++)h=L(this,n[o+p],e,p),h===F&&(h=this._$AH[p]),r||=!X(h)||h!==this._$AH[p],h===f?t=f:t!==f&&(t+=(h??"")+a[p+1]),this._$AH[p]=h}r&&!i&&this.j(t)}j(t){t===f?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class de extends dt{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===f?void 0:t}}class ce extends dt{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==f)}}class he extends dt{constructor(t,e,o,i,a){super(t,e,o,i,a),this.type=5}_$AI(t,e=this){if((t=L(this,t,e,0)??f)===F)return;const o=this._$AH,i=t===f&&o!==f||t.capture!==o.capture||t.once!==o.once||t.passive!==o.passive,a=t!==f&&(o===f||i);i&&this.element.removeEventListener(this.name,this,o),a&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class ge{constructor(t,e,o){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=o}get _$AU(){return this._$AM._$AU}_$AI(t){L(this,t)}}const ue=$t.litHtmlPolyfillSupport;ue?.(Y,Q),($t.litHtmlVersions??=[]).push("3.3.3");const xe=(s,t,e)=>{const o=e?.renderBefore??t;let i=o._$litPart$;if(i===void 0){const a=e?.renderBefore??null;o._$litPart$=i=new Q(t.insertBefore(W(),a),a,void 0,e??{})}return i._$AI(s),i};/**
+ */const kt=globalThis,Dt=i=>i,st=kt.trustedTypes,zt=st?st.createPolicy("lit-html",{createHTML:i=>i}):void 0,Ut="$lit$",C=`lit$${Math.random().toFixed(9).slice(2)}$`,Lt="?"+C,ne=`<${Lt}>`,I=document,X=()=>I.createComment(""),Y=i=>i===null||typeof i!="object"&&typeof i!="function",St=Array.isArray,pe=i=>St(i)||typeof i?.[Symbol.iterator]=="function",ft=`[ 	
+\f\r]`,G=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,Mt=/-->/g,Rt=/>/g,M=RegExp(`>|${ft}(?:([^\\s"'>=/]+)(${ft}*=${ft}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`,"g"),It=/'/g,Bt=/"/g,Vt=/^(?:script|style|textarea|title)$/i,le=i=>(t,...e)=>({_$litType$:i,strings:t,values:e}),c=le(1),F=Symbol.for("lit-noChange"),f=Symbol.for("lit-nothing"),Ht=new WeakMap,R=I.createTreeWalker(I,129);function qt(i,t){if(!St(i)||!i.hasOwnProperty("raw"))throw Error("invalid template strings array");return zt!==void 0?zt.createHTML(t):t}const de=(i,t)=>{const e=i.length-1,s=[];let o,a=t===2?"<svg>":t===3?"<math>":"",r=G;for(let n=0;n<e;n++){const p=i[n];let h,g,d=-1,b=0;for(;b<p.length&&(r.lastIndex=b,g=r.exec(p),g!==null);)b=r.lastIndex,r===G?g[1]==="!--"?r=Mt:g[1]!==void 0?r=Rt:g[2]!==void 0?(Vt.test(g[2])&&(o=RegExp("</"+g[2],"g")),r=M):g[3]!==void 0&&(r=M):r===M?g[0]===">"?(r=o??G,d=-1):g[1]===void 0?d=-2:(d=r.lastIndex-g[2].length,h=g[1],r=g[3]===void 0?M:g[3]==='"'?Bt:It):r===Bt||r===It?r=M:r===Mt||r===Rt?r=G:(r=M,o=void 0);const y=r===M&&i[n+1].startsWith("/>")?" ":"";a+=r===G?p+ne:d>=0?(s.push(h),p.slice(0,d)+Ut+p.slice(d)+C+y):p+C+(d===-2?n:y)}return[qt(i,a+(i[e]||"<?>")+(t===2?"</svg>":t===3?"</math>":"")),s]};class J{constructor({strings:t,_$litType$:e},s){let o;this.parts=[];let a=0,r=0;const n=t.length-1,p=this.parts,[h,g]=de(t,e);if(this.el=J.createElement(h,s),R.currentNode=this.el.content,e===2||e===3){const d=this.el.content.firstChild;d.replaceWith(...d.childNodes)}for(;(o=R.nextNode())!==null&&p.length<n;){if(o.nodeType===1){if(o.hasAttributes())for(const d of o.getAttributeNames())if(d.endsWith(Ut)){const b=g[r++],y=o.getAttribute(d).split(C),P=/([.?@])?(.*)/.exec(b);p.push({type:1,index:a,name:P[2],strings:y,ctor:P[1]==="."?he:P[1]==="?"?ge:P[1]==="@"?ue:ct}),o.removeAttribute(d)}else d.startsWith(C)&&(p.push({type:6,index:a}),o.removeAttribute(d));if(Vt.test(o.tagName)){const d=o.textContent.split(C),b=d.length-1;if(b>0){o.textContent=st?st.emptyScript:"";for(let y=0;y<b;y++)o.append(d[y],X()),R.nextNode(),p.push({type:2,index:++a});o.append(d[b],X())}}}else if(o.nodeType===8)if(o.data===Lt)p.push({type:2,index:a});else{let d=-1;for(;(d=o.data.indexOf(C,d+1))!==-1;)p.push({type:7,index:a}),d+=C.length-1}a++}}static createElement(t,e){const s=I.createElement("template");return s.innerHTML=t,s}}function U(i,t,e=i,s){if(t===F)return t;let o=s!==void 0?e._$Co?.[s]:e._$Cl;const a=Y(t)?void 0:t._$litDirective$;return o?.constructor!==a&&(o?._$AO?.(!1),a===void 0?o=void 0:(o=new a(i),o._$AT(i,e,s)),s!==void 0?(e._$Co??=[])[s]=o:e._$Cl=o),o!==void 0&&(t=U(i,o._$AS(i,t.values),o,s)),t}class ce{constructor(t,e){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=e}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:e},parts:s}=this._$AD,o=(t?.creationScope??I).importNode(e,!0);R.currentNode=o;let a=R.nextNode(),r=0,n=0,p=s[0];for(;p!==void 0;){if(r===p.index){let h;p.type===2?h=new tt(a,a.nextSibling,this,t):p.type===1?h=new p.ctor(a,p.name,p.strings,this,t):p.type===6&&(h=new xe(a,this,t)),this._$AV.push(h),p=s[++n]}r!==p?.index&&(a=R.nextNode(),r++)}return R.currentNode=I,o}p(t){let e=0;for(const s of this._$AV)s!==void 0&&(s.strings!==void 0?(s._$AI(t,s,e),e+=s.strings.length-2):s._$AI(t[e])),e++}}class tt{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,e,s,o){this.type=2,this._$AH=f,this._$AN=void 0,this._$AA=t,this._$AB=e,this._$AM=s,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let t=this._$AA.parentNode;const e=this._$AM;return e!==void 0&&t?.nodeType===11&&(t=e.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,e=this){t=U(this,t,e),Y(t)?t===f||t==null||t===""?(this._$AH!==f&&this._$AR(),this._$AH=f):t!==this._$AH&&t!==F&&this._(t):t._$litType$!==void 0?this.$(t):t.nodeType!==void 0?this.T(t):pe(t)?this.k(t):this._(t)}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t))}_(t){this._$AH!==f&&Y(this._$AH)?this._$AA.nextSibling.data=t:this.T(I.createTextNode(t)),this._$AH=t}$(t){const{values:e,_$litType$:s}=t,o=typeof s=="number"?this._$AC(t):(s.el===void 0&&(s.el=J.createElement(qt(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===o)this._$AH.p(e);else{const a=new ce(o,this),r=a.u(this.options);a.p(e),this.T(r),this._$AH=a}}_$AC(t){let e=Ht.get(t.strings);return e===void 0&&Ht.set(t.strings,e=new J(t)),e}k(t){St(this._$AH)||(this._$AH=[],this._$AR());const e=this._$AH;let s,o=0;for(const a of t)o===e.length?e.push(s=new tt(this.O(X()),this.O(X()),this,this.options)):s=e[o],s._$AI(a),o++;o<e.length&&(this._$AR(s&&s._$AB.nextSibling,o),e.length=o)}_$AR(t=this._$AA.nextSibling,e){for(this._$AP?.(!1,!0,e);t!==this._$AB;){const s=Dt(t).nextSibling;Dt(t).remove(),t=s}}setConnected(t){this._$AM===void 0&&(this._$Cv=t,this._$AP?.(t))}}class ct{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,e,s,o,a){this.type=1,this._$AH=f,this._$AN=void 0,this.element=t,this.name=e,this._$AM=o,this.options=a,s.length>2||s[0]!==""||s[1]!==""?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=f}_$AI(t,e=this,s,o){const a=this.strings;let r=!1;if(a===void 0)t=U(this,t,e,0),r=!Y(t)||t!==this._$AH&&t!==F,r&&(this._$AH=t);else{const n=t;let p,h;for(t=a[0],p=0;p<a.length-1;p++)h=U(this,n[s+p],e,p),h===F&&(h=this._$AH[p]),r||=!Y(h)||h!==this._$AH[p],h===f?t=f:t!==f&&(t+=(h??"")+a[p+1]),this._$AH[p]=h}r&&!o&&this.j(t)}j(t){t===f?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"")}}class he extends ct{constructor(){super(...arguments),this.type=3}j(t){this.element[this.name]=t===f?void 0:t}}class ge extends ct{constructor(){super(...arguments),this.type=4}j(t){this.element.toggleAttribute(this.name,!!t&&t!==f)}}class ue extends ct{constructor(t,e,s,o,a){super(t,e,s,o,a),this.type=5}_$AI(t,e=this){if((t=U(this,t,e,0)??f)===F)return;const s=this._$AH,o=t===f&&s!==f||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,a=t!==f&&(s===f||o);o&&this.element.removeEventListener(this.name,this,s),a&&this.element.addEventListener(this.name,this,t),this._$AH=t}handleEvent(t){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t)}}class xe{constructor(t,e,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=e,this.options=s}get _$AU(){return this._$AM._$AU}_$AI(t){U(this,t)}}const be=kt.litHtmlPolyfillSupport;be?.(J,tt),(kt.litHtmlVersions??=[]).push("3.3.3");const fe=(i,t,e)=>{const s=e?.renderBefore??t;let o=s._$litPart$;if(o===void 0){const a=e?.renderBefore??null;s._$litPart$=o=new tt(t.insertBefore(X(),a),a,void 0,e??{})}return o._$AI(i),o};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const kt=globalThis;class x extends N{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=xe(e,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return F}}x._$litElement$=!0,x.finalized=!0,kt.litElementHydrateSupport?.({LitElement:x});const be=kt.litElementPolyfillSupport;be?.({LitElement:x});(kt.litElementVersions??=[]).push("4.2.2");/**
+ */const At=globalThis;class x extends N{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const e=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=fe(e,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return F}}x._$litElement$=!0,x.finalized=!0,At.litElementHydrateSupport?.({LitElement:x});const ve=At.litElementPolyfillSupport;ve?.({LitElement:x});(At.litElementVersions??=[]).push("4.2.2");/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const y=s=>(t,e)=>{e!==void 0?e.addInitializer(()=>{customElements.define(s,t)}):customElements.define(s,t)};/**
+ */const m=i=>(t,e)=>{e!==void 0?e.addInitializer(()=>{customElements.define(i,t)}):customElements.define(i,t)};/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */const fe={attribute:!0,type:String,converter:et,reflect:!1,hasChanged:mt},ve=(s=fe,t,e)=>{const{kind:o,metadata:i}=e;let a=globalThis.litPropertyMetadata.get(i);if(a===void 0&&globalThis.litPropertyMetadata.set(i,a=new Map),o==="setter"&&((s=Object.create(s)).wrapped=!0),a.set(e.name,s),o==="accessor"){const{name:r}=e;return{set(n){const p=t.get.call(this);t.set.call(this,n),this.requestUpdate(r,p,s,!0,n)},init(n){return n!==void 0&&this.C(r,void 0,s,n),n}}}if(o==="setter"){const{name:r}=e;return function(n){const p=this[r];t.call(this,n),this.requestUpdate(r,p,s,!0,n)}}throw Error("Unsupported decorator location: "+o)};function l(s){return(t,e)=>typeof e=="object"?ve(s,t,e):((o,i,a)=>{const r=i.hasOwnProperty(a);return i.constructor.createProperty(a,o),r?Object.getOwnPropertyDescriptor(i,a):void 0})(s,t,e)}/**
+ */const me={attribute:!0,type:String,converter:ot,reflect:!1,hasChanged:$t},ye=(i=me,t,e)=>{const{kind:s,metadata:o}=e;let a=globalThis.litPropertyMetadata.get(o);if(a===void 0&&globalThis.litPropertyMetadata.set(o,a=new Map),s==="setter"&&((i=Object.create(i)).wrapped=!0),a.set(e.name,i),s==="accessor"){const{name:r}=e;return{set(n){const p=t.get.call(this);t.set.call(this,n),this.requestUpdate(r,p,i,!0,n)},init(n){return n!==void 0&&this.C(r,void 0,i,n),n}}}if(s==="setter"){const{name:r}=e;return function(n){const p=this[r];t.call(this,n),this.requestUpdate(r,p,i,!0,n)}}throw Error("Unsupported decorator location: "+s)};function l(i){return(t,e)=>typeof e=="object"?ye(i,t,e):((s,o,a)=>{const r=o.hasOwnProperty(a);return o.constructor.createProperty(a,s),r?Object.getOwnPropertyDescriptor(o,a):void 0})(i,t,e)}/**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
- */function H(s){return l({...s,state:!0,attribute:!1})}const u={drift:{key:"drift",rest:-.8,onEnd:!1,z:1,slug:"beat-mapper",title:"BEAT MAPPER",sub:"Started as a live pad-flasher and got rebuilt around a harder problem: classifying a performer’s own kick, snare, and hat relative to each other instead of guessing fixed frequencies that never held across voices or mics. A self-calibrating noise floor and root-cause debugging against real takes took it from spurious hits to 90% confidence — reskinned as a printed field manual, seismograph and all.",year:"2026",role:"Direction · build",stack:"Meyda · Web Audio",run:"0:04:12",kicker:"BEATBOX TO PAD",bg:"#f2f2f2",fg:"#111",strip:"#c62828",strip2:"#7f1d1d",embedTag:"beat-mapper-embed"},pixel:{key:"pixel",rest:1.2,onEnd:!1,z:1,slug:"chroma-chords",title:"CHROMA CHORDS",sub:"Began life as Chord Voyager, a maritime-themed modular studio gated behind Google sign-in. Rebuilt from the ground up into a three-tap Seed → Loop → Swap flow, then taught to read plain-language mood through Claude — constrained, validated, and hardened behind an authenticated proxy so a free-text vibe becomes a real, idiomatic progression in one request.",year:"2026",role:"Direction · build",stack:"Tone.js · Claude",run:"0:02:48",kicker:"CHORD PROGRESSIONS",bg:"#f6d000",fg:"#111",strip:"#e91e8c",strip2:"#7e57c2",embedTag:"chroma-chords-embed"},chord:{key:"chord",rest:-.5,onEnd:!1,z:1,slug:"circuit-chords",title:"CIRCUIT CHORDS",sub:"What started as a simple chord-to-pad mapper for the Novation Circuit grew into a full WebMIDI instrument: SysEx patch dumps in and out, a dual light/dark theme matching Circuit Tracks and Circuit Rhythm hardware, and a componentized architecture built to keep growing without buckling under its own state.",year:"2026",role:"Design · build",stack:"Tonal.js · WebMIDI",run:"0:03:30",kicker:"PAD GRID MAPPER",bg:"#f4efdd",fg:"#111",strip:"#d9a441",strip2:"#b8860b",embedTag:"circuit-chords-embed"},echo:{key:"echo",rest:-13,onEnd:!0,z:3,slug:"hypersyn-chord-helper",title:"HYPERSYN HELPER",sub:"A single-file hex converter, hand-modularized into typed, tested TypeScript as it grew — then reimagined entirely as a CRT boot terminal: command-line input, scanline flicker, eight switchable color themes, and voicings you cycle by tapping the badge itself, on desktop or thumb alike.",year:"2026",role:"Direction · build",stack:"Tonal.js · Web Audio",run:"0:05:06",kicker:"CHORD → HEX",bg:"#141414",fg:"#eee",strip:"#43a047",strip2:"#1b5e20",embedTag:"hypersyn-embed"},scene:{key:"scene",rest:-13,onEnd:!0,z:2,slug:"j6-companion",title:"J-6 COMPANION",sub:"Started as a two-pane preset browser for the Roland J-6, rebuilt as a skeuomorphic synth faceplate, then expanded across three linked data domains — presets, chord sets, and arpeggiator styles — backed by an RFC-driven relational dataset and shipped installable as a PWA for use at the instrument, offline.",year:"2026",role:"Direction · build",stack:"Lit · PWA",run:"0:06:20",kicker:"SYNTH COMPANION",bg:"#1a3fa0",fg:"#fff",strip:"#1e88e5",strip2:"#0d3fa0",embedTag:"j6-companion-embed"}};class ye{constructor(){this.ctx=null,this.muted=!1}initCtx(){if(!this.ctx){const t=window.AudioContext||window.webkitAudioContext;t&&(this.ctx=new t)}this.ctx&&this.ctx.state==="suspended"&&this.ctx.resume()}setMuted(t){this.muted=t}isMuted(){return this.muted}playClick(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.createOscillator(),e=this.ctx.createGain();t.type="triangle",t.frequency.setValueAtTime(800,this.ctx.currentTime),t.frequency.exponentialRampToValueAtTime(120,this.ctx.currentTime+.04),e.gain.setValueAtTime(.3,this.ctx.currentTime),e.gain.exponentialRampToValueAtTime(.001,this.ctx.currentTime+.04),t.connect(e),e.connect(this.ctx.destination),t.start(),t.stop(this.ctx.currentTime+.04)}playSleeveSlide(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.sampleRate*.3,e=this.ctx.createBuffer(1,t,this.ctx.sampleRate),o=e.getChannelData(0);for(let n=0;n<t;n++)o[n]=Math.random()*2-1;const i=this.ctx.createBufferSource();i.buffer=e;const a=this.ctx.createBiquadFilter();a.type="bandpass",a.frequency.setValueAtTime(400,this.ctx.currentTime),a.frequency.exponentialRampToValueAtTime(1200,this.ctx.currentTime+.25),a.Q.setValueAtTime(2,this.ctx.currentTime);const r=this.ctx.createGain();r.gain.setValueAtTime(.01,this.ctx.currentTime),r.gain.linearRampToValueAtTime(.18,this.ctx.currentTime+.12),r.gain.exponentialRampToValueAtTime(.001,this.ctx.currentTime+.3),i.connect(a),a.connect(r),r.connect(this.ctx.destination),i.start()}playDeckThunk(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.currentTime,e=this.ctx.createOscillator(),o=this.ctx.createGain();e.type="sine",e.frequency.setValueAtTime(160,t),e.frequency.exponentialRampToValueAtTime(35,t+.12),o.gain.setValueAtTime(.5,t),o.gain.exponentialRampToValueAtTime(.001,t+.14),e.connect(o),o.connect(this.ctx.destination),e.start(t),e.stop(t+.14);const i=this.ctx.createOscillator(),a=this.ctx.createGain();i.type="square",i.frequency.setValueAtTime(950,t+.03),i.frequency.exponentialRampToValueAtTime(220,t+.08),a.gain.setValueAtTime(0,t),a.gain.setValueAtTime(.25,t+.03),a.gain.exponentialRampToValueAtTime(.001,t+.09),i.connect(a),a.connect(this.ctx.destination),i.start(t+.03),i.stop(t+.09)}playStaticCrackle(t=90){if(this.muted||(this.initCtx(),!this.ctx))return;const e=t/1e3,o=Math.floor(this.ctx.sampleRate*e),i=this.ctx.createBuffer(1,o,this.ctx.sampleRate),a=i.getChannelData(0);for(let p=0;p<o;p++)a[p]=(Math.random()*2-1)*(Math.random()>.4?1:.1);const r=this.ctx.createBufferSource();r.buffer=i;const n=this.ctx.createGain();n.gain.setValueAtTime(.2,this.ctx.currentTime),n.gain.exponentialRampToValueAtTime(.001,this.ctx.currentTime+e),r.connect(n),n.connect(this.ctx.destination),r.start()}playCrtHum(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.currentTime,e=this.ctx.createOscillator(),o=this.ctx.createGain();e.type="sine",e.frequency.setValueAtTime(12e3,t),o.gain.setValueAtTime(.04,t),o.gain.exponentialRampToValueAtTime(.005,t+.4),e.connect(o),o.connect(this.ctx.destination),e.start(t),e.stop(t+.4);const i=this.ctx.createOscillator(),a=this.ctx.createGain();i.type="triangle",i.frequency.setValueAtTime(120,t),i.frequency.exponentialRampToValueAtTime(50,t+.2),a.gain.setValueAtTime(.3,t),a.gain.exponentialRampToValueAtTime(.001,t+.2),i.connect(a),a.connect(this.ctx.destination),i.start(t),i.stop(t+.2)}playEjectPop(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.currentTime,e=this.ctx.createOscillator(),o=this.ctx.createGain();e.type="sawtooth",e.frequency.setValueAtTime(450,t),e.frequency.exponentialRampToValueAtTime(80,t+.08),o.gain.setValueAtTime(.35,t),o.gain.exponentialRampToValueAtTime(.001,t+.08),e.connect(o),o.connect(this.ctx.destination),e.start(t),e.stop(t+.08)}}const E=new ye,bt="cubic-bezier(.23,1,.32,1)";class me{constructor(t){this.activeKey=null,this.stageState="idle",this.flightTransform="none",this.flightDur=220,this.flightEase=bt,this.currentShot="none",this.showFlash=!1,this.camOn=!1,this.camScale=1.6,this.camDur=0,this.camOrigin="735px 307px",this.shotADur=1300,this.shotBDur=1250,this.flashDur=130,this.dollyDur=420,this.readDur=620,this.camPct=174,this.activeHold=null,this.scrubVal=0,this._t=[],(this.host=t).addController(this)}hostDisconnected(){this.clear()}clear(){this._t.forEach(t=>clearTimeout(t)),this._t=[]}at(t,e){const o=window.setTimeout(()=>{e(),this.host.requestUpdate()},t);this._t.push(o)}setStateIdle(){this.activeKey=null,this.stageState="idle",this.flightTransform="none",this.currentShot="none",this.camOn=!1,this.host.requestUpdate()}pick(t,e,o,i){if(this.currentShot!=="none"){this.skip();return}if(!["lift","fly","insert","settle","ejectCollapse","ejectCam","pop","home"].includes(this.stageState)){if(this.stageState==="read"){this.toPlay();return}if(this.clear(),E.playClick(),history.pushState({p:u[t].slug},"","#/"+u[t].slug),window.matchMedia("(prefers-reduced-motion: reduce)").matches){this.activeKey=t,this.stageState="playWipe",this.flightTransform=e,this.flightDur=0,this.camOn=!0,this.camScale=1.6,this.camDur=0,this.host.requestUpdate();return}i?this.mobileCut(t):this.cut(t,e,o),this.host.requestUpdate()}}cut(t,e,o){const{shotADur:i,shotBDur:a,flashDur:r,dollyDur:n,readDur:p,camPct:h}=this,g=i+200,d=g+a+150,b=d+r+n+p;this.activeKey=t,this.stageState="read",this.flightTransform=e,this.flightDur=0,this.flightEase=bt,this.camOrigin=o,this.currentShot="A",this.showFlash=!0,this.camOn=!0,this.camScale=h/100,this.camDur=0,this.activeHold=null,this.scrubVal=0,E.playSleeveSlide(),this.at(r,()=>{this.showFlash=!1}),this.at(g,()=>{this.currentShot="B",this.showFlash=!0,E.playDeckThunk()}),this.at(g+r,()=>{this.showFlash=!1}),this.at(d,()=>{this.currentShot="none",this.showFlash=!0,E.playCrtHum()}),this.at(d+r,()=>{this.showFlash=!1,this.camScale=1.6,this.camDur=n}),this.at(b,()=>{this.stageState="play"}),this.at(b+260,()=>{this.stageState="playWipe"})}skip(){this.clear(),E.playClick(),this.currentShot="none",this.showFlash=!0,this.camOn=!0,this.camScale=1.6,this.camDur=0,this.stageState="play",this.host.requestUpdate(),this.at(90,()=>{this.showFlash=!1}),this.at(160,()=>{this.stageState="playWipe"})}toPlay(){this.clear(),this.stageState="play",this.camOn=!0,this.camScale=1.6,this.camDur=560,this.host.requestUpdate(),this.at(560,()=>{this.stageState="playWipe"})}jump(t,e,o){this.clear(),this.activeKey=t,this.stageState="playWipe",this.flightTransform=e,this.flightDur=0,this.camOrigin=o,this.camOn=!0,this.camScale=1.6,this.host.requestUpdate()}eject(t){if(!this.activeKey)return;if(this.clear(),E.playClick(),E.playEjectPop(),location.hash&&location.hash!=="#/"&&history.pushState({},"","#/"),window.matchMedia("(prefers-reduced-motion: reduce)").matches){this.setStateIdle();return}if(t){this.mobileEject(),this.host.requestUpdate();return}const e=this.flashDur,o=Math.round(this.shotBDur*.72);this.stageState="ejectCollapse",this.activeHold=null,this.at(200,()=>{this.currentShot="Be",this.showFlash=!0}),this.at(200+e,()=>{this.showFlash=!1}),this.at(200+o+60,()=>{this.currentShot="none",this.showFlash=!0,this.camOn=!1,this.camDur=0,this.flightTransform="none"}),this.at(200+o+60+e,()=>{this.showFlash=!1,this.setStateIdle()}),this.host.requestUpdate()}mobileCut(t){const e=this.flashDur,o=this.shotBDur;this.activeKey=t,this.stageState="read",this.currentShot="B",this.showFlash=!0,this.activeHold=null,this.scrubVal=0,E.playDeckThunk(),this.at(e,()=>{this.showFlash=!1}),this.at(o+100,()=>{this.currentShot="none",this.showFlash=!0}),this.at(o+100+e,()=>{this.showFlash=!1,this.stageState="play"}),this.at(o+100+e+260,()=>{this.stageState="playWipe"})}mobileEject(){const t=this.flashDur,e=Math.round(this.shotBDur*.72);this.stageState="ejectCollapse",this.activeHold=null,this.currentShot="Be",this.showFlash=!0,this.at(t,()=>{this.showFlash=!1}),this.at(e+60,()=>{this.currentShot="none",this.showFlash=!0}),this.at(e+60+t,()=>{this.showFlash=!1,this.setStateIdle()})}cancel(){this.clear(),this.stageState="home",this.flightTransform="none",this.flightDur=220,this.flightEase=bt,this.host.requestUpdate(),this.at(220,()=>{this.setStateIdle()})}handleHold(t,e,o){this.clear();const i=this.activeKey||"echo";if(t==="idle"){this.activeHold=null,this.scrubVal=0,this.currentShot="none",this.showFlash=!1,this.activeKey=null,this.stageState="idle",this.flightTransform="none",this.camOn=!1,this.host.requestUpdate();return}if(t==="play"){this.activeHold=null,this.scrubVal=0,this.currentShot="none",this.showFlash=!1,this.activeKey=i,this.stageState="playWipe",this.flightTransform=e,this.camOrigin=o,this.camOn=!0,this.camScale=1.6,this.host.requestUpdate();return}this.activeHold=t,this.scrubVal=0,this.currentShot=t,this.showFlash=!1,this.activeKey=i,this.stageState="read",this.flightTransform=e,this.camOrigin=o,this.camOn=!0,this.camScale=this.camPct/100,this.host.requestUpdate()}handleParamChange(t,e){t==="shotADur"?this.shotADur=e:t==="shotBDur"?this.shotBDur=e:t==="flashDur"?this.flashDur=e:t==="dollyDur"?this.dollyDur=e:t==="readDur"?this.readDur=e:t==="camPct"?this.camPct=e:t==="scrub"&&(this.scrubVal=e),this.host.requestUpdate()}}var $e=Object.defineProperty,we=Object.getOwnPropertyDescriptor,D=(s,t,e,o)=>{for(var i=o>1?void 0:o?we(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&$e(t,e,i),i};let k=class extends x{constructor(){super(...arguments),this.activeKey=null,this.stage="idle",this.sceneOp=1,this.flightTransform="none",this.flightDur=0,this.flightEase="cubic-bezier(.23,1,.32,1)",this.flightFx="drop-shadow(0 2px 4px rgba(42,38,33,.12))"}pick(s){this.dispatchEvent(new CustomEvent("pick-tape",{detail:{key:s}}))}render(){const s=this.activeKey,t=this.stage,e=t!=="idle"&&t!=="home",o=t==="play"||t==="playWipe",i=o||t==="read"||t==="ejectCollapse"?"none":"auto",a=d=>{d[0].toUpperCase()+d.slice(1);const b=s===d,m=e?b?o?0:1:o?.18:.35:1,P=e&&!b?o?"blur(6px)":"blur(3px)":"blur(0px)",gt=b?this.flightTransform:"none",ut=b?40:u[d].z;return{op:m,fx:P,tf:gt,z:ut}},r=a("drift"),n=a("pixel"),p=a("chord"),h=a("echo"),g=a("scene");return c`
-      <div style="position:relative; width:100%; height:100%; pointer-events:${i}">
+ */function H(i){return l({...i,state:!0,attribute:!1})}const u={drift:{key:"drift",rest:-.8,onEnd:!1,z:1,slug:"beat-mapper",title:"BEAT MAPPER",sub:"Started as a live pad-flasher and got rebuilt around a harder problem: classifying a performer’s own kick, snare, and hat relative to each other instead of guessing fixed frequencies that never held across voices or mics. A self-calibrating noise floor and root-cause debugging against real takes took it from spurious hits to 90% confidence — reskinned as a printed field manual, seismograph and all.",year:"2026",role:"Direction · build",stack:"Meyda · Web Audio",run:"0:04:12",kicker:"BEATBOX TO PAD",bg:"#f2f2f2",fg:"#111",strip:"#c62828",strip2:"#7f1d1d",embedTag:"beat-mapper-embed"},pixel:{key:"pixel",rest:1.2,onEnd:!1,z:1,slug:"chroma-chords",title:"CHROMA CHORDS",sub:"Began life as Chord Voyager, a maritime-themed modular studio gated behind Google sign-in. Rebuilt from the ground up into a three-tap Seed → Loop → Swap flow, then taught to read plain-language mood through Claude — constrained, validated, and hardened behind an authenticated proxy so a free-text vibe becomes a real, idiomatic progression in one request.",year:"2026",role:"Direction · build",stack:"Tone.js · Claude",run:"0:02:48",kicker:"CHORD PROGRESSIONS",bg:"#f6d000",fg:"#111",strip:"#e91e8c",strip2:"#7e57c2",embedTag:"chroma-chords-embed"},chord:{key:"chord",rest:-.5,onEnd:!1,z:1,slug:"circuit-chords",title:"CIRCUIT CHORDS",sub:"What started as a simple chord-to-pad mapper for the Novation Circuit grew into a full WebMIDI instrument: SysEx patch dumps in and out, a dual light/dark theme matching Circuit Tracks and Circuit Rhythm hardware, and a componentized architecture built to keep growing without buckling under its own state.",year:"2026",role:"Design · build",stack:"Tonal.js · WebMIDI",run:"0:03:30",kicker:"PAD GRID MAPPER",bg:"#f4efdd",fg:"#111",strip:"#d9a441",strip2:"#b8860b",embedTag:"circuit-chords-embed"},echo:{key:"echo",rest:-13,onEnd:!0,z:3,slug:"hypersyn-chord-helper",title:"HYPERSYN HELPER",sub:"A single-file hex converter, hand-modularized into typed, tested TypeScript as it grew — then reimagined entirely as a CRT boot terminal: command-line input, scanline flicker, eight switchable color themes, and voicings you cycle by tapping the badge itself, on desktop or thumb alike.",year:"2026",role:"Direction · build",stack:"Tonal.js · Web Audio",run:"0:05:06",kicker:"CHORD → HEX",bg:"#141414",fg:"#eee",strip:"#43a047",strip2:"#1b5e20",embedTag:"hypersyn-embed"},scene:{key:"scene",rest:-13,onEnd:!0,z:2,slug:"j6-companion",title:"J-6 COMPANION",sub:"Started as a two-pane preset browser for the Roland J-6, rebuilt as a skeuomorphic synth faceplate, then expanded across three linked data domains — presets, chord sets, and arpeggiator styles — backed by an RFC-driven relational dataset and shipped installable as a PWA for use at the instrument, offline.",year:"2026",role:"Direction · build",stack:"Lit · PWA",run:"0:06:20",kicker:"SYNTH COMPANION",bg:"#1a3fa0",fg:"#fff",strip:"#1e88e5",strip2:"#0d3fa0",embedTag:"j6-companion-embed"}};class we{constructor(){this.ctx=null,this.muted=!1}initCtx(){if(!this.ctx){const t=window.AudioContext||window.webkitAudioContext;t&&(this.ctx=new t)}this.ctx&&this.ctx.state==="suspended"&&this.ctx.resume()}setMuted(t){this.muted=t}isMuted(){return this.muted}playClick(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.createOscillator(),e=this.ctx.createGain();t.type="triangle",t.frequency.setValueAtTime(800,this.ctx.currentTime),t.frequency.exponentialRampToValueAtTime(120,this.ctx.currentTime+.04),e.gain.setValueAtTime(.3,this.ctx.currentTime),e.gain.exponentialRampToValueAtTime(.001,this.ctx.currentTime+.04),t.connect(e),e.connect(this.ctx.destination),t.start(),t.stop(this.ctx.currentTime+.04)}playSleeveSlide(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.sampleRate*.3,e=this.ctx.createBuffer(1,t,this.ctx.sampleRate),s=e.getChannelData(0);for(let n=0;n<t;n++)s[n]=Math.random()*2-1;const o=this.ctx.createBufferSource();o.buffer=e;const a=this.ctx.createBiquadFilter();a.type="bandpass",a.frequency.setValueAtTime(400,this.ctx.currentTime),a.frequency.exponentialRampToValueAtTime(1200,this.ctx.currentTime+.25),a.Q.setValueAtTime(2,this.ctx.currentTime);const r=this.ctx.createGain();r.gain.setValueAtTime(.01,this.ctx.currentTime),r.gain.linearRampToValueAtTime(.18,this.ctx.currentTime+.12),r.gain.exponentialRampToValueAtTime(.001,this.ctx.currentTime+.3),o.connect(a),a.connect(r),r.connect(this.ctx.destination),o.start()}playDeckThunk(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.currentTime,e=this.ctx.createOscillator(),s=this.ctx.createGain();e.type="sine",e.frequency.setValueAtTime(160,t),e.frequency.exponentialRampToValueAtTime(35,t+.12),s.gain.setValueAtTime(.5,t),s.gain.exponentialRampToValueAtTime(.001,t+.14),e.connect(s),s.connect(this.ctx.destination),e.start(t),e.stop(t+.14);const o=this.ctx.createOscillator(),a=this.ctx.createGain();o.type="square",o.frequency.setValueAtTime(950,t+.03),o.frequency.exponentialRampToValueAtTime(220,t+.08),a.gain.setValueAtTime(0,t),a.gain.setValueAtTime(.25,t+.03),a.gain.exponentialRampToValueAtTime(.001,t+.09),o.connect(a),a.connect(this.ctx.destination),o.start(t+.03),o.stop(t+.09)}playStaticCrackle(t=90){if(this.muted||(this.initCtx(),!this.ctx))return;const e=t/1e3,s=Math.floor(this.ctx.sampleRate*e),o=this.ctx.createBuffer(1,s,this.ctx.sampleRate),a=o.getChannelData(0);for(let p=0;p<s;p++)a[p]=(Math.random()*2-1)*(Math.random()>.4?1:.1);const r=this.ctx.createBufferSource();r.buffer=o;const n=this.ctx.createGain();n.gain.setValueAtTime(.2,this.ctx.currentTime),n.gain.exponentialRampToValueAtTime(.001,this.ctx.currentTime+e),r.connect(n),n.connect(this.ctx.destination),r.start()}playCrtHum(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.currentTime,e=this.ctx.createOscillator(),s=this.ctx.createGain();e.type="sine",e.frequency.setValueAtTime(12e3,t),s.gain.setValueAtTime(.04,t),s.gain.exponentialRampToValueAtTime(.005,t+.4),e.connect(s),s.connect(this.ctx.destination),e.start(t),e.stop(t+.4);const o=this.ctx.createOscillator(),a=this.ctx.createGain();o.type="triangle",o.frequency.setValueAtTime(120,t),o.frequency.exponentialRampToValueAtTime(50,t+.2),a.gain.setValueAtTime(.3,t),a.gain.exponentialRampToValueAtTime(.001,t+.2),o.connect(a),a.connect(this.ctx.destination),o.start(t),o.stop(t+.2)}playEjectPop(){if(this.muted||(this.initCtx(),!this.ctx))return;const t=this.ctx.currentTime,e=this.ctx.createOscillator(),s=this.ctx.createGain();e.type="sawtooth",e.frequency.setValueAtTime(450,t),e.frequency.exponentialRampToValueAtTime(80,t+.08),s.gain.setValueAtTime(.35,t),s.gain.exponentialRampToValueAtTime(.001,t+.08),e.connect(s),s.connect(this.ctx.destination),e.start(t),e.stop(t+.08)}}const $=new we,vt="cubic-bezier(.23,1,.32,1)";class $e{constructor(t){this.activeKey=null,this.infoMode=null,this.stageState="idle",this.flightTransform="none",this.flightDur=220,this.flightEase=vt,this.currentShot="none",this.showFlash=!1,this.camOn=!1,this.camScale=1.6,this.camDur=0,this.camOrigin="735px 307px",this.shotADur=1300,this.shotBDur=1250,this.flashDur=130,this.dollyDur=420,this.readDur=620,this.camPct=174,this.activeHold=null,this.scrubVal=0,this._t=[],(this.host=t).addController(this)}hostDisconnected(){this.clear()}clear(){this._t.forEach(t=>clearTimeout(t)),this._t=[]}at(t,e){const s=window.setTimeout(()=>{e(),this.host.requestUpdate()},t);this._t.push(s)}setStateIdle(){this.activeKey=null,this.infoMode=null,this.stageState="idle",this.flightTransform="none",this.currentShot="none",this.camOn=!1,this.host.requestUpdate()}openInfo(t,e){this.clear(),$.playClick(),this.infoMode=t,e&&(this.camOrigin=e),this.camOn=!0,this.camScale=1.6,this.camDur=400,this.stageState="play",history.pushState({p:t},"","#/"+t),this.host.requestUpdate()}switchInfoTab(t){this.infoMode!==t&&($.playClick(),this.infoMode=t,history.pushState({p:t},"","#/"+t),this.host.requestUpdate())}closeInfo(){this.infoMode&&(this.clear(),$.playClick(),this.infoMode=null,location.hash&&location.hash!=="#/"&&history.pushState({},"","#/"),this.activeKey?this.stageState="playWipe":(this.camOn=!1,this.camDur=380,this.stageState="idle"),this.host.requestUpdate())}pick(t,e,s,o){if(this.currentShot!=="none"){this.skip();return}if(!["lift","fly","insert","settle","ejectCollapse","ejectCam","pop","home"].includes(this.stageState)){if(this.stageState==="read"){this.toPlay();return}if(this.clear(),$.playClick(),history.pushState({p:u[t].slug},"","#/"+u[t].slug),window.matchMedia("(prefers-reduced-motion: reduce)").matches){this.activeKey=t,this.stageState="playWipe",this.flightTransform=e,this.flightDur=0,this.camOn=!0,this.camScale=1.6,this.camDur=0,this.host.requestUpdate();return}o?this.mobileCut(t):this.cut(t,e,s),this.host.requestUpdate()}}cut(t,e,s){const{shotADur:o,shotBDur:a,flashDur:r,dollyDur:n,readDur:p,camPct:h}=this,g=o+200,d=g+a+150,b=d+r+n+p;this.activeKey=t,this.stageState="read",this.flightTransform=e,this.flightDur=0,this.flightEase=vt,this.camOrigin=s,this.currentShot="A",this.showFlash=!0,this.camOn=!0,this.camScale=h/100,this.camDur=0,this.activeHold=null,this.scrubVal=0,$.playSleeveSlide(),this.at(r,()=>{this.showFlash=!1}),this.at(g,()=>{this.currentShot="B",this.showFlash=!0,$.playDeckThunk()}),this.at(g+r,()=>{this.showFlash=!1}),this.at(d,()=>{this.currentShot="none",this.showFlash=!0,$.playCrtHum()}),this.at(d+r,()=>{this.showFlash=!1,this.camScale=1.6,this.camDur=n}),this.at(b,()=>{this.stageState="play"}),this.at(b+260,()=>{this.stageState="playWipe"})}skip(){this.clear(),$.playClick(),this.currentShot="none",this.showFlash=!0,this.camOn=!0,this.camScale=1.6,this.camDur=0,this.stageState="play",this.host.requestUpdate(),this.at(90,()=>{this.showFlash=!1}),this.at(160,()=>{this.stageState="playWipe"})}toPlay(){this.clear(),this.stageState="play",this.camOn=!0,this.camScale=1.6,this.camDur=560,this.host.requestUpdate(),this.at(560,()=>{this.stageState="playWipe"})}jump(t,e,s){this.clear(),this.activeKey=t,this.stageState="playWipe",this.flightTransform=e,this.flightDur=0,this.camOrigin=s,this.camOn=!0,this.camScale=1.6,this.host.requestUpdate()}eject(t){if(this.infoMode){this.closeInfo();return}if(!this.activeKey)return;if(this.clear(),$.playClick(),$.playEjectPop(),location.hash&&location.hash!=="#/"&&history.pushState({},"","#/"),window.matchMedia("(prefers-reduced-motion: reduce)").matches){this.setStateIdle();return}if(t){this.mobileEject(),this.host.requestUpdate();return}const e=this.flashDur,s=Math.round(this.shotBDur*.72);this.stageState="ejectCollapse",this.activeHold=null,this.at(200,()=>{this.currentShot="Be",this.showFlash=!0}),this.at(200+e,()=>{this.showFlash=!1}),this.at(200+s+60,()=>{this.currentShot="none",this.showFlash=!0,this.camOn=!1,this.camDur=0,this.flightTransform="none"}),this.at(200+s+60+e,()=>{this.showFlash=!1,this.setStateIdle()}),this.host.requestUpdate()}mobileCut(t){const e=this.flashDur,s=this.shotBDur;this.activeKey=t,this.stageState="read",this.currentShot="B",this.showFlash=!0,this.activeHold=null,this.scrubVal=0,$.playDeckThunk(),this.at(e,()=>{this.showFlash=!1}),this.at(s+100,()=>{this.currentShot="none",this.showFlash=!0}),this.at(s+100+e,()=>{this.showFlash=!1,this.stageState="play"}),this.at(s+100+e+260,()=>{this.stageState="playWipe"})}mobileEject(){const t=this.flashDur,e=Math.round(this.shotBDur*.72);this.stageState="ejectCollapse",this.activeHold=null,this.currentShot="Be",this.showFlash=!0,this.at(t,()=>{this.showFlash=!1}),this.at(e+60,()=>{this.currentShot="none",this.showFlash=!0}),this.at(e+60+t,()=>{this.showFlash=!1,this.setStateIdle()})}cancel(){this.clear(),this.stageState="home",this.flightTransform="none",this.flightDur=220,this.flightEase=vt,this.host.requestUpdate(),this.at(220,()=>{this.setStateIdle()})}handleHold(t,e,s){this.clear();const o=this.activeKey||"echo";if(t==="idle"){this.activeHold=null,this.scrubVal=0,this.currentShot="none",this.showFlash=!1,this.activeKey=null,this.stageState="idle",this.flightTransform="none",this.camOn=!1,this.host.requestUpdate();return}if(t==="play"){this.activeHold=null,this.scrubVal=0,this.currentShot="none",this.showFlash=!1,this.activeKey=o,this.stageState="playWipe",this.flightTransform=e,this.camOrigin=s,this.camOn=!0,this.camScale=1.6,this.host.requestUpdate();return}this.activeHold=t,this.scrubVal=0,this.currentShot=t,this.showFlash=!1,this.activeKey=o,this.stageState="read",this.flightTransform=e,this.camOrigin=s,this.camOn=!0,this.camScale=this.camPct/100,this.host.requestUpdate()}handleParamChange(t,e){t==="shotADur"?this.shotADur=e:t==="shotBDur"?this.shotBDur=e:t==="flashDur"?this.flashDur=e:t==="dollyDur"?this.dollyDur=e:t==="readDur"?this.readDur=e:t==="camPct"?this.camPct=e:t==="scrub"&&(this.scrubVal=e),this.host.requestUpdate()}}var ke=Object.defineProperty,Se=Object.getOwnPropertyDescriptor,D=(i,t,e,s)=>{for(var o=s>1?void 0:s?Se(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&ke(t,e,o),o};let S=class extends x{constructor(){super(...arguments),this.activeKey=null,this.stage="idle",this.sceneOp=1,this.flightTransform="none",this.flightDur=0,this.flightEase="cubic-bezier(.23,1,.32,1)",this.flightFx="drop-shadow(0 2px 4px rgba(42,38,33,.12))"}pick(i){this.dispatchEvent(new CustomEvent("pick-tape",{detail:{key:i}}))}render(){const i=this.activeKey,t=this.stage,e=t!=="idle"&&t!=="home",s=t==="play"||t==="playWipe",o=s||t==="read"||t==="ejectCollapse"?"none":"auto",a=d=>{d[0].toUpperCase()+d.slice(1);const b=i===d,y=e?b?s?0:1:s?.18:.35:1,P=e&&!b?s?"blur(6px)":"blur(3px)":"blur(0px)",xt=b?this.flightTransform:"none",bt=b?40:u[d].z;return{op:y,fx:P,tf:xt,z:bt}},r=a("drift"),n=a("pixel"),p=a("chord"),h=a("echo"),g=a("scene");return c`
+      <div style="position:relative; width:100%; height:100%; pointer-events:${o}">
         <!-- Shadows -->
         <div style="position:absolute; left:-4px; bottom:-4px; width:222px; height:8px; background:rgba(42,38,33,.18); filter:blur(5px); border-radius:50%; opacity:${this.sceneOp}; transition:opacity 260ms cubic-bezier(.23,1,.32,1)"></div>
         <div style="position:absolute; left:226px; bottom:-4px; width:116px; height:8px; background:rgba(42,38,33,.2); filter:blur(5px); border-radius:50%; opacity:${this.sceneOp}; transition:opacity 260ms cubic-bezier(.23,1,.32,1)"></div>
@@ -117,7 +117,7 @@
           </div>
         </div>
       </div>
-    `}};k.styles=v`
+    `}};S.styles=v`
     :host {
       display: block;
       position: absolute;
@@ -127,7 +127,7 @@
       height: 210px;
       z-index: 5;
     }
-  `;D([l({type:String})],k.prototype,"activeKey",2);D([l({type:String})],k.prototype,"stage",2);D([l({type:Number})],k.prototype,"sceneOp",2);D([l({type:String})],k.prototype,"flightTransform",2);D([l({type:Number})],k.prototype,"flightDur",2);D([l({type:String})],k.prototype,"flightEase",2);D([l({type:String})],k.prototype,"flightFx",2);k=D([y("tape-shelf")],k);var ke=Object.defineProperty,Se=Object.getOwnPropertyDescriptor,ct=(s,t,e,o)=>{for(var i=o>1?void 0:o?Se(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&ke(t,e,i),i};let U=class extends x{constructor(){super(...arguments),this.setOp=.75,this.setFx="blur(5px)",this.isPlaying=!1}onEject(s){s.stopPropagation(),this.dispatchEvent(new CustomEvent("eject-click"))}render(){const s=this.isPlaying?"auto":"none";return c`
+  `;D([l({type:String})],S.prototype,"activeKey",2);D([l({type:String})],S.prototype,"stage",2);D([l({type:Number})],S.prototype,"sceneOp",2);D([l({type:String})],S.prototype,"flightTransform",2);D([l({type:Number})],S.prototype,"flightDur",2);D([l({type:String})],S.prototype,"flightEase",2);D([l({type:String})],S.prototype,"flightFx",2);S=D([m("tape-shelf")],S);var Ae=Object.defineProperty,_e=Object.getOwnPropertyDescriptor,ht=(i,t,e,s)=>{for(var o=s>1?void 0:s?_e(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Ae(t,e,o),o};let L=class extends x{constructor(){super(...arguments),this.setOp=.75,this.setFx="blur(5px)",this.isPlaying=!1}onEject(i){i.stopPropagation(),this.dispatchEvent(new CustomEvent("eject-click"))}render(){const i=this.isPlaying?"auto":"none";return c`
       <div style="position:relative; width:100%; height:100%; opacity:${this.setOp}; filter:${this.setFx}; transition:opacity 320ms cubic-bezier(.23,1,.32,1), filter 320ms cubic-bezier(.23,1,.32,1)">
         <!-- Cabinet contact shadow -->
         <div style="position:absolute; left:4px; right:4px; bottom:-3px; height:6px; background:rgba(0,0,0,.45); filter:blur(3px); border-radius:50%"></div>
@@ -214,7 +214,7 @@
           <div style="position:absolute; right:5px; top:5px; bottom:5px; width:80px; display:flex; gap:3px">
             <div
               @click=${this.onEject}
-              style="flex:1; background:linear-gradient(180deg,#2c2c2e,#171718); border-radius:4px; pointer-events:${s}; cursor:pointer; position:relative; transition:transform 90ms cubic-bezier(.23,1,.32,1)"
+              style="flex:1; background:linear-gradient(180deg,#2c2c2e,#171718); border-radius:4px; pointer-events:${i}; cursor:pointer; position:relative; transition:transform 90ms cubic-bezier(.23,1,.32,1)"
             >
               <div style="position:absolute; left:0; right:0; top:0; height:1px; background:rgba(255,255,255,.14); border-radius:4px"></div>
               <div style="position:absolute; left:-8px; right:-8px; top:-14px; bottom:-14px"></div>
@@ -231,7 +231,7 @@
           </div>
         </div>
       </div>
-    `}};U.styles=v`
+    `}};L.styles=v`
     :host {
       display: block;
       position: absolute;
@@ -244,7 +244,7 @@
       pointer-events: none;
       transition: opacity 320ms cubic-bezier(.23,1,.32,1), filter 320ms cubic-bezier(.23,1,.32,1);
     }
-  `;ct([l({type:Number})],U.prototype,"setOp",2);ct([l({type:String})],U.prototype,"setFx",2);ct([l({type:Boolean})],U.prototype,"isPlaying",2);U=ct([y("vcr-player")],U);var Ae=Object.defineProperty,_e=Object.getOwnPropertyDescriptor,I=(s,t,e,o)=>{for(var i=o>1?void 0:o?_e(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Ae(t,e,i),i};let A=class extends x{constructor(){super(...arguments),this.activeKey=null,this.isPlaying=!1,this.isReading=!1,this.isPlayWipe=!1,this.setOp=.75,this.setFx="blur(5px)"}render(){const s=this.isPlaying||this.isReading;return c`
+  `;ht([l({type:Number})],L.prototype,"setOp",2);ht([l({type:String})],L.prototype,"setFx",2);ht([l({type:Boolean})],L.prototype,"isPlaying",2);L=ht([m("vcr-player")],L);var Oe=Object.defineProperty,Ee=Object.getOwnPropertyDescriptor,z=(i,t,e,s)=>{for(var o=s>1?void 0:s?Ee(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Oe(t,e,o),o};let A=class extends x{constructor(){super(...arguments),this.activeKey=null,this.infoMode=null,this.isPlaying=!1,this.isReading=!1,this.isPlayWipe=!1,this.setOp=.75,this.setFx="blur(5px)"}render(){const i=this.isPlaying||this.isReading||!!this.infoMode;return c`
       <div style="position:relative; width:100%; height:100%; opacity:${this.setOp}; filter:${this.setFx}; transition:opacity 320ms cubic-bezier(.23,1,.32,1), filter 320ms cubic-bezier(.23,1,.32,1)">
 
         <!-- Wood cabinet -->
@@ -262,12 +262,13 @@
             <!-- Screen glass -->
             <div
               data-screen
-              style="position:absolute; left:24px; right:24px; top:22px; bottom:22px; background:radial-gradient(ellipse at 50% 42%,#c4c0d4,#aca8c0 70%,#928ea6); border-radius:38px 38px 34px 34px; overflow:hidden; pointer-events:${s?"auto":"none"}"
+              @click=${t=>t.stopPropagation()}
+              style="position:absolute; left:24px; right:24px; top:22px; bottom:22px; background:radial-gradient(ellipse at 50% 42%,#c4c0d4,#aca8c0 70%,#928ea6); border-radius:38px 38px 34px 34px; overflow:hidden; pointer-events:${i?"auto":"none"}"
             >
               <!-- Active screen layer with subtle phosphor flicker -->
-              <div style="position:absolute; inset:0; background:#0a0a0c; border-radius:38px 38px 34px 34px; opacity:${s?1:0}; transition:opacity 200ms linear; animation:crtPhosphorMicroFlicker 0.12s infinite alternate">
+              <div style="position:absolute; inset:0; background:#0a0a0c; border-radius:38px 38px 34px 34px; opacity:${i?1:0}; transition:opacity 200ms linear; animation:crtPhosphorMicroFlicker 0.12s infinite alternate">
                 <!-- App rendered at 800×643 emulated, scaled to fit the ~296×238px glass area -->
-                <div style="position:absolute; left:0; top:0; width:800px; height:643px; transform:scale(.37); transform-origin:top left; clip-path:${this.isPlayWipe?"inset(0 0 0 0)":"inset(0 0 100% 0)"}; transition:clip-path 420ms cubic-bezier(.23,1,.32,1)">
+                <div style="position:absolute; left:0; top:0; width:800px; height:643px; transform:scale(.37); transform-origin:top left; clip-path:${this.isPlayWipe||this.infoMode?"inset(0 0 0 0)":"inset(0 0 100% 0)"}; transition:clip-path 420ms cubic-bezier(.23,1,.32,1)">
                   <slot></slot>
                 </div>
               </div>
@@ -381,7 +382,7 @@
       75% { opacity: 0.997; }
       100% { opacity: 1; }
     }
-  `;I([l({type:String})],A.prototype,"activeKey",2);I([l({type:Boolean})],A.prototype,"isPlaying",2);I([l({type:Boolean})],A.prototype,"isReading",2);I([l({type:Boolean})],A.prototype,"isPlayWipe",2);I([l({type:Number})],A.prototype,"setOp",2);I([l({type:String})],A.prototype,"setFx",2);A=I([y("crt-display")],A);var Oe=Object.defineProperty,Pe=Object.getOwnPropertyDescriptor,O=(s,t,e,o)=>{for(var i=o>1?void 0:o?Pe(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Oe(t,e,i),i};let w=class extends x{constructor(){super(...arguments),this.activeKey=null,this.currentShot="none",this.showFlash=!1,this.shotADur=1300,this.shotBDur=1250,this.flashDur=130,this.isPaused=!1,this.scrubVal=0}onSkip(){this.dispatchEvent(new CustomEvent("skip-cutscene"))}render(){const s=this.activeKey?u[this.activeKey]:u.echo,t=this.isPaused?"paused":"running",e=this.currentShot==="Be"?Math.round(this.shotBDur*.72):this.shotBDur,o=this.currentShot==="A"?this.shotADur:e,i=this.isPaused?"-"+Math.round(this.scrubVal/1e3*o)+"ms":"0ms",a=this.currentShot==="A"?"shotASlide":"none",r=this.currentShot==="A"?"shotAPush":"none",n=this.currentShot==="B"?"shotBInsert":this.currentShot==="Be"?"shotBEject":"none",p=this.showFlash?"cutFlash":"none";return c`
+  `;z([l({type:String})],A.prototype,"activeKey",2);z([l({type:String})],A.prototype,"infoMode",2);z([l({type:Boolean})],A.prototype,"isPlaying",2);z([l({type:Boolean})],A.prototype,"isReading",2);z([l({type:Boolean})],A.prototype,"isPlayWipe",2);z([l({type:Number})],A.prototype,"setOp",2);z([l({type:String})],A.prototype,"setFx",2);A=z([m("crt-display")],A);var Pe=Object.defineProperty,Ce=Object.getOwnPropertyDescriptor,E=(i,t,e,s)=>{for(var o=s>1?void 0:s?Ce(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Pe(t,e,o),o};let k=class extends x{constructor(){super(...arguments),this.activeKey=null,this.currentShot="none",this.showFlash=!1,this.shotADur=1300,this.shotBDur=1250,this.flashDur=130,this.isPaused=!1,this.scrubVal=0}onSkip(){this.dispatchEvent(new CustomEvent("skip-cutscene"))}render(){const i=this.activeKey?u[this.activeKey]:u.echo,t=this.isPaused?"paused":"running",e=this.currentShot==="Be"?Math.round(this.shotBDur*.72):this.shotBDur,s=this.currentShot==="A"?this.shotADur:e,o=this.isPaused?"-"+Math.round(this.scrubVal/1e3*s)+"ms":"0ms",a=this.currentShot==="A"?"shotASlide":"none",r=this.currentShot==="A"?"shotAPush":"none",n=this.currentShot==="B"?"shotBInsert":this.currentShot==="Be"?"shotBEject":"none",p=this.showFlash?"cutFlash":"none";return c`
       <!-- Flash Static Transition Layer -->
       <div 
         style="position:absolute; inset:0; z-index:95; display:${this.showFlash?"block":"none"}; pointer-events:none; background:#d8d4c8; animation-name:${p}; animation-duration:${this.flashDur}ms; animation-timing-function:linear; animation-fill-mode:both"
@@ -398,11 +399,11 @@
           <div style="position:absolute; inset:0; background:radial-gradient(550px 350px at calc(4000px + 462px) calc(4000px + 308px), rgba(255,255,255,.62), rgba(42,38,33,.18))"></div>
         </div>
 
-        <div style="position:absolute; left:150px; top:96px; width:700px; height:500px; transform-origin:26% 50%; animation-name:${r}; animation-duration:${this.shotADur}ms; animation-timing-function:cubic-bezier(.32,.72,0,1); animation-fill-mode:both; animation-delay:${i}; animation-play-state:${t}">
+        <div style="position:absolute; left:150px; top:96px; width:700px; height:500px; transform-origin:26% 50%; animation-name:${r}; animation-duration:${this.shotADur}ms; animation-timing-function:cubic-bezier(.32,.72,0,1); animation-fill-mode:both; animation-delay:${o}; animation-play-state:${t}">
           <div style="position:absolute; left:20px; top:30px; width:420px; height:470px; background:rgba(42,38,33,.2); filter:blur(26px); border-radius:14px"></div>
 
           <!-- Sliding Tape Wrapper -->
-          <div style="position:absolute; left:34px; top:8px; width:258px; height:480px; animation-name:${a}; animation-duration:${this.shotADur}ms; animation-timing-function:cubic-bezier(.32,.72,0,1); animation-fill-mode:both; animation-delay:${i}; animation-play-state:${t}">
+          <div style="position:absolute; left:34px; top:8px; width:258px; height:480px; animation-name:${a}; animation-duration:${this.shotADur}ms; animation-timing-function:cubic-bezier(.32,.72,0,1); animation-fill-mode:both; animation-delay:${o}; animation-play-state:${t}">
             <div style="position:absolute; left:50%; top:50%; width:330px; height:178px; transform:translate(-50%,-50%) rotate(90deg) scale(1.45); box-shadow:0 22px 34px rgba(42,38,33,.3)">
               <div style="width:330px; height:178px; position:relative; border-radius:9px; background:#262626; box-shadow:0 2px 6px rgba(0,0,0,.15); overflow:hidden; font-family:Arial,Helvetica,sans-serif">
                 <div style="position:absolute; top:0; left:0; right:0; height:24px; background:#1a1a1a; border-bottom:2px solid #333; display:flex; align-items:center; justify-content:center">
@@ -419,7 +420,7 @@
                   <div style="position:absolute; inset:30px; border-radius:50%; background:#c4c4c4"></div>
                 </div>
                 <div style="position:absolute; left:118px; top:44px; width:94px; height:84px; background:#f4f4f4; border-radius:2px">
-                  <div style="position:absolute; top:0; left:0; right:0; height:20px; background:${s.strip}"></div>
+                  <div style="position:absolute; top:0; left:0; right:0; height:20px; background:${i.strip}"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:10px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:18px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:26px; height:1px; background:#c9c9c9"></div>
@@ -434,7 +435,7 @@
           <div style="position:absolute; left:0; top:0; width:326px; height:496px">
             <div style="position:absolute; left:14px; top:14px; width:326px; height:496px; background:#8d8474; border-radius:8px 8px 0 0"></div>
             <div style="position:absolute; left:0; top:0; width:96px; height:146px; transform:scale(3.4); transform-origin:top left; box-shadow:0 20px 32px rgba(42,38,33,.26)">
-              <div style="width:96px; height:146px; position:relative; border-radius:6px 6px 0 0; background:${s.bg}; box-shadow:0 2px 6px rgba(0,0,0,.15); overflow:hidden">
+              <div style="width:96px; height:146px; position:relative; border-radius:6px 6px 0 0; background:${i.bg}; box-shadow:0 2px 6px rgba(0,0,0,.15); overflow:hidden">
                 <div style="position:absolute; top:0; bottom:0; right:0; width:11px; background:#181818; border-left:1px solid rgba(255,255,255,.22); z-index:6">
                   <div style="position:absolute; top:10px; bottom:10px; left:3px; width:2px; background:rgba(255,255,255,.14)"></div>
                 </div>
@@ -451,8 +452,8 @@
 
         <div style="position:absolute; right:56px; bottom:48px; width:300px; text-align:right; font-family:'IBM Plex Mono',monospace; color:#2a2621">
           <div style="font-size:11px; letter-spacing:.14em; color:rgba(42,38,33,.6)">LOADING</div>
-          <div style="margin-top:10px; font-size:20px; font-weight:600; letter-spacing:.02em">${s.title}</div>
-          <div style="margin-top:7px; font-size:11px; letter-spacing:.14em; color:rgba(42,38,33,.55)">${s.kicker}</div>
+          <div style="margin-top:10px; font-size:20px; font-weight:600; letter-spacing:.02em">${i.title}</div>
+          <div style="margin-top:7px; font-size:11px; letter-spacing:.14em; color:rgba(42,38,33,.55)">${i.kicker}</div>
           <div style="margin-top:22px; font-size:12px; letter-spacing:.12em; color:rgba(42,38,33,.62)">CLICK TO SKIP</div>
         </div>
       </div>
@@ -498,7 +499,7 @@
         <div style="position:absolute; left:182px; right:182px; top:204px; height:108px; z-index:3; background:linear-gradient(180deg,#000 0 34%,#08080c); box-shadow:inset 0 14px 22px rgba(0,0,0,.9),inset 0 -2px 0 rgba(255,255,255,.045)"></div>
 
         <div style="position:absolute; left:0; right:0; top:0; bottom:0; z-index:5; pointer-events:none">
-          <div style="position:absolute; left:243px; top:206px; width:620px; height:343px; transform-origin:50% 0%; transform-style:preserve-3d; animation-name:${n}; animation-duration:${e}ms; animation-timing-function:linear; animation-fill-mode:both; animation-delay:${i}; animation-play-state:${t}">
+          <div style="position:absolute; left:243px; top:206px; width:620px; height:343px; transform-origin:50% 0%; transform-style:preserve-3d; animation-name:${n}; animation-duration:${e}ms; animation-timing-function:linear; animation-fill-mode:both; animation-delay:${o}; animation-play-state:${t}">
             <div style="position:absolute; left:-30px; right:-30px; top:300px; height:90px; background:rgba(0,0,0,.55); filter:blur(24px); border-radius:50%"></div>
             
             <div style="position:absolute; left:0; top:0; width:330px; height:178px; transform:scale(1.879,1.927); transform-origin:top left">
@@ -517,7 +518,7 @@
                   <div style="position:absolute; inset:30px; border-radius:50%; background:#c4c4c4"></div>
                 </div>
                 <div style="position:absolute; left:118px; top:44px; width:94px; height:84px; background:#f4f4f4; border-radius:2px">
-                  <div style="position:absolute; top:0; left:0; right:0; height:20px; background:${s.strip}"></div>
+                  <div style="position:absolute; top:0; left:0; right:0; height:20px; background:${i.strip}"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:10px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:18px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:26px; height:1px; background:#c9c9c9"></div>
@@ -547,11 +548,11 @@
 
         <div style="position:absolute; right:110px; top:378px; z-index:9; display:flex; gap:30px">
           <div style="width:15px; height:15px; border-radius:50%; background:#c9a06a; animation-name:ledBlink; animation-duration:${e}ms; animation-timing-function:linear; animation-fill-mode:both; animation-play-state:${t}; animation-delay:140ms"></div>
-          <div style="width:15px; height:15px; border-radius:50%; background:#7fb37a; animation-name:ledBlink; animation-duration:${e}ms; animation-timing-function:linear; animation-fill-mode:both; animation-play-state:${t}; animation-delay:${i}"></div>
+          <div style="width:15px; height:15px; border-radius:50%; background:#7fb37a; animation-name:ledBlink; animation-duration:${e}ms; animation-timing-function:linear; animation-fill-mode:both; animation-play-state:${t}; animation-delay:${o}"></div>
         </div>
         <div style="position:absolute; left:-4000px; right:-4000px; bottom:0; height:20%; z-index:10; pointer-events:none; background:linear-gradient(180deg,rgba(30,20,10,0),rgba(30,20,10,.5))"></div>
       </div>
-    `}};w.styles=v`
+    `}};k.styles=v`
     :host {
       display: block;
     }
@@ -623,28 +624,28 @@
       70% { opacity: .55; }
       100% { opacity: 0; }
     }
-  `;O([l({type:String})],w.prototype,"activeKey",2);O([l({type:String})],w.prototype,"currentShot",2);O([l({type:Boolean})],w.prototype,"showFlash",2);O([l({type:Number})],w.prototype,"shotADur",2);O([l({type:Number})],w.prototype,"shotBDur",2);O([l({type:Number})],w.prototype,"flashDur",2);O([l({type:Boolean})],w.prototype,"isPaused",2);O([l({type:Number})],w.prototype,"scrubVal",2);w=O([y("cutscene-overlay")],w);var Ee=Object.defineProperty,Ce=Object.getOwnPropertyDescriptor,Ut=(s,t,e,o)=>{for(var i=o>1?void 0:o?Ce(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Ee(t,e,i),i};const Te="https://warmsynths.github.io/beat-mapper/app.js";let st=class extends x{constructor(){super(...arguments),this.loaded=customElements.get("app-root")!==void 0}async connectedCallback(){if(super.connectedCallback(),!this.loaded)try{await import(Te),this.loaded=!0}catch(s){console.error("Failed to load Beat Mapper component script:",s)}}render(){return this.loaded?c`<app-root style="display:block; width:100%; height:100%;"></app-root>`:c`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING BEAT MAPPER...</div>`}};st.styles=v`
+  `;E([l({type:String})],k.prototype,"activeKey",2);E([l({type:String})],k.prototype,"currentShot",2);E([l({type:Boolean})],k.prototype,"showFlash",2);E([l({type:Number})],k.prototype,"shotADur",2);E([l({type:Number})],k.prototype,"shotBDur",2);E([l({type:Number})],k.prototype,"flashDur",2);E([l({type:Boolean})],k.prototype,"isPaused",2);E([l({type:Number})],k.prototype,"scrubVal",2);k=E([m("cutscene-overlay")],k);var Te=Object.defineProperty,De=Object.getOwnPropertyDescriptor,Kt=(i,t,e,s)=>{for(var o=s>1?void 0:s?De(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Te(t,e,o),o};const ze="https://warmsynths.github.io/beat-mapper/app.js";let at=class extends x{constructor(){super(...arguments),this.loaded=customElements.get("app-root")!==void 0}async connectedCallback(){if(super.connectedCallback(),!this.loaded)try{await import(ze),this.loaded=!0}catch(i){console.error("Failed to load Beat Mapper component script:",i)}}render(){return this.loaded?c`<app-root style="display:block; width:100%; height:100%;"></app-root>`:c`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING BEAT MAPPER...</div>`}};at.styles=v`
     :host {
       display: block;
       width: 100%;
       height: 100%;
       overflow: auto;
     }
-  `;Ut([H()],st.prototype,"loaded",2);st=Ut([y("beat-mapper-embed")],st);var De=Object.defineProperty,ze=Object.getOwnPropertyDescriptor,Vt=(s,t,e,o)=>{for(var i=o>1?void 0:o?ze(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&De(t,e,i),i};const Me="https://warmsynths.github.io/chroma-chords/app.js";let ot=class extends x{constructor(){super(...arguments),this.loaded=customElements.get("chroma-chords-app")!==void 0}async connectedCallback(){if(super.connectedCallback(),!this.loaded)try{await import(Me),this.loaded=!0}catch(s){console.error("Failed to load Chroma Chords component script:",s)}}render(){return this.loaded?c`<chroma-chords-app style="display:block; width:100%; height:100%;"></chroma-chords-app>`:c`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING CHROMA CHORDS...</div>`}};ot.styles=v`
+  `;Kt([H()],at.prototype,"loaded",2);at=Kt([m("beat-mapper-embed")],at);var Me=Object.defineProperty,Re=Object.getOwnPropertyDescriptor,Gt=(i,t,e,s)=>{for(var o=s>1?void 0:s?Re(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Me(t,e,o),o};const Ie="https://warmsynths.github.io/chroma-chords/app.js";let rt=class extends x{constructor(){super(...arguments),this.loaded=customElements.get("chroma-chords-app")!==void 0}async connectedCallback(){if(super.connectedCallback(),!this.loaded)try{await import(Ie),this.loaded=!0}catch(i){console.error("Failed to load Chroma Chords component script:",i)}}render(){return this.loaded?c`<chroma-chords-app style="display:block; width:100%; height:100%;"></chroma-chords-app>`:c`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING CHROMA CHORDS...</div>`}};rt.styles=v`
     :host {
       display: block;
       width: 100%;
       height: 100%;
       overflow: auto;
     }
-  `;Vt([H()],ot.prototype,"loaded",2);ot=Vt([y("chroma-chords-embed")],ot);var Re=Object.defineProperty,Be=Object.getOwnPropertyDescriptor,qt=(s,t,e,o)=>{for(var i=o>1?void 0:o?Be(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Re(t,e,i),i};const He="https://warmsynths.github.io/circuit-chords/app.js";let at=class extends x{constructor(){super(...arguments),this.loaded=customElements.get("circuit-chord-forge")!==void 0}async connectedCallback(){if(super.connectedCallback(),!this.loaded)try{await import(He),this.loaded=!0}catch(s){console.error("Failed to load Circuit Chords component script:",s)}}render(){return this.loaded?c`<circuit-chord-forge style="display:block; width:100%; height:100%;"></circuit-chord-forge>`:c`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING CIRCUIT CHORDS...</div>`}};at.styles=v`
+  `;Gt([H()],rt.prototype,"loaded",2);rt=Gt([m("chroma-chords-embed")],rt);var Be=Object.defineProperty,He=Object.getOwnPropertyDescriptor,Wt=(i,t,e,s)=>{for(var o=s>1?void 0:s?He(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Be(t,e,o),o};const je="https://warmsynths.github.io/circuit-chords/app.js";let nt=class extends x{constructor(){super(...arguments),this.loaded=customElements.get("circuit-chord-forge")!==void 0}async connectedCallback(){if(super.connectedCallback(),!this.loaded)try{await import(je),this.loaded=!0}catch(i){console.error("Failed to load Circuit Chords component script:",i)}}render(){return this.loaded?c`<circuit-chord-forge style="display:block; width:100%; height:100%;"></circuit-chord-forge>`:c`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING CIRCUIT CHORDS...</div>`}};nt.styles=v`
     :host {
       display: block;
       width: 100%;
       height: 100%;
       overflow: auto;
     }
-  `;qt([H()],at.prototype,"loaded",2);at=qt([y("circuit-chords-embed")],at);var Ie=Object.getOwnPropertyDescriptor,je=(s,t,e,o)=>{for(var i=o>1?void 0:o?Ie(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=r(i)||i);return i};let ft=class extends x{render(){return c`<iframe src="/hypersyn-chord-helper/index.html"></iframe>`}};ft.styles=v`
+  `;Wt([H()],nt.prototype,"loaded",2);nt=Wt([m("circuit-chords-embed")],nt);var Ne=Object.getOwnPropertyDescriptor,Fe=(i,t,e,s)=>{for(var o=s>1?void 0:s?Ne(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=r(o)||o);return o};let mt=class extends x{render(){return c`<iframe src="/hypersyn-chord-helper/index.html"></iframe>`}};mt.styles=v`
     :host {
       display: block;
       width: 100%;
@@ -658,32 +659,231 @@
       border: 0;
       display: block;
     }
-  `;ft=je([y("hypersyn-embed")],ft);var Ne=Object.defineProperty,Fe=Object.getOwnPropertyDescriptor,Kt=(s,t,e,o)=>{for(var i=o>1?void 0:o?Fe(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Ne(t,e,i),i};const Le="https://warmsynths.github.io/j6-companion/app.js";let rt=class extends x{constructor(){super(...arguments),this.loaded=customElements.get("j6-app")!==void 0}async connectedCallback(){if(super.connectedCallback(),!this.loaded)try{await import(Le),this.loaded=!0}catch(s){console.error("Failed to load J-6 Companion component script:",s)}}render(){return this.loaded?c`<j6-app style="display:block; width:100%; height:100%;"></j6-app>`:c`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING J-6 COMPANION...</div>`}};rt.styles=v`
+  `;mt=Fe([m("hypersyn-embed")],mt);var Ue=Object.defineProperty,Le=Object.getOwnPropertyDescriptor,Xt=(i,t,e,s)=>{for(var o=s>1?void 0:s?Le(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Ue(t,e,o),o};const Ve="https://warmsynths.github.io/j6-companion/app.js";let pt=class extends x{constructor(){super(...arguments),this.loaded=customElements.get("j6-app")!==void 0}async connectedCallback(){if(super.connectedCallback(),!this.loaded)try{await import(Ve),this.loaded=!0}catch(i){console.error("Failed to load J-6 Companion component script:",i)}}render(){return this.loaded?c`<j6-app style="display:block; width:100%; height:100%;"></j6-app>`:c`<div style="padding:20px; color:#888; text-align:center; font-family:monospace; font-size:11px;">LOADING J-6 COMPANION...</div>`}};pt.styles=v`
     :host {
       display: block;
       width: 100%;
       height: 100%;
       overflow: auto;
     }
-  `;Kt([H()],rt.prototype,"loaded",2);rt=Kt([y("j6-companion-embed")],rt);var Ue=Object.defineProperty,Ve=Object.getOwnPropertyDescriptor,Gt=(s,t,e,o)=>{for(var i=o>1?void 0:o?Ve(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Ue(t,e,i),i};let nt=class extends x{constructor(){super(...arguments),this.activeKey=null}render(){switch(this.activeKey){case"drift":return c`<beat-mapper-embed></beat-mapper-embed>`;case"pixel":return c`<chroma-chords-embed></chroma-chords-embed>`;case"chord":return c`<circuit-chords-embed></circuit-chords-embed>`;case"echo":return c`<hypersyn-embed></hypersyn-embed>`;case"scene":return c`<j6-companion-embed></j6-companion-embed>`;default:return c``}}};nt.styles=v`
+  `;Xt([H()],pt.prototype,"loaded",2);pt=Xt([m("j6-companion-embed")],pt);var qe=Object.defineProperty,Ke=Object.getOwnPropertyDescriptor,_t=(i,t,e,s)=>{for(var o=s>1?void 0:s?Ke(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&qe(t,e,o),o};let Q=class extends x{constructor(){super(...arguments),this.mode="about",this.isMobile=!1}selectTab(i){this.mode=i,this.dispatchEvent(new CustomEvent("switch-tab",{detail:{mode:i},bubbles:!0,composed:!0}))}render(){return c`
+      <div class="nav-tabs">
+        <span class="tab ${this.mode==="about"?"active":""}" @click=${()=>this.selectTab("about")}>ABOUT</span>
+        <span class="tab ${this.mode==="contact"?"active":""}" @click=${()=>this.selectTab("contact")}>CONTACT</span>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="content-area">
+        ${this.mode==="about"?c`
+              <div class="paragraph">
+                I'm a developer using AI to build faster than I ever could alone — closing the gap between an idea and a working thing, built between everything else life asks for.
+              </div>
+              <div class="paragraph">
+                Most of what's here started as something only I needed: a way to write chords without knowing theory, a companion for a synth that didn't have one, a tool to save me from doing something tedious by hand. I didn't set out to launch products. I set out to solve a problem I had, quickly, and see what happened.
+              </div>
+              <div class="paragraph">
+                I sit at the intersection of design and development — technical enough to know what a good app needs under the hood, and increasingly serious about how it should look and feel. AI does the typing. I do the directing: the decisions about what to build, what to cut, and what actually makes something worth using.
+              </div>
+              <div class="paragraph">
+                Everything you see here works. Try it.
+              </div>
+            `:c`
+              <div class="contact-grid">
+                <span class="contact-label">EMAIL</span>
+                <span class="contact-value">
+                  <a href="mailto:warmsynthsiloveyou@gmail.com">warmsynthsiloveyou@gmail.com</a>
+                </span>
+
+                <span class="contact-label">GITHUB</span>
+                <span class="contact-value">
+                  <a href="https://github.com/warmsynths/" target="_blank" rel="noopener">github.com/warmsynths/</a>
+                </span>
+              </div>
+            `}
+      </div>
+
+      <div class="footer">
+        ESC OR CLICK OUTSIDE THE SET TO CLOSE
+      </div>
+    `}};Q.styles=v`
+    :host {
+      display: block;
+      width: 800px;
+      height: 643px;
+      background: #0a0a0c;
+      color: #e8f0e2;
+      font-family: 'IBM Plex Mono', monospace;
+      box-sizing: border-box;
+      padding: 38px 52px 28px;
+      position: relative;
+      user-select: text;
+    }
+
+    /* Mobile mode override */
+    :host([isMobile]) {
+      width: 100%;
+      height: 100%;
+      padding: 14px 16px 10px;
+    }
+
+    /* Desktop typography (for 800x643 canvas scaled down by 0.37) */
+    .nav-tabs {
+      display: flex;
+      gap: 40px;
+      font-size: 44px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      margin-bottom: 20px;
+    }
+    :host([isMobile]) .nav-tabs {
+      gap: 20px;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .tab {
+      cursor: pointer;
+      color: rgba(232, 240, 226, 0.35);
+      transition: color 180ms ease, text-shadow 180ms ease;
+    }
+
+    .tab:hover {
+      color: rgba(232, 240, 226, 0.75);
+    }
+
+    .tab.active {
+      color: #e8f0e2;
+      text-shadow: 0 0 10px rgba(180, 255, 190, 0.7), 0 0 20px rgba(180, 255, 190, 0.3);
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(232, 240, 226, 0.18);
+      margin-bottom: 28px;
+      box-shadow: 0 0 6px rgba(180, 255, 190, 0.2);
+    }
+    :host([isMobile]) .divider {
+      margin-bottom: 12px;
+    }
+
+    .content-area {
+      height: 420px;
+      overflow-y: auto;
+      padding-right: 16px;
+      font-size: 30px;
+      line-height: 1.55;
+      letter-spacing: 0.03em;
+      color: #e8f0e2;
+      text-shadow: 0 0 5px rgba(180, 255, 190, 0.35);
+    }
+    :host([isMobile]) .content-area {
+      height: calc(100% - 66px);
+      padding-right: 8px;
+      font-size: 11.5px;
+      line-height: 1.5;
+    }
+
+    /* Custom retro scrollbar */
+    .content-area::-webkit-scrollbar {
+      width: 8px;
+    }
+    :host([isMobile]) .content-area::-webkit-scrollbar {
+      width: 4px;
+    }
+    .content-area::-webkit-scrollbar-track {
+      background: rgba(232, 240, 226, 0.06);
+      border-radius: 4px;
+    }
+    .content-area::-webkit-scrollbar-thumb {
+      background: rgba(180, 255, 190, 0.4);
+      border-radius: 4px;
+    }
+    .content-area::-webkit-scrollbar-thumb:hover {
+      background: rgba(180, 255, 190, 0.7);
+    }
+
+    .paragraph {
+      margin-bottom: 26px;
+    }
+    :host([isMobile]) .paragraph {
+      margin-bottom: 12px;
+    }
+    .paragraph:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 28px 36px;
+      font-size: 30px;
+      letter-spacing: 0.05em;
+      margin-top: 10px;
+    }
+    :host([isMobile]) .contact-grid {
+      grid-template-columns: 70px 1fr;
+      gap: 12px 16px;
+      font-size: 11.5px;
+      margin-top: 4px;
+    }
+
+    .contact-label {
+      color: rgba(232, 240, 226, 0.42);
+      font-weight: 500;
+    }
+
+    .contact-value a {
+      color: #e8f0e2;
+      text-decoration: underline;
+      text-decoration-color: rgba(180, 255, 190, 0.4);
+      text-underline-offset: 6px;
+      transition: text-shadow 150ms ease, color 150ms ease;
+      word-break: break-all;
+    }
+    :host([isMobile]) .contact-value a {
+      text-underline-offset: 3px;
+    }
+
+    .contact-value a:hover {
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(180, 255, 190, 0.8);
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 22px;
+      left: 52px;
+      right: 52px;
+      text-align: center;
+      font-size: 22px;
+      letter-spacing: 0.16em;
+      color: rgba(232, 240, 226, 0.4);
+      text-shadow: 0 0 4px rgba(180, 255, 190, 0.2);
+    }
+    :host([isMobile]) .footer {
+      display: none;
+    }
+  `;_t([l({type:String})],Q.prototype,"mode",2);_t([l({type:Boolean,reflect:!0})],Q.prototype,"isMobile",2);Q=_t([m("crt-info-view")],Q);var Ge=Object.defineProperty,We=Object.getOwnPropertyDescriptor,gt=(i,t,e,s)=>{for(var o=s>1?void 0:s?We(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Ge(t,e,o),o};let V=class extends x{constructor(){super(...arguments),this.activeKey=null,this.infoMode=null,this.isMobile=!1}render(){if(this.infoMode)return c`<crt-info-view .mode=${this.infoMode} ?isMobile=${this.isMobile}></crt-info-view>`;switch(this.activeKey){case"drift":return c`<beat-mapper-embed></beat-mapper-embed>`;case"pixel":return c`<chroma-chords-embed></chroma-chords-embed>`;case"chord":return c`<circuit-chords-embed></circuit-chords-embed>`;case"echo":return c`<hypersyn-embed></hypersyn-embed>`;case"scene":return c`<j6-companion-embed></j6-companion-embed>`;default:return c``}}};V.styles=v`
     :host {
       display: block;
       width: 100%;
       height: 100%;
       background: #14141a;
     }
-  `;Gt([l({type:String})],nt.prototype,"activeKey",2);nt=Gt([y("tape-app-slot")],nt);var qe=Object.defineProperty,Ke=Object.getOwnPropertyDescriptor,j=(s,t,e,o)=>{for(var i=o>1?void 0:o?Ke(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&qe(t,e,i),i};let _=class extends x{constructor(){super(...arguments),this.activeKey=null,this.stageState="idle",this.currentShot="none",this.flightTransform="none",this.stageScale=1,this._f=null}zoom(){const s=this.shadowRoot?.querySelector(".main-card");return(s?s.getBoundingClientRect().width/1100:1)*(this.director.camOn?this.director.camScale:1)}flip(s){const t=u[s],e=this.shadowRoot?.querySelector("tape-shelf"),o=this.shadowRoot?.querySelector("vcr-player"),i=e?.shadowRoot?.querySelector(`[data-tape="${s}"] [data-flight]`),a=o?.shadowRoot?.querySelector("[data-slot]");if(!i||!a)return this._f=null,"none";const r=this.zoom(),n=i.getBoundingClientRect(),p=a.getBoundingClientRect(),h=(p.left+p.width/2-n.left-n.width/2)/r,g=(p.top+p.height/2-n.top-n.height/2)/r,d=i.offsetWidth,b=i.offsetHeight,m=-t.rest+(t.onEnd?-90:0),P=t.onEnd?b:d,gt=t.onEnd?d:b,ut=Math.min(p.width/r/P,p.height/r/gt);return this._f={dx:h,dy:g,deg:m,s:ut},this.tf(1)}tf(s,t){const e=this._f;if(!e)return"none";const o=-14-96*Math.sin(Math.PI*s)*(s<1?1:0),i=e.dx*s,a=e.dy*s+o*(s<1?1:0),r=e.deg*(s<.6?s/.6:1)*(s===0?0:1),n=s===0?1.04:1.04+(e.s-1.04)*Math.pow(s,1.6);return`translate(${i.toFixed(1)}px,${a.toFixed(1)}px) rotate(${r.toFixed(2)}deg) scale(${n.toFixed(3)}) ${t||""}`}screenOrigin(){const s=this.shadowRoot?.querySelector(".main-card"),e=this.shadowRoot?.querySelector("crt-display")?.shadowRoot?.querySelector("[data-screen]");if(!s||!e)return"735px 307px";const o=this.zoom(),i=s.getBoundingClientRect(),a=e.getBoundingClientRect();return`${((a.left+a.width/2-i.left)/o).toFixed(0)}px ${((a.top+a.height/2-i.top)/o).toFixed(0)}px`}pick(s){this.director.pick(s,this.flip(s),this.screenOrigin(),!1)}eject(){this.director.eject(!1)}render(){const s=this.director,t=s.activeKey,e=s.stageState,o=e!=="idle"&&e!=="home",i=e==="play"||e==="playWipe",a=e==="read",r=i||a||e==="ejectCollapse",n=t?u[t]:null;return c`
+  `;gt([l({type:String})],V.prototype,"activeKey",2);gt([l({type:String})],V.prototype,"infoMode",2);gt([l({type:Boolean})],V.prototype,"isMobile",2);V=gt([m("tape-app-slot")],V);var Xe=Object.defineProperty,Ye=Object.getOwnPropertyDescriptor,j=(i,t,e,s)=>{for(var o=s>1?void 0:s?Ye(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Xe(t,e,o),o};let O=class extends x{constructor(){super(...arguments),this.activeKey=null,this.stageState="idle",this.currentShot="none",this.flightTransform="none",this.stageScale=1,this._f=null}zoom(){const i=this.shadowRoot?.querySelector(".main-card");return(i?i.getBoundingClientRect().width/1100:1)*(this.director.camOn?this.director.camScale:1)}flip(i){const t=u[i],e=this.shadowRoot?.querySelector("tape-shelf"),s=this.shadowRoot?.querySelector("vcr-player"),o=e?.shadowRoot?.querySelector(`[data-tape="${i}"] [data-flight]`),a=s?.shadowRoot?.querySelector("[data-slot]");if(!o||!a)return this._f=null,"none";const r=this.zoom(),n=o.getBoundingClientRect(),p=a.getBoundingClientRect(),h=(p.left+p.width/2-n.left-n.width/2)/r,g=(p.top+p.height/2-n.top-n.height/2)/r,d=o.offsetWidth,b=o.offsetHeight,y=-t.rest+(t.onEnd?-90:0),P=t.onEnd?b:d,xt=t.onEnd?d:b,bt=Math.min(p.width/r/P,p.height/r/xt);return this._f={dx:h,dy:g,deg:y,s:bt},this.tf(1)}tf(i,t){const e=this._f;if(!e)return"none";const s=-14-96*Math.sin(Math.PI*i)*(i<1?1:0),o=e.dx*i,a=e.dy*i+s*(i<1?1:0),r=e.deg*(i<.6?i/.6:1)*(i===0?0:1),n=i===0?1.04:1.04+(e.s-1.04)*Math.pow(i,1.6);return`translate(${o.toFixed(1)}px,${a.toFixed(1)}px) rotate(${r.toFixed(2)}deg) scale(${n.toFixed(3)}) ${t||""}`}screenOrigin(){const i=this.shadowRoot?.querySelector(".main-card"),e=this.shadowRoot?.querySelector("crt-display")?.shadowRoot?.querySelector("[data-screen]");if(!i||!e)return"735px 307px";const s=this.zoom(),o=i.getBoundingClientRect(),a=e.getBoundingClientRect();return`${((a.left+a.width/2-o.left)/s).toFixed(0)}px ${((a.top+a.height/2-o.top)/s).toFixed(0)}px`}pick(i){this.director.pick(i,this.flip(i),this.screenOrigin(),!1)}eject(){this.director.infoMode?this.director.closeInfo():this.director.eject(!1)}openInfo(i){this.director.openInfo(i,this.screenOrigin())}render(){const i=this.director,t=i.activeKey,e=i.stageState,s=e!=="idle"&&e!=="home",o=e==="play"||e==="playWipe",a=e==="read",r=o||a||e==="ejectCollapse",n=t?u[t]:null;return c`
       <div class="desktop-wrap">
       <div class="main-card" style="transform: translate(-50%, -50%) scale(${this.stageScale})">
         <div
           class="camera-stage"
-          style="transform: ${s.camOn?`scale(${s.camScale})`:"none"}; transform-origin: ${s.camOrigin}; transition: transform ${s.camDur}ms cubic-bezier(.32,.72,0,1)"
+          style="transform: ${i.camOn?`scale(${i.camScale})`:"none"}; transform-origin: ${i.camOrigin}; transition: transform ${i.camDur}ms cubic-bezier(.32,.72,0,1)"
         >
           <!-- Background Scene -->
           <div 
             class="scene-bg" 
-            @click=${()=>{s.currentShot!=="none"?s.skip():i?this.eject():e!=="idle"&&s.cancel()}}
-            style="position:absolute; inset:0; z-index:1; opacity: ${o?i?.18:.35:1}; filter: ${o?i?"blur(6px)":"blur(3px)":"blur(0px)"}; transition: opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)"
+            @click=${()=>{i.infoMode?i.closeInfo():i.currentShot!=="none"?i.skip():o?this.eject():e!=="idle"&&i.cancel()}}
+            style="position:absolute; inset:0; z-index:1; opacity: ${s||i.infoMode?o||i.infoMode?.18:.35:1}; filter: ${s||i.infoMode?o||i.infoMode?"blur(6px)":"blur(3px)":"blur(0px)"}; transition: opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)"
           >
             <div style="position:absolute; left:-4000px; right:-4000px; top:0; height:452px; background:#ece6da; filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; left:0; right:0; top:452px; bottom:0; filter:blur(6px); opacity:.72; perspective:820px; perspective-origin:50% -60%">
@@ -698,41 +898,56 @@
             <div style="position:absolute; left:64px; top:300px; width:120px; height:152px; background:#d8ccb6; border-radius:6px 6px 0 0; filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; left:96px; top:250px; width:56px; height:56px; background:#c2ceb4; border-radius:50% 50% 40% 40%; filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; left:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:#2a2621">PORTFOLIO — DESIGN × CODE</div>
-            <div style="position:absolute; right:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:rgba(42,38,33,.45)">ABOUT · CONTACT</div>
-            <div style="position:absolute; left:48px; top:212px; max-width:520px">
-              <div style="font:400 34px/1.25 Georgia,serif; color:#2a2621">Memories grow in the spaces between living.</div>
-              <div style="margin-top:16px; font:14px/1.6 Inter,sans-serif; color:rgba(42,38,33,.55)">Apps I grew, not coded. Pick a tape to load one — eject to come back.</div>
+            <div style="position:absolute; right:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:rgba(42,38,33,.65); pointer-events:auto; z-index:10">
+              <span 
+                style="cursor:pointer; text-decoration:${i.infoMode==="about"?"underline":"none"}; opacity:${i.infoMode==="about"?1:.7}; transition:opacity 140ms" 
+                @click=${p=>{p.stopPropagation(),this.openInfo("about")}}
+              >ABOUT</span>
+              &nbsp;·&nbsp;
+              <span 
+                style="cursor:pointer; text-decoration:${i.infoMode==="contact"?"underline":"none"}; opacity:${i.infoMode==="contact"?1:.7}; transition:opacity 140ms" 
+                @click=${p=>{p.stopPropagation(),this.openInfo("contact")}}
+              >CONTACT</span>
+            </div>
+            <div style="position:absolute; left:48px; top:184px; max-width:580px">
+              <div style="font-family:Georgia,serif; font-size:66px; font-weight:400; line-height:70px; letter-spacing:-0.01em; color:#2a2621">Memories grow in the spaces between living.</div>
+              <div style="margin-top:16px; font:14px/1.6 Inter,sans-serif; color:rgba(42,38,33,.55)">A web developer, using AI to catch up to my own imagination. Pick a tape to load one — eject to come back.</div>
             </div>
           </div>
 
           <!-- VCR Deck -->
           <vcr-player 
-            .setOp=${r?1:o?.9:.75}
-            .setFx=${r?"blur(0px)":o?"blur(2px)":"blur(5px)"}
-            ?isPlaying=${i}
+            .setOp=${r?1:s||i.infoMode?.9:.75}
+            .setFx=${r?"blur(0px)":s||i.infoMode?"blur(2px)":"blur(5px)"}
+            ?isPlaying=${o}
             @eject-click=${this.eject}
           ></vcr-player>
 
           <!-- CRT TV Display -->
           <crt-display
             .activeKey=${t}
-            .setOp=${r?1:o?.9:.75}
-            .setFx=${r?"blur(0px)":o?"blur(2px)":"blur(5px)"}
-            ?isPlaying=${i}
+            .infoMode=${i.infoMode}
+            .setOp=${r||i.infoMode?1:s?.9:.75}
+            .setFx=${r||i.infoMode?"blur(0px)":s?"blur(2px)":"blur(5px)"}
+            ?isPlaying=${o||!!i.infoMode}
             ?isReading=${a}
-            ?isPlayWipe=${e==="playWipe"}
+            ?isPlayWipe=${e==="playWipe"||!!i.infoMode}
           >
-            <tape-app-slot .activeKey=${t}></tape-app-slot>
+            <tape-app-slot
+              .activeKey=${t}
+              .infoMode=${i.infoMode}
+              @switch-tab=${p=>i.switchInfoTab(p.detail.mode)}
+            ></tape-app-slot>
           </crt-display>
 
           <!-- Tape Shelf Stack -->
           <tape-shelf
             .activeKey=${t}
             .stage=${e}
-            .sceneOp=${o?i?.18:.35:1}
-            .flightTransform=${s.flightTransform}
-            .flightDur=${s.flightDur}
-            .flightEase=${s.flightEase}
+            .sceneOp=${s?o?.18:.35:1}
+            .flightTransform=${i.flightTransform}
+            .flightDur=${i.flightDur}
+            .flightEase=${i.flightEase}
             .flightFx=${["lift","fly","pop","home"].includes(e)?"drop-shadow(0 22px 20px rgba(42,38,33,.26))":"drop-shadow(0 2px 4px rgba(42,38,33,.12))"}
             @pick-tape=${p=>this.pick(p.detail.key)}
           ></tape-shelf>
@@ -740,7 +955,7 @@
 
         <!-- Info Case Panel -->
         <div 
-          style="position:absolute; left:44px; top:146px; width:352px; z-index:6; pointer-events:${i?"auto":"none"}; opacity:${i?1:0}; transform:${i?"translateY(0)":"translateY(14px)"}; transition:opacity 380ms cubic-bezier(.23,1,.32,1), transform 380ms cubic-bezier(.23,1,.32,1)"
+          style="position:absolute; left:44px; top:146px; width:352px; z-index:6; pointer-events:${o&&!i.infoMode?"auto":"none"}; opacity:${o&&!i.infoMode?1:0}; transform:${o&&!i.infoMode?"translateY(0)":"translateY(14px)"}; transition:opacity 380ms cubic-bezier(.23,1,.32,1), transform 380ms cubic-bezier(.23,1,.32,1)"
         >
           <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:rgba(42,38,33,.45)">NOW PLAYING · ${n?n.year:""}</div>
           <div style="margin-top:14px; font:400 34px/1.12 Georgia,serif; color:#2a2621; text-wrap:pretty">${n?n.title:""}</div>
@@ -766,18 +981,18 @@
         <!-- 3-Shot Cutscene Overlay -->
         <cutscene-overlay
           .activeKey=${t}
-          .currentShot=${s.currentShot}
-          ?showFlash=${s.showFlash}
-          .shotADur=${s.shotADur}
-          .shotBDur=${s.shotBDur}
-          .flashDur=${s.flashDur}
-          ?isPaused=${s.activeHold!==null}
-          .scrubVal=${s.scrubVal}
-          @skip-cutscene=${()=>s.skip()}
+          .currentShot=${i.currentShot}
+          ?showFlash=${i.showFlash}
+          .shotADur=${i.shotADur}
+          .shotBDur=${i.shotBDur}
+          .flashDur=${i.flashDur}
+          ?isPaused=${i.activeHold!==null}
+          .scrubVal=${i.scrubVal}
+          @skip-cutscene=${()=>i.skip()}
         ></cutscene-overlay>
       </div>
       </div>
-    `}};_.styles=v`
+    `}};O.styles=v`
     :host {
       display: block;
       width: 100%;
@@ -805,21 +1020,25 @@
       will-change: transform;
       transition: transform 560ms cubic-bezier(.32,.72,0,1);
     }
-  `;j([l({type:Object})],_.prototype,"director",2);j([l({type:String})],_.prototype,"activeKey",2);j([l({type:String})],_.prototype,"stageState",2);j([l({type:String})],_.prototype,"currentShot",2);j([l({type:String})],_.prototype,"flightTransform",2);j([l({type:Number})],_.prototype,"stageScale",2);_=j([y("desktop-layout")],_);var Ge=Object.defineProperty,We=Object.getOwnPropertyDescriptor,St=(s,t,e,o)=>{for(var i=o>1?void 0:o?We(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Ge(t,e,i),i};const Bt=["chord","scene","echo","pixel","drift"];let J=class extends x{constructor(){super(...arguments),this.activeKey=null,this.phase="idle"}pick(s){this.dispatchEvent(new CustomEvent("pick-tape",{detail:{key:s}}))}render(){const s=this.phase!=="idle",t=this.activeKey,e=t?u[t]:null;return c`
+  `;j([l({type:Object})],O.prototype,"director",2);j([l({type:String})],O.prototype,"activeKey",2);j([l({type:String})],O.prototype,"stageState",2);j([l({type:String})],O.prototype,"currentShot",2);j([l({type:String})],O.prototype,"flightTransform",2);j([l({type:Number})],O.prototype,"stageScale",2);O=j([m("desktop-layout")],O);var Je=Object.defineProperty,Qe=Object.getOwnPropertyDescriptor,Ot=(i,t,e,s)=>{for(var o=s>1?void 0:s?Qe(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Je(t,e,o),o};const jt=["chord","scene","echo","pixel","drift"];let Z=class extends x{constructor(){super(...arguments),this.activeKey=null,this.phase="idle"}pick(i){this.dispatchEvent(new CustomEvent("pick-tape",{detail:{key:i}}))}render(){const i=this.phase!=="idle",t=this.activeKey,e=t?u[t]:null;return c`
       <div class="bg-floor"></div>
 
       <div class="header">
         <span>PORTFOLIO — DESIGN × CODE</span>
-        <span class="burger"><span></span><span></span></span>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; color:rgba(42,38,33,.6); display:flex; gap:8px">
+          <span style="cursor:pointer" @click=${()=>this.dispatchEvent(new CustomEvent("open-info",{detail:{mode:"about"},bubbles:!0,composed:!0}))}>ABOUT</span>
+          <span>·</span>
+          <span style="cursor:pointer" @click=${()=>this.dispatchEvent(new CustomEvent("open-info",{detail:{mode:"contact"},bubbles:!0,composed:!0}))}>CONTACT</span>
+        </div>
       </div>
 
       <div class="copy-stack">
         <div class="grid">
-          <div class="copy-layer" style="opacity:${s?0:1}; pointer-events:${s?"none":"auto"}">
+          <div class="copy-layer" style="opacity:${i?0:1}; pointer-events:${i?"none":"auto"}">
             <h1>Memories grow in the spaces between living.</h1>
-            <p>I direct AI-assisted builds of interactive tools. Tap a tape to load one — eject to come back.</p>
+            <p>A web developer, using AI to catch up to my own imagination. Tap a tape to load one — eject to come back.</p>
           </div>
-          <div class="copy-layer loading-copy" style="opacity:${s?1:0}; pointer-events:${s?"auto":"none"}">
+          <div class="copy-layer loading-copy" style="opacity:${i?1:0}; pointer-events:${i?"auto":"none"}">
             <div class="kicker">${this.phase==="ejecting"?"EJECTING":"LOADING"}</div>
             <div class="title">${e?e.title:""}</div>
             <div class="sub">${e?e.kicker:""}</div>
@@ -828,7 +1047,7 @@
       </div>
 
       <div class="spacer">
-        <div class="set" style="opacity:${s?1:.6}; filter:${s?"blur(0px)":"blur(4px)"}">
+        <div class="set" style="opacity:${i?1:.6}; filter:${i?"blur(0px)":"blur(4px)"}">
           <div class="set-inner">
             <vcr-player .setOp=${1} .setFx=${"blur(0px)"}></vcr-player>
             <crt-display .activeKey=${t} .setOp=${1} .setFx=${"blur(0px)"} ?isReading=${this.phase==="loading"}></crt-display>
@@ -837,21 +1056,21 @@
       </div>
 
       <div class="shelf">
-        <div class="shelf-label" style="opacity:${s?.3:1}">ON THE SHELF · 0${Bt.length}</div>
+        <div class="shelf-label" style="opacity:${i?.3:1}">ON THE SHELF · 0${jt.length}</div>
         <div class="list">
-          ${Bt.map(o=>{const i=u[o],a=s&&o===t;return c`
+          ${jt.map(s=>{const o=u[s],a=i&&s===t;return c`
               <div class="tape-slot ${a?"collapsed":""}">
                 <button
                   class="tape"
-                  data-tape=${o}
-                  @click=${()=>this.pick(o)}
-                  aria-label="Load ${i.title}"
-                  style="filter:${s&&!a?"brightness(.55) blur(1px)":"none"}"
+                  data-tape=${s}
+                  @click=${()=>this.pick(s)}
+                  aria-label="Load ${o.title}"
+                  style="filter:${i&&!a?"brightness(.55) blur(1px)":"none"}"
                 >
-                  <div class="strip" style="background:${i.strip2||i.strip}"></div>
+                  <div class="strip" style="background:${o.strip2||o.strip}"></div>
                   <div class="label">
-                    <span class="title">${i.title}</span>
-                    <span class="kicker">${i.kicker}</span>
+                    <span class="title">${o.title}</span>
+                    <span class="kicker">${o.kicker}</span>
                   </div>
                   <div class="sheen"></div>
                   <div class="vhs">VHS</div>
@@ -860,7 +1079,7 @@
             `})}
         </div>
       </div>
-    `}};J.styles=v`
+    `}};Z.styles=v`
     :host {
       display: grid;
       grid-template-rows: auto auto 1fr auto;
@@ -970,9 +1189,10 @@
 
     h1 {
       margin: 26px 0 0;
-      font: 400 clamp(24px, 8vw, 32px) / 1.18 Georgia, serif;
+      font: 400 clamp(32px, 8vw, 56px) / 1.08 Georgia, serif;
+      letter-spacing: -0.01em;
       color: #2a2621;
-      max-width: 240px;
+      max-width: 320px;
     }
 
     p {
@@ -1143,7 +1363,7 @@
     }
 
 
-  `;St([l({type:String})],J.prototype,"activeKey",2);St([l({type:String})],J.prototype,"phase",2);J=St([y("mobile-shelf")],J);var Xe=Object.defineProperty,Ye=Object.getOwnPropertyDescriptor,Wt=(s,t,e,o)=>{for(var i=o>1?void 0:o?Ye(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Xe(t,e,i),i};let pt=class extends x{constructor(){super(...arguments),this.activeKey=null}eject(){this.dispatchEvent(new CustomEvent("eject-tape"))}render(){const s=this.activeKey?u[this.activeKey]:null;return c`
+  `;Ot([l({type:String})],Z.prototype,"activeKey",2);Ot([l({type:String})],Z.prototype,"phase",2);Z=Ot([m("mobile-shelf")],Z);var Ze=Object.defineProperty,ti=Object.getOwnPropertyDescriptor,Yt=(i,t,e,s)=>{for(var o=s>1?void 0:s?ti(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&Ze(t,e,o),o};let lt=class extends x{constructor(){super(...arguments),this.activeKey=null}eject(){this.dispatchEvent(new CustomEvent("eject-tape"))}render(){const i=this.activeKey?u[this.activeKey]:null;return c`
       <div class="deck">
         <div class="tv">
           <div class="bezel">
@@ -1151,7 +1371,7 @@
               <div class="screen-inner">
                 <div class="osd">
                   <span>▶ PLAY <span style="opacity:.7">CH 3</span></span>
-                  <span>SP · ${s?s.run:"0:00:00"}</span>
+                  <span>SP · ${i?i.run:"0:00:00"}</span>
                 </div>
                 <slot></slot>
                 <div class="scanlines"></div>
@@ -1166,19 +1386,21 @@
         </div>
       </div>
 
-      <div class="notes">
-        <div class="kicker">NOW PLAYING · ${s?s.year:""}</div>
-        <div class="title">${s?s.title:""}</div>
-        <div class="sub">${s?s.sub:""}</div>
-        <div class="grid">
-          <span>ROLE</span><span>${s?s.role:""}</span>
-          <span>BUILT WITH</span><span>${s?s.stack:""}</span>
-          <span>CASE</span><span>/${s?s.slug:""}</span>
+      ${i?c`
+        <div class="notes">
+          <div class="kicker">NOW PLAYING · ${i.year}</div>
+          <div class="title">${i.title}</div>
+          <div class="sub">${i.sub}</div>
+          <div class="grid">
+            <span>ROLE</span><span>${i.role}</span>
+            <span>BUILT WITH</span><span>${i.stack}</span>
+            <span>CASE</span><span>/${i.slug}</span>
+          </div>
         </div>
-      </div>
+      `:""}
 
       <div class="return">SWIPE DOWN OR HIT ■ ▲ TO RETURN TO THE SHELF</div>
-    `}};pt.styles=v`
+    `}};lt.styles=v`
     :host {
       display: block;
       position: relative;
@@ -1366,10 +1588,10 @@
       letter-spacing: .12em;
       color: rgba(42, 38, 33, .45);
     }
-  `;Wt([l({type:String})],pt.prototype,"activeKey",2);pt=Wt([y("mobile-playing")],pt);var Je=Object.defineProperty,Qe=Object.getOwnPropertyDescriptor,q=(s,t,e,o)=>{for(var i=o>1?void 0:o?Qe(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Je(t,e,i),i};let T=class extends x{constructor(){super(...arguments),this.activeKey=null,this.currentShot="none",this.showFlash=!1,this.shotBDur=1250,this.flashDur=130}onSkip(){this.dispatchEvent(new CustomEvent("skip-cutscene"))}render(){if(this.currentShot==="none"&&!this.showFlash)return c``;const s=this.activeKey?u[this.activeKey]:u.echo,t=this.currentShot==="Be"?Math.round(this.shotBDur*.72):this.shotBDur,e=this.currentShot==="B"?"shotBInsertM":this.currentShot==="Be"?"shotBEjectM":"none",o=this.showFlash?"cutFlash":"none";return c`
+  `;Yt([l({type:String})],lt.prototype,"activeKey",2);lt=Yt([m("mobile-playing")],lt);var ei=Object.defineProperty,ii=Object.getOwnPropertyDescriptor,K=(i,t,e,s)=>{for(var o=s>1?void 0:s?ii(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&ei(t,e,o),o};let T=class extends x{constructor(){super(...arguments),this.activeKey=null,this.currentShot="none",this.showFlash=!1,this.shotBDur=1250,this.flashDur=130}onSkip(){this.dispatchEvent(new CustomEvent("skip-cutscene"))}render(){if(this.currentShot==="none"&&!this.showFlash)return c``;const i=this.activeKey?u[this.activeKey]:u.echo,t=this.currentShot==="Be"?Math.round(this.shotBDur*.72):this.shotBDur,e=this.currentShot==="B"?"shotBInsertM":this.currentShot==="Be"?"shotBEjectM":"none",s=this.showFlash?"cutFlash":"none";return c`
       <!-- Flash Static -->
       <div
-        style="position:absolute; inset:0; z-index:30; display:${this.showFlash?"block":"none"}; pointer-events:none; background:#d8d4c8; animation-name:${o}; animation-duration:${this.flashDur}ms; animation-timing-function:linear; animation-fill-mode:both"
+        style="position:absolute; inset:0; z-index:30; display:${this.showFlash?"block":"none"}; pointer-events:none; background:#d8d4c8; animation-name:${s}; animation-duration:${this.flashDur}ms; animation-timing-function:linear; animation-fill-mode:both"
       >
         <div style="position:absolute; inset:0; background:repeating-linear-gradient(180deg,rgba(255,255,255,.85) 0 3px,rgba(20,20,22,.65) 3px 7px)"></div>
       </div>
@@ -1440,7 +1662,7 @@
                 </div>
                 <!-- Label sticker -->
                 <div style="position:absolute; left:118px; top:44px; width:94px; height:84px; background:#f4f4f4; border-radius:2px">
-                  <div style="position:absolute; top:0; left:0; right:0; height:20px; background:${s.strip}"></div>
+                  <div style="position:absolute; top:0; left:0; right:0; height:20px; background:${i.strip}"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:10px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:18px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:26px; height:1px; background:#c9c9c9"></div>
@@ -1478,8 +1700,8 @@
         <!-- Loading info overlay -->
         <div style="position:absolute; left:22px; right:22px; bottom:36px; font-family:'IBM Plex Mono',monospace; color:#f0e9dc; text-align:center; z-index:5">
           <div style="font-size:10px; letter-spacing:.16em; color:rgba(240,233,220,.6)">${this.currentShot==="Be"?"EJECTING":"LOADING"}</div>
-          <div style="margin-top:9px; font-size:19px; font-weight:600; letter-spacing:.02em">${s.title}</div>
-          <div style="margin-top:6px; font-size:10px; letter-spacing:.14em; color:rgba(240,233,220,.5)">${s.kicker}</div>
+          <div style="margin-top:9px; font-size:19px; font-weight:600; letter-spacing:.02em">${i.title}</div>
+          <div style="margin-top:6px; font-size:10px; letter-spacing:.14em; color:rgba(240,233,220,.5)">${i.kicker}</div>
           <div style="margin-top:20px; font-size:10.5px; letter-spacing:.12em; color:rgba(240,233,220,.45)">TAP TO SKIP</div>
         </div>
       </div>
@@ -1531,32 +1753,38 @@
       70% { opacity: .55; }
       100% { opacity: 0; }
     }
-  `;q([l({type:String})],T.prototype,"activeKey",2);q([l({type:String})],T.prototype,"currentShot",2);q([l({type:Boolean})],T.prototype,"showFlash",2);q([l({type:Number})],T.prototype,"shotBDur",2);q([l({type:Number})],T.prototype,"flashDur",2);T=q([y("mobile-cutscene")],T);var Ze=Object.defineProperty,ti=Object.getOwnPropertyDescriptor,Z=(s,t,e,o)=>{for(var i=o>1?void 0:o?ti(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&Ze(t,e,i),i};const Ht="cubic-bezier(.23,1,.32,1)";let B=class extends x{constructor(){super(...arguments),this.activeKey=null,this.stageState="idle",this.currentShot="none"}get mobileShelfPhase(){const s=this.director.stageState;return s==="ejectCollapse"?"ejecting":s==="idle"||s==="home"?"idle":"loading"}get mobilePlayingVisible(){return this.director.stageState==="play"||this.director.stageState==="playWipe"}pick(s){this.director.pick(s,"none","none",!0)}eject(){this.director.eject(!0)}render(){const s=this.director,t=s.activeKey,e=this.mobilePlayingVisible,o=s.currentShot==="B"||s.currentShot==="Be";return c`
+  `;K([l({type:String})],T.prototype,"activeKey",2);K([l({type:String})],T.prototype,"currentShot",2);K([l({type:Boolean})],T.prototype,"showFlash",2);K([l({type:Number})],T.prototype,"shotBDur",2);K([l({type:Number})],T.prototype,"flashDur",2);T=K([m("mobile-cutscene")],T);var oi=Object.defineProperty,si=Object.getOwnPropertyDescriptor,et=(i,t,e,s)=>{for(var o=s>1?void 0:s?si(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&oi(t,e,o),o};const Nt="cubic-bezier(.23,1,.32,1)";let B=class extends x{constructor(){super(...arguments),this.activeKey=null,this.stageState="idle",this.currentShot="none"}get mobileShelfPhase(){const i=this.director.stageState;return i==="ejectCollapse"?"ejecting":i==="idle"||i==="home"?"idle":"loading"}get mobilePlayingVisible(){return this.director.stageState==="play"||this.director.stageState==="playWipe"}pick(i){this.director.pick(i,"none","none",!0)}eject(){this.director.eject(!0)}render(){const i=this.director,t=i.activeKey,e=this.mobilePlayingVisible,s=i.currentShot==="B"||i.currentShot==="Be";return c`
       <div class="mobile-wrap">
         <mobile-shelf
           class="mobile-panel"
-          style="opacity:${e||o?0:1}; pointer-events:${e||o?"none":"auto"}; transition:opacity 320ms ${Ht}"
+          style="opacity:${e||s||i.infoMode?0:1}; pointer-events:${e||s||i.infoMode?"none":"auto"}; transition:opacity 320ms ${Nt}"
           .activeKey=${t}
           .phase=${this.mobileShelfPhase}
-          @pick-tape=${i=>this.pick(i.detail.key)}
+          @pick-tape=${o=>this.pick(o.detail.key)}
+          @open-info=${o=>i.openInfo(o.detail.mode)}
         ></mobile-shelf>
 
         <mobile-playing
           class="mobile-panel"
-          style="opacity:${e?1:0}; pointer-events:${e?"auto":"none"}; transition:opacity 260ms ${Ht}"
+          style="opacity:${e||i.infoMode?1:0}; pointer-events:${e||i.infoMode?"auto":"none"}; transition:opacity 260ms ${Nt}"
           .activeKey=${t}
-          @eject-tape=${()=>this.eject()}
+          @eject-tape=${()=>i.infoMode?i.closeInfo():this.eject()}
         >
-          <tape-app-slot .activeKey=${t}></tape-app-slot>
+          <tape-app-slot
+            .activeKey=${t}
+            .infoMode=${i.infoMode}
+            .isMobile=${!0}
+            @switch-tab=${o=>i.switchInfoTab(o.detail.mode)}
+          ></tape-app-slot>
         </mobile-playing>
 
         <mobile-cutscene
           .activeKey=${t}
-          .currentShot=${s.currentShot}
-          ?showFlash=${s.showFlash}
-          .shotBDur=${s.shotBDur}
-          .flashDur=${s.flashDur}
-          @skip-cutscene=${()=>s.skip()}
+          .currentShot=${i.currentShot}
+          ?showFlash=${i.showFlash}
+          .shotBDur=${i.shotBDur}
+          .flashDur=${i.flashDur}
+          @skip-cutscene=${()=>i.skip()}
         ></mobile-cutscene>
       </div>
     `}};B.styles=v`
@@ -1578,7 +1806,7 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
     }
-  `;Z([l({type:Object})],B.prototype,"director",2);Z([l({type:String})],B.prototype,"activeKey",2);Z([l({type:String})],B.prototype,"stageState",2);Z([l({type:String})],B.prototype,"currentShot",2);B=Z([y("mobile-layout")],B);var ei=Object.defineProperty,ii=Object.getOwnPropertyDescriptor,S=(s,t,e,o)=>{for(var i=o>1?void 0:o?ii(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&ei(t,e,i),i};let $=class extends x{constructor(){super(...arguments),this.inspectState="SHELF",this.activeHold=null,this.scrubVal=0,this.shotADur=1300,this.shotBDur=1250,this.flashDur=130,this.dollyDur=420,this.readDur=620,this.camPct=174}onHold(s){this.dispatchEvent(new CustomEvent("hold-shot",{detail:{hold:s}}))}onRunSeq(){this.dispatchEvent(new CustomEvent("run-sequence"))}onParamChange(s,t){this.dispatchEvent(new CustomEvent("param-change",{detail:{name:s,val:t}}))}render(){const s=this.shotADur+200+this.shotBDur+150+this.flashDur+this.dollyDur+this.readDur+260+"ms";return c`
+  `;et([l({type:Object})],B.prototype,"director",2);et([l({type:String})],B.prototype,"activeKey",2);et([l({type:String})],B.prototype,"stageState",2);et([l({type:String})],B.prototype,"currentShot",2);B=et([m("mobile-layout")],B);var ai=Object.defineProperty,ri=Object.getOwnPropertyDescriptor,_=(i,t,e,s)=>{for(var o=s>1?void 0:s?ri(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&ai(t,e,o),o};let w=class extends x{constructor(){super(...arguments),this.inspectState="SHELF",this.activeHold=null,this.scrubVal=0,this.shotADur=1300,this.shotBDur=1250,this.flashDur=130,this.dollyDur=420,this.readDur=620,this.camPct=174}onHold(i){this.dispatchEvent(new CustomEvent("hold-shot",{detail:{hold:i}}))}onRunSeq(){this.dispatchEvent(new CustomEvent("run-sequence"))}onParamChange(i,t){this.dispatchEvent(new CustomEvent("param-change",{detail:{name:i,val:t}}))}render(){const i=this.shotADur+200+this.shotBDur+150+this.flashDur+this.dollyDur+this.readDur+260+"ms";return c`
       <div class="inspector-card">
         <div class="header">
           <span class="title">MOTION INSPECTOR</span>
@@ -1634,10 +1862,10 @@
         </div>
 
         <div class="foot-info">
-          Total load → playing: <b style="color:#2a2621">${s}</b>. Holding a shot pauses its animation so the scrub bar seeks it; RUN plays the whole cut sequence with the values above. Esc or the deck's EJECT key returns to the shelf.
+          Total load → playing: <b style="color:#2a2621">${i}</b>. Holding a shot pauses its animation so the scrub bar seeks it; RUN plays the whole cut sequence with the values above. Esc or the deck's EJECT key returns to the shelf.
         </div>
       </div>
-    `}};$.styles=v`
+    `}};w.styles=v`
     :host {
       display: block;
       width: 1100px;
@@ -1751,38 +1979,38 @@
       line-height: 1.7;
       color: rgba(42, 38, 33, 0.5);
     }
-  `;S([l({type:String})],$.prototype,"inspectState",2);S([l({type:String})],$.prototype,"activeHold",2);S([l({type:Number})],$.prototype,"scrubVal",2);S([l({type:Number})],$.prototype,"shotADur",2);S([l({type:Number})],$.prototype,"shotBDur",2);S([l({type:Number})],$.prototype,"flashDur",2);S([l({type:Number})],$.prototype,"dollyDur",2);S([l({type:Number})],$.prototype,"readDur",2);S([l({type:Number})],$.prototype,"camPct",2);$=S([y("motion-inspector")],$);var si=Object.defineProperty,oi=Object.getOwnPropertyDescriptor,ht=(s,t,e,o)=>{for(var i=o>1?void 0:o?oi(t,e):t,a=s.length-1,r;a>=0;a--)(r=s[a])&&(i=(o?r(t,e,i):r(i))||i);return o&&i&&si(t,e,i),i};let V=class extends x{constructor(){super(...arguments),this.stageScale=1,this.isMobile=!1,this.handleMqChange=s=>{this.isMobile=s.matches},this.director=new me(this),this.showInspector=!1,this.handleKeyDown=s=>{s.key==="Escape"&&(this.director.currentShot!=="none"?this.director.skip():this.director.stageState==="play"||this.director.stageState==="playWipe"?this.director.eject(this.isMobile):this.director.stageState!=="idle"&&this.director.cancel())},this.handlePopState=()=>this.route(!1)}connectedCallback(){super.connectedCallback(),window.addEventListener("keydown",this.handleKeyDown),window.addEventListener("popstate",this.handlePopState),this.mq=window.matchMedia("(max-width: 639px)"),this.isMobile=this.mq.matches,this.mq.addEventListener("change",this.handleMqChange),requestAnimationFrame(()=>this.route(!0))}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("keydown",this.handleKeyDown),window.removeEventListener("popstate",this.handlePopState),this.mq?.removeEventListener("change",this.handleMqChange),this.resizeObserver?.disconnect()}updated(){const s=this.shadowRoot?.querySelector("desktop-layout");!s||s===this.observedStageEl||(this.resizeObserver?.disconnect(),this.observedStageEl=s,this.resizeObserver=new ResizeObserver(t=>{const e=t[0]?.contentRect;e&&(this.stageScale=Math.min(e.width/1100,e.height/700))}),this.resizeObserver.observe(s))}route(s){const t=(location.hash||"").replace(/^#\/?/,""),e=Object.keys(u).find(o=>u[o].slug===t);if(e&&this.director.activeKey!==e){const o=this.shadowRoot?.querySelector("desktop-layout"),i=o?o.flip(e):"none",a=o?o.screenOrigin():"735px 307px";this.director.jump(e,i,a);return}!e&&this.director.activeKey&&(s?this.director.setStateIdle():this.director.eject(this.isMobile))}runSequence(){const s=this.director.activeKey||"echo",t=this.shadowRoot?.querySelector("desktop-layout"),e=t?t.flip(s):"none",o=t?t.screenOrigin():"735px 307px";this.director.handleHold("idle",e,o),setTimeout(()=>this.director.pick(s,e,o,this.isMobile),60)}render(){const s=this.director,t=s.activeKey,e=s.activeHold?"HOLDING "+(s.activeHold==="A"?"SHOT A":s.activeHold==="B"?"SHOT B · INSERT":"SHOT B · EJECT")+(t?" — "+u[t].title:""):s.stageState==="idle"?"SHELF":(s.stageState==="play"||s.stageState==="playWipe"?"PLAYING":s.currentShot!=="none"?"RUNNING · "+(s.currentShot==="A"?"SHOT A":s.currentShot==="Be"?"EJECT":"SHOT B"):s.stageState==="read"?"RUNNING · SETTLE / READ":"RUNNING")+(t?" — "+u[t].title:"");return c`
+  `;_([l({type:String})],w.prototype,"inspectState",2);_([l({type:String})],w.prototype,"activeHold",2);_([l({type:Number})],w.prototype,"scrubVal",2);_([l({type:Number})],w.prototype,"shotADur",2);_([l({type:Number})],w.prototype,"shotBDur",2);_([l({type:Number})],w.prototype,"flashDur",2);_([l({type:Number})],w.prototype,"dollyDur",2);_([l({type:Number})],w.prototype,"readDur",2);_([l({type:Number})],w.prototype,"camPct",2);w=_([m("motion-inspector")],w);var ni=Object.defineProperty,pi=Object.getOwnPropertyDescriptor,ut=(i,t,e,s)=>{for(var o=s>1?void 0:s?pi(t,e):t,a=i.length-1,r;a>=0;a--)(r=i[a])&&(o=(s?r(t,e,o):r(o))||o);return s&&o&&ni(t,e,o),o};let q=class extends x{constructor(){super(...arguments),this.stageScale=1,this.isMobile=!1,this.handleMqChange=i=>{this.isMobile=i.matches},this.director=new $e(this),this.showInspector=!1,this.handleKeyDown=i=>{i.key==="Escape"&&(this.director.infoMode?this.director.closeInfo():this.director.currentShot!=="none"?this.director.skip():this.director.stageState==="play"||this.director.stageState==="playWipe"?this.director.eject(this.isMobile):this.director.stageState!=="idle"&&this.director.cancel())},this.handlePopState=()=>this.route(!1)}connectedCallback(){super.connectedCallback(),window.addEventListener("keydown",this.handleKeyDown),window.addEventListener("popstate",this.handlePopState),this.mq=window.matchMedia("(max-width: 639px)"),this.isMobile=this.mq.matches,this.mq.addEventListener("change",this.handleMqChange),requestAnimationFrame(()=>this.route(!0))}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("keydown",this.handleKeyDown),window.removeEventListener("popstate",this.handlePopState),this.mq?.removeEventListener("change",this.handleMqChange),this.resizeObserver?.disconnect()}updated(){const i=this.shadowRoot?.querySelector("desktop-layout");!i||i===this.observedStageEl||(this.resizeObserver?.disconnect(),this.observedStageEl=i,this.resizeObserver=new ResizeObserver(t=>{const e=t[0]?.contentRect;e&&(this.stageScale=Math.min(e.width/1100,e.height/700))}),this.resizeObserver.observe(i))}route(i){const t=(location.hash||"").replace(/^#\/?/,"");if(t==="about"||t==="contact"){const s=this.shadowRoot?.querySelector("desktop-layout"),o=s?s.screenOrigin():"735px 307px";this.director.openInfo(t,o);return}this.director.infoMode&&this.director.closeInfo();const e=Object.keys(u).find(s=>u[s].slug===t);if(e&&this.director.activeKey!==e){const s=this.shadowRoot?.querySelector("desktop-layout"),o=s?s.flip(e):"none",a=s?s.screenOrigin():"735px 307px";this.director.jump(e,o,a);return}!e&&this.director.activeKey&&(i?this.director.setStateIdle():this.director.eject(this.isMobile))}runSequence(){const i=this.director.activeKey||"echo",t=this.shadowRoot?.querySelector("desktop-layout"),e=t?t.flip(i):"none",s=t?t.screenOrigin():"735px 307px";this.director.handleHold("idle",e,s),setTimeout(()=>this.director.pick(i,e,s,this.isMobile),60)}render(){const i=this.director,t=i.activeKey,e=i.activeHold?"HOLDING "+(i.activeHold==="A"?"SHOT A":i.activeHold==="B"?"SHOT B · INSERT":"SHOT B · EJECT")+(t?" — "+u[t].title:""):i.stageState==="idle"?"SHELF":(i.stageState==="play"||i.stageState==="playWipe"?"PLAYING":i.currentShot!=="none"?"RUNNING · "+(i.currentShot==="A"?"SHOT A":i.currentShot==="Be"?"EJECT":"SHOT B"):i.stageState==="read"?"RUNNING · SETTLE / READ":"RUNNING")+(t?" — "+u[t].title:"");return c`
       ${this.isMobile?c`<mobile-layout
-            .director=${s}
-            .activeKey=${s.activeKey}
-            .stageState=${s.stageState}
-            .currentShot=${s.currentShot}
+            .director=${i}
+            .activeKey=${i.activeKey}
+            .stageState=${i.stageState}
+            .currentShot=${i.currentShot}
           ></mobile-layout>`:c`<desktop-layout
-            .director=${s}
-            .activeKey=${s.activeKey}
-            .stageState=${s.stageState}
-            .currentShot=${s.currentShot}
-            .flightTransform=${s.flightTransform}
+            .director=${i}
+            .activeKey=${i.activeKey}
+            .stageState=${i.stageState}
+            .currentShot=${i.currentShot}
+            .flightTransform=${i.flightTransform}
             .stageScale=${this.stageScale}
           ></desktop-layout>`}
 
       ${this.showInspector?c`
             <motion-inspector
               .inspectState=${e}
-              .activeHold=${s.activeHold}
-              .scrubVal=${s.scrubVal}
-              .shotADur=${s.shotADur}
-              .shotBDur=${s.shotBDur}
-              .flashDur=${s.flashDur}
-              .dollyDur=${s.dollyDur}
-              .readDur=${s.readDur}
-              .camPct=${s.camPct}
-              @hold-shot=${o=>{const i=this.shadowRoot?.querySelector("desktop-layout"),a=i?i.flip(t||"echo"):"none",r=i?i.screenOrigin():"735px 307px";s.handleHold(o.detail.hold,a,r)}}
-              @param-change=${o=>s.handleParamChange(o.detail.name,o.detail.val)}
+              .activeHold=${i.activeHold}
+              .scrubVal=${i.scrubVal}
+              .shotADur=${i.shotADur}
+              .shotBDur=${i.shotBDur}
+              .flashDur=${i.flashDur}
+              .dollyDur=${i.dollyDur}
+              .readDur=${i.readDur}
+              .camPct=${i.camPct}
+              @hold-shot=${s=>{const o=this.shadowRoot?.querySelector("desktop-layout"),a=o?o.flip(t||"echo"):"none",r=o?o.screenOrigin():"735px 307px";i.handleHold(s.detail.hold,a,r)}}
+              @param-change=${s=>i.handleParamChange(s.detail.name,s.detail.val)}
               @run-sequence=${this.runSequence}
             ></motion-inspector>
           `:""}
-    `}};V.styles=v`
+    `}};q.styles=v`
     :host {
       display: block;
       width: 100%;
@@ -1791,4 +2019,4 @@
       box-sizing: border-box;
       user-select: none;
     }
-  `;ht([H()],V.prototype,"stageScale",2);ht([H()],V.prototype,"isMobile",2);ht([H()],V.prototype,"showInspector",2);V=ht([y("portfolio-app")],V);console.log("📼 Studio Portfolio — Retro Cutscene Experience initialized.");
+  `;ut([H()],q.prototype,"stageScale",2);ut([H()],q.prototype,"isMobile",2);ut([H()],q.prototype,"showInspector",2);q=ut([m("portfolio-app")],q);console.log("📼 Studio Portfolio — Retro Cutscene Experience initialized.");

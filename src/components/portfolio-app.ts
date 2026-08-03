@@ -63,7 +63,8 @@ export class PortfolioAppComponent extends LitElement {
 
   private handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      if (this.director.currentShot !== 'none') this.director.skip();
+      if (this.director.infoMode) this.director.closeInfo();
+      else if (this.director.currentShot !== 'none') this.director.skip();
       else if (this.director.stageState === 'play' || this.director.stageState === 'playWipe') this.director.eject(this.isMobile);
       else if (this.director.stageState !== 'idle') this.director.cancel();
     }
@@ -73,6 +74,15 @@ export class PortfolioAppComponent extends LitElement {
 
   private route(initial: boolean) {
     const slug = (location.hash || '').replace(/^#\/?/, '');
+    if (slug === 'about' || slug === 'contact') {
+      const desktop = this.shadowRoot?.querySelector('desktop-layout') as any;
+      const origin = desktop ? desktop.screenOrigin() : '735px 307px';
+      this.director.openInfo(slug as 'about' | 'contact', origin);
+      return;
+    }
+    if (this.director.infoMode) {
+      this.director.closeInfo();
+    }
     const foundKey = (Object.keys(TAPES) as TapeKey[]).find(x => TAPES[x].slug === slug);
     if (foundKey && this.director.activeKey !== foundKey) {
       const desktop = this.shadowRoot?.querySelector('desktop-layout') as any;

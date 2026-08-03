@@ -8,6 +8,7 @@ export class CutsceneDirector implements ReactiveController {
   host: ReactiveControllerHost;
 
   activeKey: TapeKey | null = null;
+  infoMode: 'about' | 'contact' | null = null;
   stageState: CutsceneState = 'idle';
   flightTransform: string = 'none';
   flightDur: number = 220;
@@ -54,10 +55,48 @@ export class CutsceneDirector implements ReactiveController {
 
   setStateIdle() {
     this.activeKey = null;
+    this.infoMode = null;
     this.stageState = 'idle';
     this.flightTransform = 'none';
     this.currentShot = 'none';
     this.camOn = false;
+    this.host.requestUpdate();
+  }
+
+  openInfo(mode: 'about' | 'contact', origin?: string) {
+    this.clear();
+    sounds.playClick();
+    this.infoMode = mode;
+    if (origin) this.camOrigin = origin;
+    this.camOn = true;
+    this.camScale = 1.6;
+    this.camDur = 400;
+    this.stageState = 'play';
+    history.pushState({ p: mode }, '', '#/' + mode);
+    this.host.requestUpdate();
+  }
+
+  switchInfoTab(mode: 'about' | 'contact') {
+    if (this.infoMode === mode) return;
+    sounds.playClick();
+    this.infoMode = mode;
+    history.pushState({ p: mode }, '', '#/' + mode);
+    this.host.requestUpdate();
+  }
+
+  closeInfo() {
+    if (!this.infoMode) return;
+    this.clear();
+    sounds.playClick();
+    this.infoMode = null;
+    if (location.hash && location.hash !== '#/') history.pushState({}, '', '#/');
+    if (this.activeKey) {
+      this.stageState = 'playWipe';
+    } else {
+      this.camOn = false;
+      this.camDur = 380;
+      this.stageState = 'idle';
+    }
     this.host.requestUpdate();
   }
 
@@ -168,6 +207,10 @@ export class CutsceneDirector implements ReactiveController {
   }
 
   eject(isMobile: boolean) {
+    if (this.infoMode) {
+      this.closeInfo();
+      return;
+    }
     if (!this.activeKey) return;
     this.clear();
     sounds.playClick();
