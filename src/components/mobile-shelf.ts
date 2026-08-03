@@ -59,7 +59,7 @@ export class MobileShelfComponent extends LitElement {
     .set-inner vcr-player {
       right: auto;
       left: 132px;
-      top: 0;
+      top: 16px;
     }
 
     .set-inner crt-display {

@@ -8,7 +8,7 @@ export class VcrPlayerComponent extends LitElement {
       display: block;
       position: absolute;
       right: 112px;
-      top: 52px;
+      top: 60px;
       width: 296px;
       height: 95px;
       z-index: 3;
@@ -32,6 +32,8 @@ export class VcrPlayerComponent extends LitElement {
 
     return html`
       <div style="position:relative; width:100%; height:100%; opacity:${this.setOp}; filter:${this.setFx}; transition:opacity 320ms cubic-bezier(.23,1,.32,1), filter 320ms cubic-bezier(.23,1,.32,1)">
+        <!-- Cabinet contact shadow -->
+        <div style="position:absolute; left:4px; right:4px; bottom:-3px; height:6px; background:rgba(0,0,0,.45); filter:blur(3px); border-radius:50%"></div>
 
         <!-- Hood -->
         <div style="position:absolute; left:11px; right:11px; top:0; height:23px; background:linear-gradient(180deg,#2b2b2d,#1b1b1c); border-radius:3px 3px 0 0; clip-path:polygon(1.4% 0,98.6% 0,100% 100%,0 100%)">

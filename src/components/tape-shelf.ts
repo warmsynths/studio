@@ -38,7 +38,7 @@ export class TapeShelfComponent extends LitElement {
     const getVal = (k: TapeKey) => {
       const K = k[0].toUpperCase() + k.slice(1);
       const act = a === k;
-      const op = !dim ? 1 : (act ? 1 : (playing ? 0.18 : 0.35));
+      const op = !dim ? 1 : (act ? (playing ? 0 : 1) : (playing ? 0.18 : 0.35));
       const fx = dim && !act ? (playing ? 'blur(6px)' : 'blur(3px)') : 'blur(0px)';
       const tf = act ? this.flightTransform : 'none';
       const z = act ? 40 : TAPES[k].z;

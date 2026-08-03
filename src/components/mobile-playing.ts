@@ -48,6 +48,23 @@ export class MobilePlayingComponent extends LitElement {
       overflow: hidden;
     }
 
+    @keyframes crtTextFlicker {
+      0%, 100% {
+        text-shadow: 0.6px 0 0.8px rgba(234, 54, 175, 0.4), -0.6px 0 0.8px rgba(117, 250, 105, 0.4);
+      }
+      50% {
+        text-shadow: 1px 0.3px 1px rgba(234, 54, 175, 0.5), -0.5px -0.3px 1px rgba(117, 250, 105, 0.5);
+      }
+    }
+
+    @keyframes crtPhosphorMicroFlicker {
+      0% { opacity: 0.993; }
+      25% { opacity: 1; }
+      50% { opacity: 0.989; }
+      75% { opacity: 0.997; }
+      100% { opacity: 1; }
+    }
+
     .osd {
       position: absolute;
       left: 14px;
@@ -63,19 +80,29 @@ export class MobilePlayingComponent extends LitElement {
       font-size: 9px;
       letter-spacing: .12em;
       color: #e8f0e2;
-      text-shadow: 0 0 7px rgba(180,255,190,.5);
+      text-shadow: 0.6px 0 0.8px rgba(234, 54, 175, 0.4), -0.6px 0 0.8px rgba(117, 250, 105, 0.4);
+      animation: crtTextFlicker 0.1s infinite alternate;
     }
 
     ::slotted(*) {
       width: 100%;
       height: 100%;
+      animation: crtPhosphorMicroFlicker 0.12s infinite alternate;
     }
 
     .scanlines {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: repeating-linear-gradient(180deg, rgba(255,255,255,.035) 0 1px, transparent 1px 5px);
+      background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0 1px, transparent 1px 4px);
+    }
+
+    .rgb-fringe {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(90deg, rgba(234, 54, 175, 0.012) 0 1px, rgba(117, 250, 105, 0.012) 1px 2px, transparent 2px 3px);
+      animation: crtPhosphorMicroFlicker 0.15s infinite alternate;
     }
 
     .transport {
@@ -188,6 +215,7 @@ export class MobilePlayingComponent extends LitElement {
                 </div>
                 <slot></slot>
                 <div class="scanlines"></div>
+                <div class="rgb-fringe"></div>
               </div>
             </div>
           </div>
