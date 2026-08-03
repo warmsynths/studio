@@ -34,6 +34,13 @@ export class CrtDisplayComponent extends LitElement {
       50% { transform: translate(-2px, 1px); }
       100% { transform: translate(1px, -1px); }
     }
+    @keyframes crtPhosphorMicroFlicker {
+      0% { opacity: 0.993; }
+      25% { opacity: 1; }
+      50% { opacity: 0.989; }
+      75% { opacity: 0.997; }
+      100% { opacity: 1; }
+    }
   `;
 
   @property({ type: String }) activeKey: TapeKey | null = null;
@@ -66,8 +73,8 @@ export class CrtDisplayComponent extends LitElement {
               data-screen
               style="position:absolute; left:24px; right:24px; top:22px; bottom:22px; background:radial-gradient(ellipse at 50% 42%,#c4c0d4,#aca8c0 70%,#928ea6); border-radius:38px 38px 34px 34px; overflow:hidden; pointer-events:${screenOn ? 'auto' : 'none'}"
             >
-              <!-- Active screen layer -->
-              <div style="position:absolute; inset:0; background:#0a0a0c; border-radius:38px 38px 34px 34px; opacity:${screenOn ? 1 : 0}; transition:opacity 200ms linear;">
+              <!-- Active screen layer with subtle phosphor flicker -->
+              <div style="position:absolute; inset:0; background:#0a0a0c; border-radius:38px 38px 34px 34px; opacity:${screenOn ? 1 : 0}; transition:opacity 200ms linear; animation:crtPhosphorMicroFlicker 0.12s infinite alternate">
                 <!-- App rendered at 800×643 emulated, scaled to fit the ~296×238px glass area -->
                 <div style="position:absolute; left:0; top:0; width:800px; height:643px; transform:scale(.37); transform-origin:top left; clip-path:${this.isPlayWipe ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)'}; transition:clip-path 420ms cubic-bezier(.23,1,.32,1)">
                   <slot></slot>
@@ -75,7 +82,9 @@ export class CrtDisplayComponent extends LitElement {
               </div>
 
               <!-- Scanlines -->
-              <div style="position:absolute; inset:0; background:repeating-linear-gradient(180deg,rgba(255,255,255,.035) 0 1px,transparent 1px 5px); pointer-events:none; z-index:3"></div>
+              <div style="position:absolute; inset:0; background:repeating-linear-gradient(180deg,rgba(0,0,0,.08) 0 1px,transparent 1px 4px); pointer-events:none; z-index:3"></div>
+              <!-- Subtle RGB aperture grid & chromatic fringe -->
+              <div style="position:absolute; inset:0; background:repeating-linear-gradient(90deg, rgba(234,54,175,.012) 0 1px, rgba(117,250,105,.012) 1px 2px, transparent 2px 3px); pointer-events:none; z-index:3; animation:crtPhosphorMicroFlicker 0.15s infinite alternate"></div>
               <!-- CRT vignette -->
               <div style="position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 0 20px rgba(0,0,0,.35); border-radius:38px 38px 34px 34px; z-index:3"></div>
 
