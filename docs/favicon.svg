@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Dark App Badge Background -->
+    <linearGradient id="badgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1e24"/>
+      <stop offset="100%" stop-color="#0f0f12"/>
+    </linearGradient>
+
+    <!-- Cassette Plastic Body -->
+    <linearGradient id="tapeBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34343a"/>
+      <stop offset="100%" stop-color="#1c1c20"/>
+    </linearGradient>
+
+    <!-- Top Guard Shield -->
+    <linearGradient id="topShieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#28282e"/>
+      <stop offset="100%" stop-color="#141418"/>
+    </linearGradient>
+
+    <!-- Paper Label Gradient -->
+    <linearGradient id="labelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fefdfa"/>
+      <stop offset="100%" stop-color="#eae6da"/>
+    </linearGradient>
+
+    <!-- Red Accent Strip -->
+    <linearGradient id="stripGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff4757"/>
+      <stop offset="100%" stop-color="#d63031"/>
+    </linearGradient>
+
+    <!-- Metallic Reel Rim -->
+    <linearGradient id="reelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#c8d6e5"/>
+    </linearGradient>
+
+    <!-- Magnetic Tape Color -->
+    <linearGradient id="magneticTape" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3a2312"/>
+      <stop offset="50%" stop-color="#54331a"/>
+      <stop offset="100%" stop-color="#3a2312"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Rounded Favicon Container Badge -->
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#badgeGrad)" stroke="#2d2d38" stroke-width="6"/>
+
+  <!-- Main Cassette Body (Centered inside 512x512) -->
+  <g id="cassette-tape">
+    <!-- Drop Shadow under Cassette Shell -->
+    <rect x="51" y="147" width="410" height="230" rx="16" fill="#050508" opacity="0.6"/>
+
+    <!-- Plastic Shell -->
+    <rect x="51" y="141" width="410" height="230" rx="16" fill="url(#tapeBodyGrad)" stroke="#4a4a56" stroke-width="4"/>
+
+    <!-- Top Magnetic Ribbon Shield / Flap -->
+    <rect x="51" y="141" width="410" height="38" rx="16 16 0 0" fill="url(#topShieldGrad)" stroke="#3a3a44" stroke-width="2"/>
+    <line x1="51" y1="179" x2="461" y2="179" stroke="#141418" stroke-width="3"/>
+    
+    <!-- Top Flap Text / Model -->
+    <text x="256" y="166" font-family="'IBM Plex Mono', monospace, sans-serif" font-size="14" font-weight="800" fill="#e2e8f0" letter-spacing="4" text-anchor="middle">VHS T-120</text>
+
+    <!-- Corner Screws -->
+    <circle cx="69" cy="191" r="5" fill="#5a5a68" stroke="#222" stroke-width="1.5"/>
+    <circle cx="443" cy="191" r="5" fill="#5a5a68" stroke="#222" stroke-width="1.5"/>
+    <circle cx="69" cy="351" r="5" fill="#5a5a68" stroke="#222" stroke-width="1.5"/>
+    <circle cx="443" cy="351" r="5" fill="#5a5a68" stroke="#222" stroke-width="1.5"/>
+
+    <!-- Magnetic Tape Strand connecting behind spools -->
+    <rect x="133" y="240" width="246" height="32" fill="url(#magneticTape)"/>
+
+    <!-- Left Reel Hub Window -->
+    <g transform="translate(133, 256)">
+      <!-- Outer Transparent Window Ring -->
+      <circle cx="0" cy="0" r="52" fill="#141418" stroke="#646473" stroke-width="3"/>
+      <!-- Tape Pack Spool -->
+      <circle cx="0" cy="0" r="42" fill="#4a301c" stroke="#2a1a0e" stroke-width="2"/>
+      <!-- White Reel Hub -->
+      <circle cx="0" cy="0" r="28" fill="url(#reelGrad)" stroke="#8395a7" stroke-width="2"/>
+      <!-- Inner Gear Teeth Ring -->
+      <circle cx="0" cy="0" r="16" fill="#1e1e24"/>
+      <!-- Gear Teeth Notches -->
+      <rect x="-3" y="-19" width="6" height="7" rx="1" fill="#f1f2f6"/>
+      <rect x="-3" y="12" width="6" height="7" rx="1" fill="#f1f2f6"/>
+      <rect x="-19" y="-3" width="7" height="6" rx="1" fill="#f1f2f6"/>
+      <rect x="12" y="-3" width="7" height="6" rx="1" fill="#f1f2f6"/>
+    </g>
+
+    <!-- Right Reel Hub Window -->
+    <g transform="translate(379, 256)">
+      <!-- Outer Transparent Window Ring -->
+      <circle cx="0" cy="0" r="52" fill="#141418" stroke="#646473" stroke-width="3"/>
+      <!-- Tape Pack Spool -->
+      <circle cx="0" cy="0" r="34" fill="#4a301c" stroke="#2a1a0e" stroke-width="2"/>
+      <!-- White Reel Hub -->
+      <circle cx="0" cy="0" r="28" fill="url(#reelGrad)" stroke="#8395a7" stroke-width="2"/>
+      <!-- Inner Gear Teeth Ring -->
+      <circle cx="0" cy="0" r="16" fill="#1e1e24"/>
+      <!-- Gear Teeth Notches -->
+      <rect x="-3" y="-19" width="6" height="7" rx="1" fill="#f1f2f6"/>
+      <rect x="-3" y="12" width="6" height="7" rx="1" fill="#f1f2f6"/>
+      <rect x="-19" y="-3" width="7" height="6" rx="1" fill="#f1f2f6"/>
+      <rect x="12" y="-3" width="7" height="6" rx="1" fill="#f1f2f6"/>
+    </g>
+
+    <!-- Center Sticker Label -->
+    <g transform="translate(201, 201)">
+      <!-- Label Card -->
+      <rect x="0" y="0" width="110" height="110" rx="4" fill="url(#labelGrad)" stroke="#dcdde1" stroke-width="2"/>
+      <!-- Red Header Strip -->
+      <path d="M 0 4 Q 0 0 4 0 L 106 0 Q 110 0 110 4 L 110 28 L 0 28 Z" fill="url(#stripGrad)"/>
+      <text x="55" y="19" font-family="'IBM Plex Mono', monospace, sans-serif" font-size="12" font-weight="900" fill="#ffffff" letter-spacing="1.5" text-anchor="middle">STUDIO</text>
+
+      <!-- Label Details Lines -->
+      <line x1="10" y1="46" x2="100" y2="46" stroke="#b2bec3" stroke-width="2"/>
+      <line x1="10" y1="62" x2="100" y2="62" stroke="#b2bec3" stroke-width="2"/>
+      <line x1="10" y1="78" x2="100" y2="78" stroke="#b2bec3" stroke-width="2"/>
+      <line x1="10" y1="94" x2="100" y2="94" stroke="#b2bec3" stroke-width="2"/>
+
+      <text x="14" y="58" font-family="'IBM Plex Mono', monospace, sans-serif" font-size="9" font-weight="800" fill="#2d3436">HI-FI STEREO</text>
+      <text x="14" y="74" font-family="'IBM Plex Mono', monospace, sans-serif" font-size="9" font-weight="800" fill="#2d3436">MASTER TAPE</text>
+    </g>
+
+    <!-- Write Protect Tab Notches -->
+    <rect x="435" y="347" width="22" height="24" fill="#0f0f12" rx="2"/>
+    <rect x="55" y="347" width="22" height="24" fill="#0f0f12" rx="2"/>
+
+    <!-- Bottom Center Texture Grip Lines -->
+    <line x1="226" y1="357" x2="286" y2="357" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+    <line x1="226" y1="363" x2="286" y2="363" stroke="#222" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
