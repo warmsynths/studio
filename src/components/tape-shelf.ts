@@ -14,6 +14,15 @@ export class TapeShelfComponent extends LitElement {
       height: 210px;
       z-index: 5;
     }
+
+    .tape-item {
+      cursor: pointer;
+      transition: transform 160ms cubic-bezier(.23,1,.32,1);
+    }
+
+    .tape-item:active {
+      transform: scale(0.97);
+    }
   `;
 
   @property({ type: String }) activeKey: TapeKey | null = null;
@@ -61,7 +70,7 @@ export class TapeShelfComponent extends LitElement {
         <div data-tape="drift" style="position:absolute; left:8px; bottom:0; z-index:${vDrift.z}; opacity:${vDrift.op}; filter:${vDrift.fx}; transition:opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)">
           <div data-flight style="transform:${vDrift.tf}; filter:${this.flightFx}; transition:transform ${this.flightDur}ms ${this.flightEase}, filter 300ms cubic-bezier(.23,1,.32,1); will-change:transform">
             <div style="transform:rotate(-.8deg)">
-              <div @click=${() => this.pick('drift')} style="width:200px; height:35px; position:relative; border-radius:4px 4px 2px 2px; background:#262626; box-shadow:0 2px 7px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
+              <div @click=${() => this.pick('drift')} class="tape-item" style="width:200px; height:35px; position:relative; border-radius:4px 4px 2px 2px; background:#262626; box-shadow:0 2px 7px rgba(42,38,33,.2); overflow:hidden">
                 <div style="position:absolute; left:0; top:0; bottom:0; width:10px; background:${TAPES.drift.strip}"></div>
                 <div style="position:absolute; left:18px; top:6px; bottom:6px; right:34px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; gap:8px; padding:0 8px">
                   <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">BEAT MAPPER</span>
@@ -78,7 +87,7 @@ export class TapeShelfComponent extends LitElement {
         <div data-tape="pixel" style="position:absolute; left:2px; bottom:33px; z-index:${vPixel.z}; opacity:${vPixel.op}; filter:${vPixel.fx}; transition:opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)">
           <div data-flight style="transform:${vPixel.tf}; filter:${this.flightFx}; transition:transform ${this.flightDur}ms ${this.flightEase}, filter 300ms cubic-bezier(.23,1,.32,1); will-change:transform">
             <div style="transform:rotate(1.2deg)">
-              <div @click=${() => this.pick('pixel')} style="width:200px; height:35px; position:relative; border-radius:4px 4px 2px 2px; background:#262626; box-shadow:0 2px 7px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
+              <div @click=${() => this.pick('pixel')} class="tape-item" style="width:200px; height:35px; position:relative; border-radius:4px 4px 2px 2px; background:#262626; box-shadow:0 2px 7px rgba(42,38,33,.2); overflow:hidden">
                 <div style="position:absolute; left:0; top:0; bottom:0; width:10px; background:${TAPES.pixel.strip}"></div>
                 <div style="position:absolute; left:18px; top:6px; bottom:6px; right:34px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; gap:8px; padding:0 8px">
                   <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">CHROMA CHORDS</span>
@@ -95,7 +104,7 @@ export class TapeShelfComponent extends LitElement {
         <div data-tape="chord" style="position:absolute; left:11px; bottom:66px; z-index:${vChord.z}; opacity:${vChord.op}; filter:${vChord.fx}; transition:opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)">
           <div data-flight style="transform:${vChord.tf}; filter:${this.flightFx}; transition:transform ${this.flightDur}ms ${this.flightEase}, filter 300ms cubic-bezier(.23,1,.32,1); will-change:transform">
             <div style="transform:rotate(-.5deg)">
-              <div @click=${() => this.pick('chord')} style="width:200px; height:35px; position:relative; border-radius:4px 4px 2px 2px; background:#262626; box-shadow:0 2px 7px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
+              <div @click=${() => this.pick('chord')} class="tape-item" style="width:200px; height:35px; position:relative; border-radius:4px 4px 2px 2px; background:#262626; box-shadow:0 2px 7px rgba(42,38,33,.2); overflow:hidden">
                 <div style="position:absolute; left:0; top:0; bottom:0; width:10px; background:${TAPES.chord.strip2}"></div>
                 <div style="position:absolute; left:18px; top:6px; bottom:6px; right:34px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; gap:8px; padding:0 8px">
                   <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">CIRCUIT CHORDS</span>
@@ -112,7 +121,7 @@ export class TapeShelfComponent extends LitElement {
         <div data-tape="echo" style="position:absolute; left:232px; bottom:0; z-index:${vEcho.z}; opacity:${vEcho.op}; filter:${vEcho.fx}; transition:opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)">
           <div data-flight style="transform:${vEcho.tf}; filter:${this.flightFx}; transition:transform ${this.flightDur}ms ${this.flightEase}, filter 300ms cubic-bezier(.23,1,.32,1); will-change:transform">
             <div style="transform:rotate(-13deg); transform-origin:bottom left">
-              <div @click=${() => this.pick('echo')} style="width:35px; height:200px; position:relative; border-radius:2px 2px 4px 4px; background:#262626; box-shadow:0 3px 10px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
+              <div @click=${() => this.pick('echo')} class="tape-item" style="width:35px; height:200px; position:relative; border-radius:2px 2px 4px 4px; background:#262626; box-shadow:0 3px 10px rgba(42,38,33,.2); overflow:hidden">
                 <div style="position:absolute; left:0; right:0; bottom:0; height:10px; background:${TAPES.echo.strip}"></div>
                 <div style="position:absolute; left:6px; right:6px; top:34px; bottom:18px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; justify-content:center; overflow:hidden">
                   <span style="writing-mode:vertical-rl; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">HYPERSYN</span>
@@ -128,7 +137,7 @@ export class TapeShelfComponent extends LitElement {
         <div data-tape="scene" style="position:absolute; left:267px; bottom:0; z-index:${vScene.z}; opacity:${vScene.op}; filter:${vScene.fx}; transition:opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)">
           <div data-flight style="transform:${vScene.tf}; filter:${this.flightFx}; transition:transform ${this.flightDur}ms ${this.flightEase}, filter 300ms cubic-bezier(.23,1,.32,1); will-change:transform">
             <div style="transform:rotate(-13deg); transform-origin:bottom left">
-              <div @click=${() => this.pick('scene')} style="width:35px; height:200px; position:relative; border-radius:2px 2px 4px 4px; background:#262626; box-shadow:0 3px 10px rgba(42,38,33,.2); overflow:hidden; cursor:pointer; transition:transform 120ms cubic-bezier(.23,1,.32,1)">
+              <div @click=${() => this.pick('scene')} class="tape-item" style="width:35px; height:200px; position:relative; border-radius:2px 2px 4px 4px; background:#262626; box-shadow:0 3px 10px rgba(42,38,33,.2); overflow:hidden">
                 <div style="position:absolute; left:0; right:0; bottom:0; height:10px; background:${TAPES.scene.strip2}"></div>
                 <div style="position:absolute; left:6px; right:6px; top:34px; bottom:18px; background:#f4f1e6; border-radius:1px; display:flex; align-items:center; justify-content:center; overflow:hidden">
                   <span style="writing-mode:vertical-rl; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:9px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">J-6 COMPANION</span>

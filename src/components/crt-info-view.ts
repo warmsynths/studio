@@ -42,11 +42,15 @@ export class CrtInfoViewComponent extends LitElement {
     .tab {
       cursor: pointer;
       color: rgba(232, 240, 226, 0.35);
-      transition: color 180ms ease, text-shadow 180ms ease;
+      transition: color 180ms ease, text-shadow 180ms ease, transform 160ms ease-out;
     }
 
     .tab:hover {
       color: rgba(232, 240, 226, 0.75);
+    }
+
+    .tab:active {
+      transform: scale(0.97);
     }
 
     .tab.active {
