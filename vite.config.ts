@@ -52,10 +52,11 @@ function serveSiblingDocs(): Plugin {
 }
 
 export default defineConfig({
+  base: './',
   plugins: [serveSiblingDocs()],
   build: {
     target: 'es2022',
-    outDir: 'dist',
+    outDir: 'docs',
   },
   server: {
     port: 3000,
