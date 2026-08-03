@@ -67,19 +67,25 @@ export class MobileLayout extends LitElement {
       <div class="mobile-wrap">
         <mobile-shelf
           class="mobile-panel"
-          style="opacity:${playingVisible || cutsceneVisible ? 0 : 1}; pointer-events:${playingVisible || cutsceneVisible ? 'none' : 'auto'}; transition:opacity 320ms ${OUT}"
+          style="opacity:${playingVisible || cutsceneVisible || d.infoMode ? 0 : 1}; pointer-events:${playingVisible || cutsceneVisible || d.infoMode ? 'none' : 'auto'}; transition:opacity 320ms ${OUT}"
           .activeKey=${a}
           .phase=${this.mobileShelfPhase}
           @pick-tape=${(e: CustomEvent) => this.pick(e.detail.key)}
+          @open-info=${(e: CustomEvent) => d.openInfo(e.detail.mode)}
         ></mobile-shelf>
 
         <mobile-playing
           class="mobile-panel"
-          style="opacity:${playingVisible ? 1 : 0}; pointer-events:${playingVisible ? 'auto' : 'none'}; transition:opacity 260ms ${OUT}"
+          style="opacity:${playingVisible || d.infoMode ? 1 : 0}; pointer-events:${playingVisible || d.infoMode ? 'auto' : 'none'}; transition:opacity 260ms ${OUT}"
           .activeKey=${a}
-          @eject-tape=${() => this.eject()}
+          @eject-tape=${() => d.infoMode ? d.closeInfo() : this.eject()}
         >
-          <tape-app-slot .activeKey=${a}></tape-app-slot>
+          <tape-app-slot
+            .activeKey=${a}
+            .infoMode=${d.infoMode}
+            .isMobile=${true}
+            @switch-tab=${(e: CustomEvent) => d.switchInfoTab(e.detail.mode)}
+          ></tape-app-slot>
         </mobile-playing>
 
         <mobile-cutscene

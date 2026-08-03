@@ -44,6 +44,7 @@ export class CrtDisplayComponent extends LitElement {
   `;
 
   @property({ type: String }) activeKey: TapeKey | null = null;
+  @property({ type: String }) infoMode: 'about' | 'contact' | null = null;
   @property({ type: Boolean }) isPlaying = false;
   @property({ type: Boolean }) isReading = false;
   @property({ type: Boolean }) isPlayWipe = false;
@@ -51,7 +52,7 @@ export class CrtDisplayComponent extends LitElement {
   @property({ type: String }) setFx = 'blur(5px)';
 
   render() {
-    const screenOn = this.isPlaying || this.isReading;
+    const screenOn = this.isPlaying || this.isReading || !!this.infoMode;
 
     return html`
       <div style="position:relative; width:100%; height:100%; opacity:${this.setOp}; filter:${this.setFx}; transition:opacity 320ms cubic-bezier(.23,1,.32,1), filter 320ms cubic-bezier(.23,1,.32,1)">
@@ -71,12 +72,13 @@ export class CrtDisplayComponent extends LitElement {
             <!-- Screen glass -->
             <div
               data-screen
+              @click=${(e: Event) => e.stopPropagation()}
               style="position:absolute; left:24px; right:24px; top:22px; bottom:22px; background:radial-gradient(ellipse at 50% 42%,#c4c0d4,#aca8c0 70%,#928ea6); border-radius:38px 38px 34px 34px; overflow:hidden; pointer-events:${screenOn ? 'auto' : 'none'}"
             >
               <!-- Active screen layer with subtle phosphor flicker -->
               <div style="position:absolute; inset:0; background:#0a0a0c; border-radius:38px 38px 34px 34px; opacity:${screenOn ? 1 : 0}; transition:opacity 200ms linear; animation:crtPhosphorMicroFlicker 0.12s infinite alternate">
                 <!-- App rendered at 800×643 emulated, scaled to fit the ~296×238px glass area -->
-                <div style="position:absolute; left:0; top:0; width:800px; height:643px; transform:scale(.37); transform-origin:top left; clip-path:${this.isPlayWipe ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)'}; transition:clip-path 420ms cubic-bezier(.23,1,.32,1)">
+                <div style="position:absolute; left:0; top:0; width:800px; height:643px; transform:scale(.37); transform-origin:top left; clip-path:${this.isPlayWipe || !!this.infoMode ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)'}; transition:clip-path 420ms cubic-bezier(.23,1,.32,1)">
                   <slot></slot>
                 </div>
               </div>

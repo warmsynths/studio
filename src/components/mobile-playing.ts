@@ -226,16 +226,18 @@ export class MobilePlayingComponent extends LitElement {
         </div>
       </div>
 
-      <div class="notes">
-        <div class="kicker">NOW PLAYING · ${t ? t.year : ''}</div>
-        <div class="title">${t ? t.title : ''}</div>
-        <div class="sub">${t ? t.sub : ''}</div>
-        <div class="grid">
-          <span>ROLE</span><span>${t ? t.role : ''}</span>
-          <span>BUILT WITH</span><span>${t ? t.stack : ''}</span>
-          <span>CASE</span><span>/${t ? t.slug : ''}</span>
+      ${t ? html`
+        <div class="notes">
+          <div class="kicker">NOW PLAYING · ${t.year}</div>
+          <div class="title">${t.title}</div>
+          <div class="sub">${t.sub}</div>
+          <div class="grid">
+            <span>ROLE</span><span>${t.role}</span>
+            <span>BUILT WITH</span><span>${t.stack}</span>
+            <span>CASE</span><span>/${t.slug}</span>
+          </div>
         </div>
-      </div>
+      ` : ''}
 
       <div class="return">SWIPE DOWN OR HIT ■ ▲ TO RETURN TO THE SHELF</div>
     `;

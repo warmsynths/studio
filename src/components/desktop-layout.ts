@@ -108,7 +108,15 @@ export class DesktopLayout extends LitElement {
   }
 
   private eject() {
-    this.director.eject(false);
+    if (this.director.infoMode) {
+      this.director.closeInfo();
+    } else {
+      this.director.eject(false);
+    }
+  }
+
+  private openInfo(mode: 'about' | 'contact') {
+    this.director.openInfo(mode, this.screenOrigin());
   }
 
   render() {
@@ -131,8 +139,8 @@ export class DesktopLayout extends LitElement {
           <!-- Background Scene -->
           <div 
             class="scene-bg" 
-            @click=${() => { if (d.currentShot !== 'none') d.skip(); else if (playing) this.eject(); else if (st !== 'idle') d.cancel(); }}
-            style="position:absolute; inset:0; z-index:1; opacity: ${dim ? (playing ? 0.18 : 0.35) : 1}; filter: ${dim ? (playing ? 'blur(6px)' : 'blur(3px)') : 'blur(0px)'}; transition: opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)"
+            @click=${() => { if (d.infoMode) d.closeInfo(); else if (d.currentShot !== 'none') d.skip(); else if (playing) this.eject(); else if (st !== 'idle') d.cancel(); }}
+            style="position:absolute; inset:0; z-index:1; opacity: ${dim || d.infoMode ? (playing || d.infoMode ? 0.18 : 0.35) : 1}; filter: ${dim || d.infoMode ? (playing || d.infoMode ? 'blur(6px)' : 'blur(3px)') : 'blur(0px)'}; transition: opacity 260ms cubic-bezier(.23,1,.32,1), filter 260ms cubic-bezier(.23,1,.32,1)"
           >
             <div style="position:absolute; left:-4000px; right:-4000px; top:0; height:452px; background:#ece6da; filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; left:0; right:0; top:452px; bottom:0; filter:blur(6px); opacity:.72; perspective:820px; perspective-origin:50% -60%">
@@ -147,17 +155,27 @@ export class DesktopLayout extends LitElement {
             <div style="position:absolute; left:64px; top:300px; width:120px; height:152px; background:#d8ccb6; border-radius:6px 6px 0 0; filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; left:96px; top:250px; width:56px; height:56px; background:#c2ceb4; border-radius:50% 50% 40% 40%; filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; left:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:#2a2621">PORTFOLIO — DESIGN × CODE</div>
-            <div style="position:absolute; right:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:rgba(42,38,33,.45)">ABOUT · CONTACT</div>
-            <div style="position:absolute; left:48px; top:212px; max-width:520px">
-              <div style="font:400 34px/1.25 Georgia,serif; color:#2a2621">Memories grow in the spaces between living.</div>
-              <div style="margin-top:16px; font:14px/1.6 Inter,sans-serif; color:rgba(42,38,33,.55)">Apps I grew, not coded. Pick a tape to load one — eject to come back.</div>
+            <div style="position:absolute; right:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:rgba(42,38,33,.65); pointer-events:auto; z-index:10">
+              <span 
+                style="cursor:pointer; text-decoration:${d.infoMode === 'about' ? 'underline' : 'none'}; opacity:${d.infoMode === 'about' ? 1 : 0.7}; transition:opacity 140ms" 
+                @click=${(e: Event) => { e.stopPropagation(); this.openInfo('about'); }}
+              >ABOUT</span>
+              &nbsp;·&nbsp;
+              <span 
+                style="cursor:pointer; text-decoration:${d.infoMode === 'contact' ? 'underline' : 'none'}; opacity:${d.infoMode === 'contact' ? 1 : 0.7}; transition:opacity 140ms" 
+                @click=${(e: Event) => { e.stopPropagation(); this.openInfo('contact'); }}
+              >CONTACT</span>
+            </div>
+            <div style="position:absolute; left:48px; top:184px; max-width:580px">
+              <div style="font-family:Georgia,serif; font-size:66px; font-weight:400; line-height:70px; letter-spacing:-0.01em; color:#2a2621">Memories grow in the spaces between living.</div>
+              <div style="margin-top:16px; font:14px/1.6 Inter,sans-serif; color:rgba(42,38,33,.55)">A web developer, using AI to catch up to my own imagination. Pick a tape to load one — eject to come back.</div>
             </div>
           </div>
 
           <!-- VCR Deck -->
           <vcr-player 
-            .setOp=${sharp ? 1 : (dim ? 0.9 : 0.75)}
-            .setFx=${sharp ? 'blur(0px)' : (dim ? 'blur(2px)' : 'blur(5px)')}
+            .setOp=${sharp ? 1 : (dim || d.infoMode ? 0.9 : 0.75)}
+            .setFx=${sharp ? 'blur(0px)' : (dim || d.infoMode ? 'blur(2px)' : 'blur(5px)')}
             ?isPlaying=${playing}
             @eject-click=${this.eject}
           ></vcr-player>
@@ -165,13 +183,18 @@ export class DesktopLayout extends LitElement {
           <!-- CRT TV Display -->
           <crt-display
             .activeKey=${a}
-            .setOp=${sharp ? 1 : (dim ? 0.9 : 0.75)}
-            .setFx=${sharp ? 'blur(0px)' : (dim ? 'blur(2px)' : 'blur(5px)')}
-            ?isPlaying=${playing}
+            .infoMode=${d.infoMode}
+            .setOp=${sharp || d.infoMode ? 1 : (dim ? 0.9 : 0.75)}
+            .setFx=${sharp || d.infoMode ? 'blur(0px)' : (dim ? 'blur(2px)' : 'blur(5px)')}
+            ?isPlaying=${playing || !!d.infoMode}
             ?isReading=${reading}
-            ?isPlayWipe=${st === 'playWipe'}
+            ?isPlayWipe=${st === 'playWipe' || !!d.infoMode}
           >
-            <tape-app-slot .activeKey=${a}></tape-app-slot>
+            <tape-app-slot
+              .activeKey=${a}
+              .infoMode=${d.infoMode}
+              @switch-tab=${(e: CustomEvent) => d.switchInfoTab(e.detail.mode)}
+            ></tape-app-slot>
           </crt-display>
 
           <!-- Tape Shelf Stack -->
@@ -189,7 +212,7 @@ export class DesktopLayout extends LitElement {
 
         <!-- Info Case Panel -->
         <div 
-          style="position:absolute; left:44px; top:146px; width:352px; z-index:6; pointer-events:${playing ? 'auto' : 'none'}; opacity:${playing ? 1 : 0}; transform:${playing ? 'translateY(0)' : 'translateY(14px)'}; transition:opacity 380ms cubic-bezier(.23,1,.32,1), transform 380ms cubic-bezier(.23,1,.32,1)"
+          style="position:absolute; left:44px; top:146px; width:352px; z-index:6; pointer-events:${playing && !d.infoMode ? 'auto' : 'none'}; opacity:${playing && !d.infoMode ? 1 : 0}; transform:${playing && !d.infoMode ? 'translateY(0)' : 'translateY(14px)'}; transition:opacity 380ms cubic-bezier(.23,1,.32,1), transform 380ms cubic-bezier(.23,1,.32,1)"
         >
           <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; color:rgba(42,38,33,.45)">NOW PLAYING · ${activeTape ? activeTape.year : ''}</div>
           <div style="margin-top:14px; font:400 34px/1.12 Georgia,serif; color:#2a2621; text-wrap:pretty">${activeTape ? activeTape.title : ''}</div>

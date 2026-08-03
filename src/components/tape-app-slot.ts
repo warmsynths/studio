@@ -6,6 +6,7 @@ import '../embeds/chroma-chords-embed.js';
 import '../embeds/circuit-chords-embed.js';
 import '../embeds/hypersyn-embed.js';
 import '../embeds/j6-companion-embed.js';
+import './crt-info-view.js';
 
 @customElement('tape-app-slot')
 export class TapeAppSlotComponent extends LitElement {
@@ -19,8 +20,14 @@ export class TapeAppSlotComponent extends LitElement {
   `;
 
   @property({ type: String }) activeKey: TapeKey | null = null;
+  @property({ type: String }) infoMode: 'about' | 'contact' | null = null;
+  @property({ type: Boolean }) isMobile = false;
 
   render() {
+    if (this.infoMode) {
+      return html`<crt-info-view .mode=${this.infoMode} ?isMobile=${this.isMobile}></crt-info-view>`;
+    }
+
     switch (this.activeKey) {
       case 'drift':
         return html`<beat-mapper-embed></beat-mapper-embed>`;
