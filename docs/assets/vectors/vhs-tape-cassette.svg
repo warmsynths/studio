@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 178" width="100%" height="100%">
+  <defs>
+    <linearGradient id="tapeBodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#303030"/>
+      <stop offset="100%" stop-color="#1e1e1e"/>
+    </linearGradient>
+    <linearGradient id="labelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fdfbf7"/>
+      <stop offset="100%" stop-color="#ede9df"/>
+    </linearGradient>
+    <linearGradient id="stripGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d32f2f"/>
+      <stop offset="100%" stop-color="#b71c1c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cassette Main Plastic Shell -->
+  <rect x="0" y="0" width="330" height="178" rx="9" fill="url(#tapeBodyGrad)" stroke="#121212" stroke-width="2"/>
+  
+  <!-- Top Magnetic Ribbon Shield / Flap -->
+  <rect x="0" y="0" width="330" height="24" rx="9 9 0 0" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+  <text x="165" y="16" font-family="'IBM Plex Mono', monospace" font-size="10" font-weight="800" fill="#e8e8e8" letter-spacing="3" text-anchor="middle">VHS T-120</text>
+
+  <!-- Left Reel Hub Window -->
+  <circle cx="66" cy="86" r="38" fill="#d9d9d9" stroke="#999" stroke-width="1.5"/>
+  <circle cx="66" cy="86" r="24" fill="#a8a8a8"/>
+  <!-- Spool Gear Teeth -->
+  <circle cx="66" cy="86" r="14" fill="#c4c4c4"/>
+  <circle cx="66" cy="86" r="6" fill="#1e1e1e"/>
+
+  <!-- Right Reel Hub Window -->
+  <circle cx="264" cy="86" r="38" fill="#d9d9d9" stroke="#999" stroke-width="1.5"/>
+  <circle cx="264" cy="86" r="24" fill="#a8a8a8"/>
+  <!-- Spool Gear Teeth -->
+  <circle cx="264" cy="86" r="14" fill="#c4c4c4"/>
+  <circle cx="264" cy="86" r="6" fill="#1e1e1e"/>
+
+  <!-- Center Paper Spine Sticker Label -->
+  <g transform="translate(118, 44)">
+    <rect x="0" y="0" width="94" height="84" rx="2" fill="url(#labelGrad)" stroke="#ccc" stroke-width="1"/>
+    <!-- Color Strip Accent -->
+    <rect x="0" y="0" width="94" height="20" rx="2 2 0 0" fill="url(#stripGrad)"/>
+    <text x="47" y="14" font-family="'IBM Plex Mono', monospace" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">PORTFOLIO</text>
+
+    <!-- Handwritten / Typed Metadata Lines -->
+    <line x1="6" y1="36" x2="88" y2="36" stroke="#c9c9c9" stroke-width="1"/>
+    <line x1="6" y1="48" x2="88" y2="48" stroke="#c9c9c9" stroke-width="1"/>
+    <line x1="6" y1="60" x2="88" y2="60" stroke="#c9c9c9" stroke-width="1"/>
+    <line x1="6" y1="72" x2="88" y2="72" stroke="#c9c9c9" stroke-width="1"/>
+
+    <text x="10" y="45" font-family="'IBM Plex Mono', monospace" font-size="7" font-weight="600" fill="#2a2621">STEREO HIGH QUALITY</text>
+    <text x="10" y="57" font-family="'IBM Plex Mono', monospace" font-size="7" font-weight="600" fill="#2a2621">TITLES: 01-05</text>
+  </g>
+
+  <!-- Write Protect Tab Notch (Bottom Right Corner) -->
+  <rect x="306" y="152" width="16" height="18" fill="#121212" rx="1"/>
+</svg>
