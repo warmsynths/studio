@@ -327,7 +327,7 @@ export class MobileShelfComponent extends LitElement {
       <div class="bg-floor"></div>
 
       <div class="header">
-        <span>PORTFOLIO — DESIGN × CODE</span>
+        <span>PORTFOLIO · DESIGN × CODE</span>
         <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; color:rgba(42,38,33,.6); display:flex; gap:8px">
           <span class="nav-link" @click=${() => this.dispatchEvent(new CustomEvent('open-info', { detail: { mode: 'about' }, bubbles: true, composed: true }))}>ABOUT</span>
           <span>·</span>

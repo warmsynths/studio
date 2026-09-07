@@ -189,16 +189,16 @@ export class CrtInfoViewComponent extends LitElement {
         ${this.mode === 'about'
           ? html`
               <div class="paragraph">
-                I'm a developer using AI to build faster than I ever could alone — closing the gap between an idea and a working thing, built between everything else life asks for.
+                I use AI to build faster than I could alone, turning ideas into working tools between everything else life asks for.
               </div>
               <div class="paragraph">
-                Most of what's here started as something only I needed: a way to write chords without knowing theory, a companion for a synth that didn't have one, a tool to save me from doing something tedious by hand. I didn't set out to launch products. I set out to solve a problem I had, quickly, and see what happened.
+                Most of these projects started because I needed them: a way to write chords without theory, a companion for a synth that lacked one, or a tool to skip tedious manual work. I built each one to solve an immediate problem and see where it led.
               </div>
               <div class="paragraph">
-                I sit at the intersection of design and development — technical enough to know what a good app needs under the hood, and increasingly serious about how it should look and feel. AI does the typing. I do the directing: the decisions about what to build, what to cut, and what actually makes something worth using.
+                I care about how an app runs under the hood and how it feels to use. AI handles the typing, while I decide what to build, what to cut, and what makes a tool worth using.
               </div>
               <div class="paragraph">
-                Everything you see here works. Try it.
+                Everything here is interactive. Pick a tape and try it.
               </div>
             `
           : html`

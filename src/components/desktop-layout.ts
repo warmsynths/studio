@@ -154,7 +154,7 @@ export class DesktopLayout extends LitElement {
             <div style="position:absolute; right:22px; top:196px; width:80px; height:52px; background:#e2d6c0; border-radius:6px 6px 3px 3px; filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; left:64px; top:300px; width:120px; height:152px; background:#d8ccb6; border-radius:6px 6px 0 0; filter:blur(6px); opacity:.72"></div>
             <div style="position:absolute; left:96px; top:250px; width:56px; height:56px; background:#c2ceb4; border-radius:50% 50% 40% 40%; filter:blur(6px); opacity:.72"></div>
-            <div style="position:absolute; left:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:#2a2621">PORTFOLIO — DESIGN × CODE</div>
+            <div style="position:absolute; left:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:#2a2621">PORTFOLIO · DESIGN × CODE</div>
             <div style="position:absolute; right:48px; top:40px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.08em; color:rgba(42,38,33,.65); pointer-events:auto; z-index:10">
               <span 
                 style="cursor:pointer; text-decoration:${d.infoMode === 'about' ? 'underline' : 'none'}; opacity:${d.infoMode === 'about' ? 1 : 0.7}; transition:opacity 140ms" 
