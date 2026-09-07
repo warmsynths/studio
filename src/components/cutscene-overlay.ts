@@ -142,6 +142,7 @@ export class CutsceneOverlayComponent extends LitElement {
                 </div>
                 <div style="position:absolute; left:118px; top:44px; width:94px; height:84px; background:#f4f4f4; border-radius:2px">
                   <div style="position:absolute; top:0; left:0; right:0; height:20px; background:${activeTape.strip}"></div>
+                  <div style="position:absolute; left:6px; right:6px; top:28px; text-align:center; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:10px; line-height:1.1; color:#2a2621; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden">${activeTape.title}</div>
                   <div style="position:absolute; left:6px; right:6px; bottom:10px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:18px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:26px; height:1px; background:#c9c9c9"></div>
@@ -240,6 +241,7 @@ export class CutsceneOverlayComponent extends LitElement {
                 </div>
                 <div style="position:absolute; left:118px; top:44px; width:94px; height:84px; background:#f4f4f4; border-radius:2px">
                   <div style="position:absolute; top:0; left:0; right:0; height:20px; background:${activeTape.strip}"></div>
+                  <div style="position:absolute; left:6px; right:6px; top:28px; text-align:center; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:10px; line-height:1.1; color:#2a2621; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden">${activeTape.title}</div>
                   <div style="position:absolute; left:6px; right:6px; bottom:10px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:18px; height:1px; background:#c9c9c9"></div>
                   <div style="position:absolute; left:6px; right:6px; bottom:26px; height:1px; background:#c9c9c9"></div>
@@ -251,9 +253,12 @@ export class CutsceneOverlayComponent extends LitElement {
 
             <div style="position:absolute; left:0; top:343px; width:620px; height:82px; transform-origin:50% 0%; transform:rotateX(72deg); background:linear-gradient(180deg,#242427 0 4px,#18181b 4px 46%,#101012 46%,#0a0a0b); border-radius:0 0 7px 7px; box-shadow:0 20px 26px rgba(0,0,0,.5)">
               <div style="position:absolute; left:0; right:0; top:4px; height:1px; background:rgba(255,255,255,.08)"></div>
-              <div style="position:absolute; left:96px; right:96px; top:22px; bottom:14px; background:linear-gradient(160deg,#2b2b2f,#101013 60%); border-radius:2px; box-shadow:inset 0 1px 3px rgba(0,0,0,.7)"></div>
-              <div style="position:absolute; left:24px; top:26px; width:56px; height:34px; background:rgba(226,222,210,.82); border-radius:1px"></div>
-              <div style="position:absolute; right:26px; top:30px; width:34px; height:26px; background:#191919; border-radius:1px"></div>
+              <div style="position:absolute; left:0; top:0; bottom:0; width:26px; background:${activeTape.strip}; border-radius:0 0 0 7px"></div>
+              <div style="position:absolute; left:84px; right:84px; top:18px; bottom:14px; background:#f4f1e6; border-radius:2px; display:flex; align-items:center; gap:16px; padding:0 20px; box-shadow:inset 0 2px 5px rgba(0,0,0,.15)">
+                <span style="font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:22px; letter-spacing:.05em; white-space:nowrap; color:#2a2621">${activeTape.title}</span>
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:14px; color:rgba(42,38,33,.5); letter-spacing:.05em; white-space:nowrap">${activeTape.kicker}</span>
+              </div>
+              <div style="position:absolute; right:28px; top:30px; font-size:16px; font-style:italic; color:#777; font-family:Arial,sans-serif; font-weight:bold">VHS</div>
             </div>
           </div>
         </div>

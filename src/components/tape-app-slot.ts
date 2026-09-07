@@ -17,6 +17,19 @@ export class TapeAppSlotComponent extends LitElement {
       height: 100%;
       background: #14141a;
     }
+
+    crt-info-view, beat-mapper-embed, chroma-chords-embed, circuit-chords-embed, hypersyn-embed, j6-companion-embed {
+      display: block;
+      width: 100%;
+      height: 100%;
+      transition: opacity 260ms ease-out;
+    }
+
+    @starting-style {
+      crt-info-view, beat-mapper-embed, chroma-chords-embed, circuit-chords-embed, hypersyn-embed, j6-companion-embed {
+        opacity: 0;
+      }
+    }
   `;
 
   @property({ type: String }) activeKey: TapeKey | null = null;

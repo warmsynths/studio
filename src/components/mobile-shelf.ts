@@ -82,6 +82,17 @@ export class MobileShelfComponent extends LitElement {
       color: #2a2621;
     }
 
+    .nav-link {
+      cursor: pointer;
+      transition: opacity 160ms, transform 160ms ease-out;
+      display: inline-block;
+    }
+
+    .nav-link:active {
+      opacity: 0.6;
+      transform: scale(0.97);
+    }
+
     .burger {
       display: flex;
       flex-direction: column;
@@ -202,6 +213,12 @@ export class MobileShelfComponent extends LitElement {
       overflow: hidden;
       margin-bottom: 1.5%;
       transition: aspect-ratio 460ms cubic-bezier(.6,0,.4,1), margin-bottom 460ms cubic-bezier(.6,0,.4,1);
+      animation: popIn 400ms cubic-bezier(.23,1,.32,1) both;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .tape-slot:last-child {
@@ -312,9 +329,9 @@ export class MobileShelfComponent extends LitElement {
       <div class="header">
         <span>PORTFOLIO — DESIGN × CODE</span>
         <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; color:rgba(42,38,33,.6); display:flex; gap:8px">
-          <span style="cursor:pointer" @click=${() => this.dispatchEvent(new CustomEvent('open-info', { detail: { mode: 'about' }, bubbles: true, composed: true }))}>ABOUT</span>
+          <span class="nav-link" @click=${() => this.dispatchEvent(new CustomEvent('open-info', { detail: { mode: 'about' }, bubbles: true, composed: true }))}>ABOUT</span>
           <span>·</span>
-          <span style="cursor:pointer" @click=${() => this.dispatchEvent(new CustomEvent('open-info', { detail: { mode: 'contact' }, bubbles: true, composed: true }))}>CONTACT</span>
+          <span class="nav-link" @click=${() => this.dispatchEvent(new CustomEvent('open-info', { detail: { mode: 'contact' }, bubbles: true, composed: true }))}>CONTACT</span>
         </div>
       </div>
 
@@ -344,11 +361,11 @@ export class MobileShelfComponent extends LitElement {
       <div class="shelf">
         <div class="shelf-label" style="opacity:${dim ? .3 : 1}">ON THE SHELF · 0${ORDER.length}</div>
         <div class="list">
-          ${ORDER.map(k => {
+          ${ORDER.map((k, index) => {
             const tp = TAPES[k];
             const hidden = dim && k === a;
             return html`
-              <div class="tape-slot ${hidden ? 'collapsed' : ''}">
+              <div class="tape-slot ${hidden ? 'collapsed' : ''}" style="animation-delay: ${index * 60}ms">
                 <button
                   class="tape"
                   data-tape=${k}
